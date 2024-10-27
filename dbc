@@ -1,0 +1,29 @@
+#!/bin/bash
+# Script: dbe
+# Purpose: Print argument associated with -n, followed by all output (including -n)
+
+# Initialize variable for -n option
+name_arg=""
+
+# Parse command-line arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -n)
+            name_arg="$2"               # Capture argument for -n
+            other_args+="-n $2 "         # Add -n and its value to the other arguments
+            shift ;;                     # Skip the argument for -n
+        *)
+            other_args+="$1 " ;;          # Collect all other arguments
+    esac
+    shift
+done
+
+# Print the -n argument
+if [[ -n "$name_arg" ]]; then
+    echo "Argument for -n: $name_arg"
+else
+    echo "No -n argument provided"
+fi
+
+# Print all other arguments (including -n and its value)
+echo "All arguments: $other_args"

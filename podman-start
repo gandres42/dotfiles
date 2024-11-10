@@ -1,2 +1,3 @@
 #!/bin/bash
+xhost si:localuser:gavin
 podman start $(podman ps -a -q -f status=exited)

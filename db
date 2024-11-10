@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Check if the first parameter is 'code'
+if [ "$1" == "code" ]; then
+    # Shift to remove 'code' from the parameters, then call another script with the next parameter
+    distrobox-code "$2"
+else
+    # Run 'distrobox' with all parameters except the script name
+    distrobox "${@:1}"
+fi

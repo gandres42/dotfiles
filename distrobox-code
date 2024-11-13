@@ -46,7 +46,8 @@ cat <<EOF > "$OUTPUT_FILE"
     "XDG_MENU_PREFIX": "\${localEnv:XDG_MENU_PREFIX}",
     "XDG_RUNTIME_DIR": "\${localEnv:XDG_RUNTIME_DIR}",
     "XDG_SESSION_DESKTOP": "\${localEnv:XDG_SESSION_DESKTOP}",
-    "XDG_SESSION_TYPE": "\${localEnv:XDG_SESSION_TYPE}"
+    "XDG_SESSION_TYPE": "\${localEnv:XDG_SESSION_TYPE}",
+    "QT_AUTO_SCREEN_SCALE_FACTOR": "0"
   }
 }
 EOF

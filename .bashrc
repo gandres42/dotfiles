@@ -28,15 +28,16 @@ if [[ -z "$CONTAINER_ID" ]]; then
     alias octet="stat -c \"%a %n\""
     alias speed="speedtest-cli"
     export PATH=$PATH:~/.scripts
-#    fortune -s | cowsay | lolcat
 elif [[ "$CONTAINER_ID" == "humble" ]]; then
     source /opt/ros/humble/setup.bash
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
+    export ROS_DOMAIN_ID=5
+    export ROS_DISCOVERY_SERVER="10.214.154.212:11811"
 elif [[ "$CONTAINER_ID" == "noetic" ]]; then
     source /opt/ros/noetic/setup.bash
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
 fi
-alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
+alias wake-severn="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

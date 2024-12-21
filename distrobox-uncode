@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Check if the Distrobox name is provided as a parameter
+if [ -z "$1" ]; then
+  echo "Usage: $0 <distrobox_name>"
+  exit 1
+fi
+
+DISTROBOX_NAME="$1"
+OUTPUT_DIR="${HOME}/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/nameConfigs"
+OUTPUT_FILE="${OUTPUT_DIR}/${DISTROBOX_NAME}.json"
+
+rm "$OUTPUT_FILE"
+
+echo "$OUTPUT_FILE has been deleted"

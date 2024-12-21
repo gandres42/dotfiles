@@ -2,6 +2,8 @@
 
 if [ "$1" == "code" ]; then
     distrobox-code "$2"
+elif [ "$1" == "uncode" ]; then
+    distrobox-uncode "$2"
 elif [ "$1" == "startall" ]; then
     distrobox-startall
 else

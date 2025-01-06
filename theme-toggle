@@ -10,16 +10,8 @@ for line in lines:
 
 if current_theme == 'BreezeLight':
     subprocess.run(['plasma-apply-colorscheme', 'BreezeDark'])
-    with open('/home/gavin/.config/kwinrulesrc') as f:
-        newText=f.read().replace('BraveLight', 'BraveDark')
 elif current_theme == 'BreezeDark':
     subprocess.run(['plasma-apply-colorscheme', 'BreezeLight'])
-    with open('/home/gavin/.config/kwinrulesrc') as f:
-        newText=f.read().replace('BraveDark', 'BraveLight')
-with open('/home/gavin/.config/kwinrulesrc', "w") as f:
-    f.write(newText)
-    f.close()
-# time.sleep(1)
 subprocess.run(['qdbus', 'org.kde.KWin', '/KWin', 'reconfigure'])
 subprocess.run(['flatpak', 'kill', 'org.fkoehler.KTailctl'])
 subprocess.Popen(['flatpak', 'run', 'org.fkoehler.KTailctl', '>', '/dev/null', '2>&1', '&'])

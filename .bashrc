@@ -27,11 +27,15 @@ unset rc
 if [[ -z "$CONTAINER_ID" ]]; then
     alias octet="stat -c \"%a %n\""
     alias speed="speedtest-cli"
+    alias ts="tailscale"
     alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
     alias waypipe-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
+    alias waypipe-kitsuragi="waypipe -c lz4=8 --video=hw ssh -Y -C kitsuragi"
+    alias waypipe-karr="waypipe -c lz4=8 ssh -Y -C karr"
+    alias de-uv="rm -rf .venv pyproject.toml .python-version uv.lock"
     export SDKMAN_DIR="$HOME/.sdkman"
     [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-    export PATH=$PATH:~/.scripts
+    export PATH="$HOME/.scripts:$PATH"
 else
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
     case $CONTAINER_ID in

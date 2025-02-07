@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ "$1" == "deinit" ]; then
+    rm -rf .venv pyproject.toml uv.lock .python-version
+elif [ "$1" == "203" ]; then
+    uv add numpy scipy matplotlib otter-grader ipykernel
+elif [ "$1" == "init" ]; then
+    if [[ -n "$2" ]]; then
+        /home/gavin/.local/bin/uv init --bare "$2"
+    else
+	/home/gavin/.local/bin/uv init --bare
+    fi
+else
+    /home/gavin/.local/bin/uv "${@:1}"
+fi

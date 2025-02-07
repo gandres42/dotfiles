@@ -1,0 +1,9 @@
+#!/bin/bash
+git reset --hard HEAD
+git clean -fd
+rm -rf .venv pyproject.toml uv.lock .python-version
+uv python pin 3.12.8
+uv init
+rm hello.py
+uv add numpy scipy matplotlib otter-grader ipykernel
+

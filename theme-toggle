@@ -15,6 +15,4 @@ elif current_theme == 'BreezeDark':
     subprocess.run(['plasma-apply-colorscheme', 'BreezeLight'])
     subprocess.run(['/usr/libexec/plasma-changeicons', 'breeze'])
 subprocess.run(['qdbus', 'org.kde.KWin', '/KWin', 'reconfigure'])
-subprocess.run(['flatpak', 'kill', 'org.fkoehler.KTailctl'])
-subprocess.Popen(['flatpak', 'run', 'org.fkoehler.KTailctl', '>', '/dev/null', '2>&1', '&'])
 

@@ -11,9 +11,14 @@ for line in lines:
 if current_theme == 'BreezeLight':
     subprocess.run(['plasma-apply-colorscheme', 'BreezeDark'])
     subprocess.run(['/usr/libexec/plasma-changeicons', 'breeze-dark'])
+#    subprocess.run(['sed', '-i', "'s/^decocolor=Brave$/decocolor=BraveDark/'", '/home/gavin/.config/kwinrulesrc'])
+    subprocess.run(['sed', '-i', 's/^decocolor=Brave$/decocolor=BraveDark/', '/home/gavin/.config/kwinrulesrc'])
+
 elif current_theme == 'BreezeDark':
     subprocess.run(['plasma-apply-colorscheme', 'BreezeLight'])
     subprocess.run(['/usr/libexec/plasma-changeicons', 'breeze'])
+#    subprocess.run(['sed', '-i', "'s/^decocolor=BraveDark$/decocolor=Brave/'", '/home/gavin/.config/kwinrulesrc'])
+    subprocess.run(['sed', '-i', 's/^decocolor=BraveDark$/decocolor=Brave/', '/home/gavin/.config/kwinrulesrc'])
 subprocess.run(['qdbus', 'org.kde.KWin', '/KWin', 'reconfigure'])
 subprocess.run(['flatpak', 'kill', 'org.fkoehler.KTailctl'])
 subprocess.Popen(['flatpak', 'run', 'org.fkoehler.KTailctl', '>', '/dev/null', '2>&1', '&'])

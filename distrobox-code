@@ -52,4 +52,4 @@ cat <<EOF > "$OUTPUT_FILE"
 }
 EOF
 
-echo "$OUTPUT_FILE has been created with the specified contents for Distrobox name '$DISTROBOX_NAME'."
+# echo "$OUTPUT_FILE has been created with the specified contents for Distrobox name '$DISTROBOX_NAME'."

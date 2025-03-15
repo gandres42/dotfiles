@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Check if the user provided two arguments
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: ffind <path_to_search> <filename_pattern>"
+    exit 1
+fi
+
+# Search for specified files in the provided path
+find "$1" -type f -name "$2"

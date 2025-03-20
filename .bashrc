@@ -27,12 +27,10 @@ unset rc
 if [[ -z "$CONTAINER_ID" ]]; then
     alias octet="stat -c \"%a %n\""
     alias speed="speedtest-cli"
-    alias ts="tailscale"
     alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
-    alias waypipe-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
-    alias waypipe-kitsuragi="waypipe -c lz4=8 --video=hw ssh -Y -C kitsuragi"
-    alias waypipe-karr="waypipe -c lz4=8 ssh -Y -C karr"
-    alias de-uv="rm -rf .venv pyproject.toml .python-version uv.lock"
+    alias wp-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
+    alias wp-leadbelly="waypipe -c lz4=8 ssh -Y -C leadbelly.engr.oregonstate.edu"
+    alias laservision-ipcheck="ssh laservision \"ipcheck\""
     export SDKMAN_DIR="$HOME/.sdkman"
     [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
     export PATH="$HOME/.scripts:$PATH"
@@ -42,15 +40,14 @@ else
         "humble")
             source /opt/ros/humble/setup.bash
         ;;
+	"exmax")
+            source /opt/ros/foxy/setup.bash
+	    export PYTHONPATH="/home/gavin/Git/em_exploration/build:$PYTHONPATH"
+	    export TURTLEBOT3_MODEL=waffle
+	    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/foxy/share/turtlebot3_gazebo/models 
+        ;;
         "noetic")
             source /opt/ros/noetic/setup.bash
-        ;;
-	"orbslam")
-            source /opt/ros/noetic/setup.bash
-        ;;
-        "rdml")
-            source /opt/ros/noetic/setup.bash
-            export ROS_MASTER_URI=http://keats:11311/
         ;;
     esac
 fi

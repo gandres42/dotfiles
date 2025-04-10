@@ -1,0 +1,15 @@
+#!/bin/bash
+db() {
+    if [ "$1" == "code" ]; then
+        distrobox-code "$2"
+    elif [ "$1" == "uncode" ]; then
+        distrobox-uncode "$2"
+    elif [ "$1" == "startall" ]; then
+        distrobox-startall
+    elif [ "$1" == "create" ]; then
+        distrobox "${@:1}"
+        distrobox-codeall
+    else
+        distrobox "${@:1}"
+    fi
+}

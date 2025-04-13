@@ -56,3 +56,5 @@ fi
 
 #PIXI
 export PATH="/home/gavin/.pixi/bin:$PATH"
+eval "$(pixi shell-hook)"
+clear

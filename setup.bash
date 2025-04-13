@@ -56,5 +56,8 @@ fi
 
 #PIXI
 export PATH="/home/gavin/.pixi/bin:$PATH"
-eval "$(pixi shell-hook)"
-clear
+
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    eval "$(pixi shell-hook)"
+    clear
+fi

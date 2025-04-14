@@ -1,0 +1,5 @@
+#!/bin/bash
+rosconda() {
+    source "${CONDA_PREFIX}/setup.bash" >/dev/null 2>&1
+}
+

@@ -1,9 +1,0 @@
-#!/bin/bash
-pixi() {
-    if [ "$1" == "shell" ]; then
-        eval "$(/home/gavin/.pixi/bin/pixi shell-hook)"
-        source "${CONDA_PREFIX}/setup.bash" >/dev/null 2>&1
-    else
-        /home/gavin/.pixi/bin/pixi "${@:1}"
-    fi
-}

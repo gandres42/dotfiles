@@ -39,10 +39,7 @@ ts() {
 
 pixi() {
     if [ "$1" == "shell" ]; then
-#         $HOME/.pixi/bin/pixi shell
-#         echo $PIXI_PROJECT_ROOT
-#         source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
-        bash -c 'eval "$(pixi shell-hook)"; exec bash'
+        bash --rcfile <(cat ~/.bashrc; echo 'eval "$(pixi shell-hook)"'; echo 'source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"')
     else
         $HOME/.pixi/bin/pixi "${@:1}"
     fi

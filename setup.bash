@@ -34,3 +34,6 @@ if [[ -n "$CONTAINER_ID" ]]; then
         ;;
     esac
 fi
+
+# PIXI
+export PATH="/home/gavin/.pixi/bin:$PATH"

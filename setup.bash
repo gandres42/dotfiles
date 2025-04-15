@@ -6,6 +6,9 @@ alias ros-conda="source "${CONDA_PREFIX}/setup.bash" >/dev/null 2>&1"
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
+# PIXI ----------------------------------------------------------------------------------
+export PATH="/home/gavin/.pixi/bin:$PATH"
+
 # FUNCTIONS -------------------------------------------------------------------
 db() {
     if [ "$1" == "code" ]; then
@@ -34,8 +37,15 @@ ts() {
     fi
 }
 
-ros-pixi() {
-    source "${CONDA_PREFIX}/setup.bash" >/dev/null 2>&1
+pixi() {
+    if [ "$1" == "shell" ]; then
+#         $HOME/.pixi/bin/pixi shell
+#         echo $PIXI_PROJECT_ROOT
+#         source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+        bash -c 'eval "$(pixi shell-hook)"; exec bash'
+    else
+        $HOME/.pixi/bin/pixi "${@:1}"
+    fi
 }
 
 # DISTROBOX -------------------------------------------------------------------
@@ -60,5 +70,3 @@ if [[ -n "$CONTAINER_ID" ]]; then
     esac
 fi
 
-# PIXI ----------------------------------------------------------------------------------
-export PATH="/home/gavin/.pixi/bin:$PATH"

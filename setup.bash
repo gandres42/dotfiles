@@ -47,30 +47,18 @@ pixi() {
     fi
 }
 
-# if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-#     eval "$($HOME/.pixi/bin/pixi shell-hook)"
-#     source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
-# fi
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    eval "$($HOME/.pixi/bin/pixi shell-hook)"
+    source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+    clear
+fi
 
 # DISTROBOX -------------------------------------------------------------------
 if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
-    case $CONTAINER_ID in
-        "jazzy")
-            source /opt/ros/jazzy/setup.bash
-        ;;
-        "svin")
-            source /opt/ros/noetic/setup.bash
-        ;;
-        "humble")
-            source /opt/ros/humble/setup.bash
-        ;;
-        "foxy")
-            source /opt/ros/foxy/setup.bash
-        ;;
-        "noetic")
-            source /opt/ros/noetic/setup.bash
-        ;;
-    esac
 fi
 
+# ROS -------------------------------------------------------------------------
+[ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
+[ -f /opt/ros/humble/setup.bash ] && source /opt/ros/humble/setup.bash
+[ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash

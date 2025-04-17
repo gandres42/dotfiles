@@ -1,7 +1,6 @@
 # ALIASES ---------------------------------------------------------------------
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 alias wp-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
-alias ros-conda="source "${CONDA_PREFIX}/setup.bash" >/dev/null 2>&1"
 
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"

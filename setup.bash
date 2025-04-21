@@ -19,6 +19,8 @@ db() {
     elif [ "$1" == "create" ]; then
         distrobox "${@:1}"
         distrobox-codeall
+    elif [ "$1" == "uncode-all" ]; then
+        rm ${HOME}/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/nameConfigs/*
     else
         distrobox "${@:1}"
     fi

@@ -2,6 +2,9 @@
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 alias wp-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
 alias ros-conda="source "${CONDA_PREFIX}/setup.bash" >/dev/null 2>&1"
+alias cbt="colcon build && source install/setup.bash"
+alias c="clear"
+alias resource="source ~/.bashrc"
 
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
@@ -74,3 +77,5 @@ if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     esac
 fi
 
+# ENV VARIABLES ---------------------------------------------------------------
+export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification

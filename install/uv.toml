@@ -1,0 +1,2 @@
+python-preference = "system"
+no-build-isolation = true

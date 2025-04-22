@@ -59,10 +59,10 @@ if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
 fi
 
-# ENV VARIABLES ---------------------------------------------------------------
-export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
-
 # ROS -------------------------------------------------------------------------
 [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
 [ -f /opt/ros/humble/setup.bash ] && source /opt/ros/humble/setup.bash
 [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
+
+# ENV VARIABLES ---------------------------------------------------------------
+export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification

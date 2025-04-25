@@ -1,9 +1,9 @@
 # ALIASES ---------------------------------------------------------------------
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 alias wp-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
-alias cbs="colcon build && source install/setup.bash"
+
 alias c="clear"
-alias resource="source ~/.bashrc"
+alias re-source="source ~/.bashrc"
 
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
@@ -63,6 +63,11 @@ fi
 [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
 [ -f /opt/ros/humble/setup.bash ] && source /opt/ros/humble/setup.bash
 [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
+if [[ "$ROS_DISTRO" == "noetic" ]]; then
+    alias cbs="catkin build && source devel/setup.bash"
+else
+    alias cbs="colcon build && source install/setup.bash"
+fi
 
 # ENV VARIABLES ---------------------------------------------------------------
 export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification

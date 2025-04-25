@@ -1,2 +1,0 @@
-#!/bin/bash
-source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash

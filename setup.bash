@@ -57,6 +57,7 @@ pixi() {
 # DISTROBOX -------------------------------------------------------------------
 if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
+    export QT_QPA_PLATFORM=xcb
 fi
 
 # ROS -------------------------------------------------------------------------
@@ -65,8 +66,10 @@ fi
 [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
     alias cbs="catkin build && source devel/setup.bash"
+    alias plotjuggler="rosrun plotjuggler plotjuggler -n"
 else
     alias cbs="colcon build && source install/setup.bash"
+    alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
 fi
 
 # ENV VARIABLES ---------------------------------------------------------------

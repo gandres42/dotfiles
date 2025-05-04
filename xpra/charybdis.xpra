@@ -1,0 +1,17 @@
+proxy_key=
+proxy_port=22
+port=14500
+quality=0
+ssh_port=22
+password=
+min-quality=1
+proxy_username=gavin
+mode=tcp
+min-speed=1
+proxy_host=
+encoding=auto
+autoconnect=True
+username=gavin
+host=charybdis
+proxy_password=
+speed=0

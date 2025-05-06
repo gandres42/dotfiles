@@ -12,8 +12,13 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
 # PIXI ----------------------------------------------------------------------------------
 export PATH="/home/gavin/.pixi/bin:$PATH"
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-    eval "$($HOME/.pixi/bin/pixi shell-hook)"
-    source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+    export VSCODE_WORKSPACE_ROOT="$PWD"
+    if [ -f pixi.lock ]; then
+        eval "$($HOME/.pixi/bin/pixi shell-hook)"
+        source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+    elif [ -f uv.lock ]; then
+        source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
+    fi
     clear
 fi
 

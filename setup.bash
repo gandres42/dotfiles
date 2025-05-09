@@ -9,6 +9,12 @@ alias re-source="source ~/.bashrc"
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
+# DISTROBOX -------------------------------------------------------------------
+if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
+    PS1="📦[\u@${CONTAINER_ID} \W]\$ "
+    export QT_QPA_PLATFORM=xcb
+fi
+
 # PIXI ----------------------------------------------------------------------------------
 export PATH="/home/gavin/.pixi/bin:$PATH"
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
@@ -59,12 +65,6 @@ pixi() {
         $HOME/.pixi/bin/pixi "${@:1}"
     fi
 }
-
-# DISTROBOX -------------------------------------------------------------------
-if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
-    PS1="📦[\u@${CONTAINER_ID} \W]\$ "
-    export QT_QPA_PLATFORM=xcb
-fi
 
 # ROS -------------------------------------------------------------------------
 [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash

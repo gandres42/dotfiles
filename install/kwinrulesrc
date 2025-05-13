@@ -129,6 +129,8 @@ wmclassmatch=1
 
 [cff720d2-e6fd-413e-82a8-2cfaa7548756]
 Description=Application settings for org.kde.konsole
+decocolor=Konsole
+decocolorrule=2
 size=1313,607
 sizerule=3
 wmclass=konsole org.kde.konsole

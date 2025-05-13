@@ -1,0 +1,167 @@
+[2b9d0ada-45d0-42b3-8e43-6fc9618997aa]
+Description=Application settings for obsidian
+decocolor=Obsidian
+decocolorrule=2
+wmclass=\sobsidian
+wmclasscomplete=true
+wmclassmatch=1
+
+[2d780a1a-6cc6-486c-98bf-d94c77bfc273]
+Description=Application settings for PlotJuggler-3
+clientmachine=localhost
+decocolor=Plotjuggler
+decocolorrule=2
+wmclass=plotjuggler PlotJuggler-3
+wmclasscomplete=true
+wmclassmatch=1
+
+[3b2dfbdb-504c-471d-afe3-33af4a75e4f3]
+Description=Application settings for jetbrains-studio
+clientmachine=localhost
+decocolor=JetBrains
+decocolorrule=2
+wmclass=jetbrains-studio
+wmclassmatch=1
+
+[3c48ebfc-329b-4a5a-b9b2-c3e9a5467c5d]
+Description=Application settings for org.raspberrypi.rpi-imager
+decocolor=RPIImager
+decocolorrule=2
+wmclass=rpi-imager org.raspberrypi.rpi-imager
+wmclasscomplete=true
+wmclassmatch=1
+
+[61f04d5c-be03-407f-b13a-7b2445a5f90b]
+Description=Application settings for Supersonic
+clientmachine=localhost
+decocolor=Supersonic
+decocolorrule=2
+wmclass=Supersonic
+wmclassmatch=1
+
+[6df4c75d-571a-4d09-90c1-5945acf27484]
+Description=Application settings for Dopamine
+clientmachine=localhost
+decocolor=Dopamine
+decocolorrule=2
+desktops=\\0
+desktopsrule=3
+wmclass=dopamine Dopamine
+wmclasscomplete=true
+wmclassmatch=1
+
+[80922fad-8f2d-4344-94e2-7416dfae28db]
+Description=Application settings for org.kde.konsole
+decocolor=Konsole
+decocolorrule=2
+wmclass=konsole org.kde.konsole
+wmclasscomplete=true
+wmclassmatch=1
+
+[8b58850e-7920-4e44-be28-5a8a12b39ee2]
+Description=Application settings for com.github.iwalton3.jellyfin-media-player
+decocolor=Jellyfin
+decocolorrule=2
+wmclass=\scom.github.iwalton3.jellyfin-media-player
+wmclasscomplete=true
+wmclassmatch=1
+
+[982638ba-09b8-456f-a787-d324f84f6ce2]
+Description=Application settings for Code
+clientmachine=localhost
+decocolor=Code
+decocolorrule=2
+wmclass=code Code
+wmclasscomplete=true
+wmclassmatch=1
+
+[9bdc8cfb-e418-4978-a8a3-e43c49c8d9f2]
+Description=Application settings for TkFDialog
+clientmachine=localhost
+size=850,450
+sizerule=3
+title=Save the figure
+titlematch=1
+wmclass=__tk_filedialog TkFDialog
+wmclasscomplete=true
+wmclassmatch=1
+
+[General]
+count=17
+rules=61f04d5c-be03-407f-b13a-7b2445a5f90b,2d780a1a-6cc6-486c-98bf-d94c77bfc273,cff720d2-e6fd-413e-82a8-2cfaa7548756,c0876af3-8625-43a9-bc51-ed8b03901df5,be386724-dc4c-41c2-9e9d-6fb942e2d419,9bdc8cfb-e418-4978-a8a3-e43c49c8d9f2,2b9d0ada-45d0-42b3-8e43-6fc9618997aa,6df4c75d-571a-4d09-90c1-5945acf27484,add0a6ae-660e-41d9-b1a5-241d875f6930,3b2dfbdb-504c-471d-afe3-33af4a75e4f3,8b58850e-7920-4e44-be28-5a8a12b39ee2,cc643c9d-8fc8-41bc-a8e3-00d8a1acc403,fb834c47-3ac0-4935-989e-847860e93270,f62a7666-9dc1-4831-8cb1-788e63db2cda,f62b71f4-bb0b-4c95-99c3-3cd97159ed5a,982638ba-09b8-456f-a787-d324f84f6ce2,3c48ebfc-329b-4a5a-b9b2-c3e9a5467c5d
+
+[add0a6ae-660e-41d9-b1a5-241d875f6930]
+Description=Application settings for discord
+clientmachine=localhost
+decocolor=Discord
+decocolorrule=2
+wmclass=discord
+wmclassmatch=1
+
+[be386724-dc4c-41c2-9e9d-6fb942e2d419]
+Description=Application settings for ferdium
+decocolor=Ferdium
+decocolorrule=2
+fsplevelrule=2
+minimizerule=4
+wmclass=ferdium
+wmclassmatch=1
+
+[c0876af3-8625-43a9-bc51-ed8b03901df5]
+Description=Application settings for code
+decocolor=Code
+decocolorrule=2
+wmclass=code
+wmclassmatch=1
+
+[ca87971c-afcc-46fe-9fd9-71faac55b813]
+decocolor=Code
+decocolorrule=2
+
+[cc643c9d-8fc8-41bc-a8e3-00d8a1acc403]
+Description=Application settings for Ferdium
+clientmachine=localhost
+decocolor=Ferdium
+decocolorrule=2
+wmclass=ferdium Ferdium
+wmclasscomplete=true
+wmclassmatch=1
+
+[cff720d2-e6fd-413e-82a8-2cfaa7548756]
+Description=Application settings for org.kde.konsole
+size=1313,607
+sizerule=3
+wmclass=konsole org.kde.konsole
+wmclasscomplete=true
+wmclassmatch=1
+
+[e8da418b-3e5e-4e04-a355-9480cf4461b6]
+decocolor=Brave
+decocolorrule=2
+
+[f62a7666-9dc1-4831-8cb1-788e63db2cda]
+Description=Application settings for steam
+clientmachine=localhost
+noborderrule=3
+wmclass=steamwebhelper steam
+wmclasscomplete=true
+wmclassmatch=1
+
+[f62b71f4-bb0b-4c95-99c3-3cd97159ed5a]
+Description=Application settings for Spotify
+clientmachine=localhost
+decocolor=Spotify
+decocolorrule=2
+desktops=\\0
+desktopsrule=3
+wmclass=spotify Spotify
+wmclasscomplete=true
+wmclassmatch=1
+
+[fb834c47-3ac0-4935-989e-847860e93270]
+Description=Application settings for WebCord
+decocolor=Discord
+decocolorrule=2
+wmclass=\sWebCord
+wmclasscomplete=true
+wmclassmatch=1

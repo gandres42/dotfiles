@@ -1,0 +1,2 @@
+#!/bin/bash
+cp ./config/plasma-org.kde.plasma.desktop-appletsrc $HOME/.config/

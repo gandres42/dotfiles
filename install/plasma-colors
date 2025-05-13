@@ -1,0 +1,4 @@
+#!/bin/bash
+rsync -aP --ignore-existing ./config/color-schemes/ $HOME/.local/share/color-schemes
+cp ./config/kwinrulesrc ~/.config
+qdbus org.kde.KWin /KWin reconfigure

@@ -26,7 +26,7 @@ if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     elif [ -f uv.lock ]; then
         source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
     fi
-    clear
+    # clear
 fi
 
 # FUNCTIONS -------------------------------------------------------------------
@@ -56,6 +56,28 @@ ts() {
         ipcheck
     else
         tailscale "${@:1}"
+    fi
+}
+
+uv() {
+    if [ "$1" == "shell" ]; then
+        dir="$PWD"
+        uv_dir=""
+        while [ "$dir" != "/" ]; do
+            if [ -e "$dir/.venv" ]; then
+                export uv_dir="$dir"
+                break
+            fi
+            dir="$(dirname "$dir")"
+        done
+        if [ -z "$uv_dir" ]; then
+            unset uv_dir
+            echo "Error: .venv not found in any parent directory." >&2
+        else
+            (cd "$uv_dir" && bash --rcfile <(echo 'source ~/.bashrc; source .venv/bin/activate'))
+        fi
+    else
+        $HOME/.local/bin/uv "${@:1}"
     fi
 }
 

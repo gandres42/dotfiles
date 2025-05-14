@@ -16,8 +16,10 @@ if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     export QT_QPA_PLATFORM=xcb
 fi
 
-# PIXI ----------------------------------------------------------------------------------
+# PIXI ------------------------------------------------------------------------
 export PATH="/home/gavin/.pixi/bin:$PATH"
+
+# VSCODE ----------------------------------------------------------------------
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     export VSCODE_WORKSPACE_ROOT="$PWD"
     if [ -f pixi.lock ]; then
@@ -26,7 +28,7 @@ if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     elif [ -f uv.lock ]; then
         source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
     fi
-    # clear
+    clear
 fi
 
 # FUNCTIONS -------------------------------------------------------------------

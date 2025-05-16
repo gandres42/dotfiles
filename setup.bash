@@ -14,6 +14,9 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
 if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
     export QT_QPA_PLATFORM=xcb
+    [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
+    [ -f /opt/ros/humble/setup.bash ] && source /opt/ros/humble/setup.bash
+    [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
 fi
 
 # PIXI ------------------------------------------------------------------------
@@ -92,9 +95,6 @@ pixi() {
 }
 
 # ROS -------------------------------------------------------------------------
-[ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
-[ -f /opt/ros/humble/setup.bash ] && source /opt/ros/humble/setup.bash
-[ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
     alias cbs="catkin build && source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"

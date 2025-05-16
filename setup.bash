@@ -86,6 +86,14 @@ uv() {
     fi
 }
 
+function ls() {
+  if [ "$PWD" = "$HOME" ]; then
+    command ls --hide=snap "$@"
+  else
+    command ls "$@"
+  fi
+}
+
 pixi() {
     if [ "$1" == "shell" ]; then
         bash --rcfile <(cat ~/.bashrc; echo 'eval "$(pixi shell-hook)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')

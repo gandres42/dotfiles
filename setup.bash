@@ -5,7 +5,7 @@ alias wp-charybdis="waypipe --video=hw ssh -Y charybdis"
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
-alias xpra-charybdis="xpra attach ssh://charybdis:22/100 --headerbar=no"
+alias xpra-charybdis="xpra attach tcp://charybdis:15000/100 --headerbar=no"
 
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
@@ -22,17 +22,17 @@ fi
 # PIXI ------------------------------------------------------------------------
 export PATH="/home/gavin/.pixi/bin:$PATH"
 
-# VSCODE ----------------------------------------------------------------------
-if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-    export VSCODE_WORKSPACE_ROOT="$PWD"
-    if [ -f pixi.lock ]; then
-        eval "$($HOME/.pixi/bin/pixi shell-hook)"
-        source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
-    elif [ -f uv.lock ]; then
-        source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
-    fi
-    clear
-fi
+# # VSCODE ----------------------------------------------------------------------
+# if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+#     export VSCODE_WORKSPACE_ROOT="$PWD"
+#     if [ -f pixi.lock ]; then
+#         eval "$($HOME/.pixi/bin/pixi shell-hook)"
+#         source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+#     elif [ -f uv.lock ]; then
+#         source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
+#     fi
+#     clear
+# fi
 
 # FUNCTIONS -------------------------------------------------------------------
 db() {

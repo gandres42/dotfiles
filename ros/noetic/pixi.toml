@@ -1,0 +1,13 @@
+[workspace]
+authors = ["gandres42 <gandres2416@gmail.com>"]
+channels = ["robostack-noetic", "conda-forge"]
+name = "noetic"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+ros-noetic-desktop = ">=1.5.0,<2"
+nano = ">=8.3,<9"
+pip = ">=25.1.1,<26"

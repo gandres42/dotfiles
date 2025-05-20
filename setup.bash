@@ -23,16 +23,16 @@ fi
 export PATH="/home/gavin/.pixi/bin:$PATH"
 
 # # VSCODE ----------------------------------------------------------------------
-# if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-#     export VSCODE_WORKSPACE_ROOT="$PWD"
-#     if [ -f pixi.lock ]; then
-#         eval "$($HOME/.pixi/bin/pixi shell-hook)"
-#         source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
-#     elif [ -f uv.lock ]; then
-#         source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
-#     fi
-#     clear
-# fi
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    export VSCODE_WORKSPACE_ROOT="$PWD"
+    if [ -f pixi.lock ]; then
+        eval "$($HOME/.pixi/bin/pixi shell-hook)"
+        source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+    elif [ -f uv.lock ]; then
+        source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
+    fi
+    clear
+fi
 
 # FUNCTIONS -------------------------------------------------------------------
 db() {
@@ -100,6 +100,15 @@ pixi() {
     else
         $HOME/.pixi/bin/pixi "${@:1}"
     fi
+}
+
+# PIXI ROS --------------------------------------------------------------------
+jazzy() {
+    bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/jazzy && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
+}
+
+noetic() {
+    bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/noetic && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
 }
 
 # ROS -------------------------------------------------------------------------

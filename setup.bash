@@ -97,18 +97,13 @@ function ls() {
 pixi() {
     if [ "$1" == "shell" ]; then
         bash --rcfile <(cat ~/.bashrc; echo 'eval "$(pixi shell-hook)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
+    elif [ "$1" == "jazzy" ]; then
+        bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/jazzy && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
+    elif [ "$1" == "noetic" ]; then
+        bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/noetic && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
     else
         $HOME/.pixi/bin/pixi "${@:1}"
     fi
-}
-
-# PIXI ROS --------------------------------------------------------------------
-jazzy() {
-    bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/jazzy && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
-}
-
-noetic() {
-    bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/noetic && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
 }
 
 # ROS -------------------------------------------------------------------------

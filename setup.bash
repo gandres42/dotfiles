@@ -5,7 +5,7 @@ alias wp-charybdis="waypipe --video=hw ssh -Y charybdis"
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
-alias xpra-charybdis="xpra attach tcp://charybdis:15000/100 --headerbar=no"
+alias xpra-charybdis="xpra attach tcp://charybdis:15000/100 --headerbar=no --encoding=h264"
 
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"

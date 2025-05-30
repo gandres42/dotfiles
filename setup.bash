@@ -9,6 +9,9 @@ alias re-source="source ~/.bashrc"
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
+# PIXI INCLUDE ------------------------------------------------------------------
+export PATH="/home/gavin/.pixi/bin:$PATH"
+
 # DISTROBOX -------------------------------------------------------------------
 if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
@@ -16,21 +19,28 @@ if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
     [ -f /opt/ros/humble/setup.bash ] && source /opt/ros/humble/setup.bash
     [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
+    [ -f /opt/ros/kilted/setup.bash ] && source /opt/ros/kilted/setup.bash
 fi
 
-# PIXI ------------------------------------------------------------------------
-export PATH="/home/gavin/.pixi/bin:$PATH"
-
-# # VSCODE ----------------------------------------------------------------------
+# VSCODE AUTO-ACTIVATION ------------------------------------------------------
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-    export VSCODE_WORKSPACE_ROOT="$PWD"
-    if [ -f pixi.lock ]; then
+    dir="$PWD"
+    while [[ "$dir" != "/" ]]; do
+        if [[ -d "$dir/.pixi" || -d "$dir/.venv" ]]; then
+            break
+        fi
+        dir="$(dirname "$dir")"
+    done
+    export VSCODE_WORKSPACE_ROOT="$dir"
+    if [ -d $dir/.pixi ]; then
         eval "$($HOME/.pixi/bin/pixi shell-hook)"
-        source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
-    elif [ -f uv.lock ]; then
+        if [ -f $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash ]; then
+            source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+        fi
+    elif [ -d $dir/.venv ]; then
         source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
     fi
-    clear
+#     clear
 fi
 
 # FUNCTIONS -------------------------------------------------------------------
@@ -62,28 +72,6 @@ ts() {
         tailscale "${@:1}"
     fi
 }
-
-# uv() {
-#     if [ "$1" == "shell" ]; then
-#         dir="$PWD"
-#         uv_dir=""
-#         while [ "$dir" != "/" ]; do
-#             if [ -e "$dir/.venv" ]; then
-#                 export uv_dir="$dir"
-#                 break
-#             fi
-#             dir="$(dirname "$dir")"
-#         done
-#         if [ -z "$uv_dir" ]; then
-#             unset uv_dir
-#             echo "Error: .venv not found in any parent directory." >&2
-#         else
-#             (cd "$uv_dir" && bash --rcfile <(echo 'source ~/.bashrc; source .venv/bin/activate'))
-#         fi
-#     else
-#         $HOME/.local/bin/uv "${@:1}"
-#     fi
-# }
 
 function ls() {
   if [ "$PWD" = "$HOME" ]; then

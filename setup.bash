@@ -40,7 +40,7 @@ if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     elif [ -d $dir/.venv ]; then
         source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
     fi
-#     clear
+    clear
 fi
 
 # FUNCTIONS -------------------------------------------------------------------

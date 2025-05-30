@@ -5,7 +5,6 @@ alias wp-charybdis="waypipe --video=hw ssh -Y charybdis"
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
-alias xpra-charybdis="xpra attach tcp://charybdis:15000/100 --headerbar=no --encoding=h264"
 
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
@@ -64,27 +63,27 @@ ts() {
     fi
 }
 
-uv() {
-    if [ "$1" == "shell" ]; then
-        dir="$PWD"
-        uv_dir=""
-        while [ "$dir" != "/" ]; do
-            if [ -e "$dir/.venv" ]; then
-                export uv_dir="$dir"
-                break
-            fi
-            dir="$(dirname "$dir")"
-        done
-        if [ -z "$uv_dir" ]; then
-            unset uv_dir
-            echo "Error: .venv not found in any parent directory." >&2
-        else
-            (cd "$uv_dir" && bash --rcfile <(echo 'source ~/.bashrc; source .venv/bin/activate'))
-        fi
-    else
-        $HOME/.local/bin/uv "${@:1}"
-    fi
-}
+# uv() {
+#     if [ "$1" == "shell" ]; then
+#         dir="$PWD"
+#         uv_dir=""
+#         while [ "$dir" != "/" ]; do
+#             if [ -e "$dir/.venv" ]; then
+#                 export uv_dir="$dir"
+#                 break
+#             fi
+#             dir="$(dirname "$dir")"
+#         done
+#         if [ -z "$uv_dir" ]; then
+#             unset uv_dir
+#             echo "Error: .venv not found in any parent directory." >&2
+#         else
+#             (cd "$uv_dir" && bash --rcfile <(echo 'source ~/.bashrc; source .venv/bin/activate'))
+#         fi
+#     else
+#         $HOME/.local/bin/uv "${@:1}"
+#     fi
+# }
 
 function ls() {
   if [ "$PWD" = "$HOME" ]; then
@@ -96,11 +95,7 @@ function ls() {
 
 pixi() {
     if [ "$1" == "shell" ]; then
-        bash --rcfile <(cat ~/.bashrc; echo 'eval "$(pixi shell-hook)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
-    elif [ "$1" == "jazzy" ]; then
-        bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/jazzy && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
-    elif [ "$1" == "noetic" ]; then
-        bash --rcfile <(cat ~/.bashrc; echo 'eval "$(BASE_DIR=$PWD && cd $HOME/.dotfiles/ros/noetic && pixi shell-hook && cd $BASE_DIR)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;')
+        bash --rcfile <(echo 'eval "$(pixi shell-hook)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
     elif [ "$1" == "pip" ]; then
         if [ -n "$PIXI_PROJECT_NAME" ]; then
             $HOME/.local/bin/uv "${@:1}" --system
@@ -123,3 +118,4 @@ fi
 
 # ENV VARIABLES ---------------------------------------------------------------
 export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
+

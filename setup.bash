@@ -83,7 +83,8 @@ function ls() {
 
 pixi() {
     if [ "$1" == "shell" ]; then
-        bash --rcfile <(echo 'eval "$(pixi shell-hook)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
+#         bash --rcfile <(echo 'eval "$(pixi shell-hook)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
+        bash --rcfile <( cat ~/.bashrc; echo 'RIG_PS1=$PS1'; echo 'eval "$(pixi shell-hook)"'; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $RIG_PS1"'; echo 'unset RIG_PS1')
     elif [ "$1" == "pip" ]; then
         if [ -n "$PIXI_PROJECT_NAME" ]; then
             $HOME/.local/bin/uv "${@:1}" --system

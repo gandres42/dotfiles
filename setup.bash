@@ -5,6 +5,7 @@ alias wp-charybdis="waypipe --video=hw ssh -Y charybdis"
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
+alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
@@ -98,9 +99,11 @@ pixi() {
 # ROS -------------------------------------------------------------------------
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
     alias cbs="catkin build && source devel/setup.bash"
+    alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
 else
     alias cbs="colcon build && source install/setup.bash"
+    alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
 fi
 

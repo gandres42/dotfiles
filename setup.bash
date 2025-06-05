@@ -10,6 +10,29 @@ alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
+# VSCODE AUTO-ACTIVATION ------------------------------------------------------
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    dir="$PWD"
+    while [[ "$dir" != "/" ]]; do
+        if [[ -d "$dir/.pixi" || -d "$dir/.venv" || -e "$dir/.condaenv" ]]; then
+            break
+        fi
+        dir="$(dirname "$dir")"
+    done
+    export VSCODE_WORKSPACE_ROOT="$dir"
+    if [ -d $dir/.pixi ]; then
+        eval "$($HOME/.pixi/bin/pixi shell-hook)"
+        if [ -f $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash ]; then
+            source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
+        fi
+    elif [ -d $dir/.venv ]; then
+        source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
+    elif [ -e $dir/.condaenv ]; then
+        mamba activate $(cat .condaenv)
+    fi
+    clear
+fi
+
 # PIXI ------------------------------------------------------------------------
 if [[ -e "$HOME/.pixi" ]]; then
     export PATH="/home/gavin/.pixi/bin:$PATH"
@@ -84,29 +107,6 @@ db() {
         distrobox "${@:1}"
     fi
 }
-
-# VSCODE AUTO-ACTIVATION ------------------------------------------------------
-if [[ "$TERM_PROGRAM" == "vscode" ]]; then
-    dir="$PWD"
-    while [[ "$dir" != "/" ]]; do
-        if [[ -d "$dir/.pixi" || -d "$dir/.venv" || -e "$dir/.condaenv" ]]; then
-            break
-        fi
-        dir="$(dirname "$dir")"
-    done
-    export VSCODE_WORKSPACE_ROOT="$dir"
-    if [ -d $dir/.pixi ]; then
-        eval "$($HOME/.pixi/bin/pixi shell-hook)"
-        if [ -f $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash ]; then
-            source $PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash
-        fi
-    elif [ -d $dir/.venv ]; then
-        source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
-    elif [ -e $dir/.condaenv ]; then
-        mamba activate $(cat .condaenv)
-    fi
-    clear
-fi
 
 # TAILSCALE  ------------------------------------------------------------------
 ts() {

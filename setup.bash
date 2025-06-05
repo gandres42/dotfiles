@@ -11,20 +11,53 @@ alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
 # PIXI ------------------------------------------------------------------------
-export PATH="/home/gavin/.pixi/bin:$PATH"
-pixi() {
-    if [ "$1" == "shell" ]; then
-        bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
-    elif [ "$1" == "pip" ]; then
-        if [ -n "$PIXI_PROJECT_NAME" ]; then
-            $HOME/.local/bin/uv "${@:1}" --system
+if [[ -e "$HOME/.pixi" ]]; then
+    export PATH="/home/gavin/.pixi/bin:$PATH"
+    pixi() {
+        if [ "$1" == "shell" ]; then
+            bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
+        elif [ "$1" == "pip" ]; then
+            if [ -n "$PIXI_PROJECT_NAME" ]; then
+                $HOME/.local/bin/uv "${@:1}" --system
+            else
+                echo -e "Error:   \e[31m×\e[0m could not find pixi.toml or pyproject.toml at directory $PWD"
+            fi
         else
-            echo -e "Error:   \e[31m×\e[0m could not find pixi.toml or pyproject.toml at directory $PWD"
+            $HOME/.pixi/bin/pixi "${@:1}"
         fi
+    }
+fi
+
+# MAMBA -----------------------------------------------------------------------
+if [[ -e "$HOME/.miniforge" ]]; then
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/home/gavin/.miniforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        $HOME/.pixi/bin/pixi "${@:1}"
+        if [ -f "/home/gavin/.miniforge/etc/profile.d/conda.sh" ]; then
+            . "/home/gavin/.miniforge/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/gavin/.miniforge/bin:$PATH"
+        fi
     fi
-}
+    unset __conda_setup
+    # <<< conda initialize <<<
+
+    # >>> mamba initialize >>>
+    # !! Contents within this block are managed by 'mamba shell init' !!
+    export MAMBA_EXE='/home/gavin/.miniforge/bin/mamba';
+    export MAMBA_ROOT_PREFIX='/home/gavin/.miniforge';
+    __mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__mamba_setup"
+    else
+        alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+    fi
+    unset __mamba_setup
+    # <<< mamba initialize <<<
+fi
 
 # DISTROBOX -------------------------------------------------------------------
 if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
@@ -56,7 +89,7 @@ db() {
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     dir="$PWD"
     while [[ "$dir" != "/" ]]; do
-        if [[ -d "$dir/.pixi" || -d "$dir/.venv" ]]; then
+        if [[ -d "$dir/.pixi" || -d "$dir/.venv" || -e "$dir/.condaenv" ]]; then
             break
         fi
         dir="$(dirname "$dir")"
@@ -69,6 +102,8 @@ if [[ "$TERM_PROGRAM" == "vscode" ]]; then
         fi
     elif [ -d $dir/.venv ]; then
         source $VSCODE_WORKSPACE_ROOT/.venv/bin/activate
+    elif [ -e $dir/.condaenv ]; then
+        mamba activate $(cat .condaenv)
     fi
     clear
 fi

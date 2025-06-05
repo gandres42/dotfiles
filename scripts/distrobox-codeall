@@ -1,5 +1,8 @@
 #!/bin/bash
-xhost si:localuser:gavin
-for container in $(podman ps -a --format "{{.Names}}"); do
+OUTPUT_DIR="${HOME}/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/nameConfigs"
+xhost si:localuser:gavin > /dev/null 2>&1
+rm $OUTPUT_DIR/* > /dev/null 2>&1
+containers=$(distrobox list | tail -n +2 | awk -F '|' '{gsub(/^ +| +$/,"",$2); print $2}')
+for container in $containers; do
   distrobox-code "$container"
 done

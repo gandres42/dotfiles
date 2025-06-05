@@ -10,8 +10,21 @@ alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 # SHELL SCRIPTS ---------------------------------------------------------------
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
-# PIXI INCLUDE ------------------------------------------------------------------
+# PIXI ------------------------------------------------------------------------
 export PATH="/home/gavin/.pixi/bin:$PATH"
+pixi() {
+    if [ "$1" == "shell" ]; then
+        bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
+    elif [ "$1" == "pip" ]; then
+        if [ -n "$PIXI_PROJECT_NAME" ]; then
+            $HOME/.local/bin/uv "${@:1}" --system
+        else
+            echo -e "Error:   \e[31m×\e[0m could not find pixi.toml or pyproject.toml at directory $PWD"
+        fi
+    else
+        $HOME/.pixi/bin/pixi "${@:1}"
+    fi
+}
 
 # DISTROBOX -------------------------------------------------------------------
 if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
@@ -22,6 +35,21 @@ if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
     [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
     [ -f /opt/ros/kilted/setup.bash ] && source /opt/ros/kilted/setup.bash
 fi
+
+db() {
+    if [ "$1" == "code" ]; then
+        distrobox-code "$2"
+    elif [ "$1" == "uncode" ]; then
+        distrobox-uncode "$2"
+    elif [ "$1" == "startall" ]; then
+        distrobox-startall
+    elif [ "$1" == "create" ]; then
+        distrobox "${@:1}"
+        distrobox-codeall
+    else
+        distrobox "${@:1}"
+    fi
+}
 
 # VSCODE AUTO-ACTIVATION ------------------------------------------------------
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
@@ -44,24 +72,7 @@ if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     clear
 fi
 
-# FUNCTIONS -------------------------------------------------------------------
-db() {
-    if [ "$1" == "code" ]; then
-        distrobox-code "$2"
-    elif [ "$1" == "uncode" ]; then
-        distrobox-uncode "$2"
-    elif [ "$1" == "startall" ]; then
-        distrobox-startall
-    elif [ "$1" == "create" ]; then
-        distrobox "${@:1}"
-        distrobox-codeall
-    elif [ "$1" == "uncode-all" ]; then
-        rm ${HOME}/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/nameConfigs/*
-    else
-        distrobox "${@:1}"
-    fi
-}
-
+# TAILSCALE  ------------------------------------------------------------------
 ts() {
     if [ "$1" == "mull" ]; then
         tailscale set --exit-node=$(tailscale exit-node suggest | awk -F': ' '/Suggested exit node:/ {print $2}' | sed 's/\.$//')
@@ -71,28 +82,6 @@ ts() {
         ipcheck
     else
         tailscale "${@:1}"
-    fi
-}
-
-function ls() {
-  if [ "$PWD" = "$HOME" ]; then
-    command ls --hide=snap "$@"
-  else
-    command ls "$@"
-  fi
-}
-
-pixi() {
-    if [ "$1" == "shell" ]; then
-        bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
-    elif [ "$1" == "pip" ]; then
-        if [ -n "$PIXI_PROJECT_NAME" ]; then
-            $HOME/.local/bin/uv "${@:1}" --system
-        else
-            echo -e "Error:   \e[31m×\e[0m could not find pixi.toml or pyproject.toml at directory $PWD"
-        fi
-    else
-        $HOME/.pixi/bin/pixi "${@:1}"
     fi
 }
 

@@ -1,3 +1,6 @@
+# SHELL SCRIPTS ---------------------------------------------------------------
+export PATH="$HOME/.dotfiles/scripts:$PATH"
+
 # ALIASES ---------------------------------------------------------------------
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 alias wp-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
@@ -6,9 +9,8 @@ alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
-
-# SHELL SCRIPTS ---------------------------------------------------------------
-export PATH="$HOME/.dotfiles/scripts:$PATH"
+alias foxglove-bridge="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
+alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 
 # VSCODE AUTO-ACTIVATION ------------------------------------------------------
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
@@ -126,12 +128,9 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     alias cbs="catkin build && source devel/setup.bash"
     alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
-else
+elif [[ -n "$ROS_DISTRO" ]]; then
     alias cbs="colcon build && source install/setup.bash"
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
+    export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
 fi
-
-# ENV VARIABLES ---------------------------------------------------------------
-export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
-

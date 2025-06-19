@@ -1,5 +1,0 @@
-conda config --env --add channels conda-forge
-conda config --env --remove channels defaults
-conda config --env --add channels robostack-"$1"
-mamba install ros-"$1"-desktop
-echo -e '#!/bin/bash\nsource $CONDA_PREFIX/setup.bash > /dev/null 2>&1\n' > $CONDA_PREFIX/etc/conda/activate.d/ros-activate.sh

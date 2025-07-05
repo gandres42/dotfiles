@@ -9,7 +9,6 @@ alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
-alias foxglove-bridge="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 
 # VSCODE AUTO-ACTIVATION ------------------------------------------------------
@@ -132,5 +131,8 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias cbs="colcon build && source install/setup.bash"
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
+    alias foxglove-bridge="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
+    alias ros2core="ros2 run rmw_zenoh_cpp rmw_zenohd"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
+    export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 fi

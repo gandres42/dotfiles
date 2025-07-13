@@ -84,7 +84,7 @@ if [[ -e "$HOME/.miniforge" ]]; then
 fi
 
 # DISTROBOX -------------------------------------------------------------------
-if [[ -n "$CONTAINER_ID" || "$HOSTNAME" == *.* ]]; then
+if [[ -n "$CONTAINER_ID" ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
     export QT_QPA_PLATFORM=xcb
     [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash

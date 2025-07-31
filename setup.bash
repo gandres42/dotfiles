@@ -100,9 +100,17 @@ if [[ -e "$HOME/.pixi" ]]; then
             bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
         elif [ "$1" == "pip" ]; then
             if [ -n "$PIXI_PROJECT_NAME" ]; then
+                if [ ! -f "$PIXI_PROJECT_ROOT/.python-version" ]; then
+                    dir="$PWD"
+                    cd "$PIXI_PROJECT_ROOT"
+                    uv python pin "$(which python)"
+                    cd "$dir"
+                    unset dir
+                fi
+
                 $HOME/.local/bin/uv "${@:1}" --system
             else
-                echo -e "Error:   \e[31m×\e[0m could not find pixi.toml or pyproject.toml at directory $PWD"
+                echo -e "Error:   \e[31m×\e[0m enter a pixi shell to use pip"
             fi
         else
             $HOME/.pixi/bin/pixi "${@:1}"

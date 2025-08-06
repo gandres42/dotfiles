@@ -100,14 +100,6 @@ if [[ -e "$HOME/.pixi" ]]; then
             bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
         elif [ "$1" == "pip" ]; then
             if [ -n "$PIXI_PROJECT_NAME" ]; then
-#                 if [ ! -f "$PIXI_PROJECT_ROOT/.python-version" ]; then
-#                     dir="$PWD"
-#                     cd "$PIXI_PROJECT_ROOT"
-#                     uv python pin "$(which python)"
-#                     cd "$dir"
-#                     unset dir
-#                 fi
-
                 $HOME/.local/bin/uv "${@:1}" --system
             else
                 echo -e "Error:   \e[31m×\e[0m enter a pixi shell to use pip"
@@ -142,7 +134,7 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
     alias foxglove-bridge="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
-    alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
+    alias ros2core="ros2 run rmw_zenoh_cpp rmw_zenohd"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 fi

@@ -11,37 +11,6 @@ alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 
-# MAMBA -----------------------------------------------------------------------
-# if [[ -e "$HOME/.miniforge" ]]; then
-#     # >>> conda initialize >>>
-#     # !! Contents within this block are managed by 'conda init' !!
-#     __conda_setup="$('/home/gavin/.miniforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-#     if [ $? -eq 0 ]; then
-#         eval "$__conda_setup"
-#     else
-#         if [ -f "/home/gavin/.miniforge/etc/profile.d/conda.sh" ]; then
-#             . "/home/gavin/.miniforge/etc/profile.d/conda.sh"
-#         else
-#             export PATH="/home/gavin/.miniforge/bin:$PATH"
-#         fi
-#     fi
-#     unset __conda_setup
-#     # <<< conda initialize <<<
-#
-#     # >>> mamba initialize >>>
-#     # !! Contents within this block are managed by 'mamba shell init' !!
-#     export MAMBA_EXE='/home/gavin/.miniforge/bin/mamba';
-#     export MAMBA_ROOT_PREFIX='/home/gavin/.miniforge';
-#     __mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-#     if [ $? -eq 0 ]; then
-#         eval "$__mamba_setup"
-#     else
-#         alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-#     fi
-#     unset __mamba_setup
-#     # <<< mamba initialize <<<
-# fi
-
 # DISTROBOX -------------------------------------------------------------------
 if [[ -n "$CONTAINER_ID" ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
@@ -103,6 +72,20 @@ if [[ -e "$HOME/.pixi" ]]; then
                 $HOME/.local/bin/uv "${@:1}" --system
             else
                 echo -e "Error:   \e[31m×\e[0m enter a pixi shell to use pip"
+            fi
+        elif [ "$1" == "ros" ]; then
+            if ! pixi list &>/dev/null; then
+                pixi init
+            fi
+            if [ "$2" == "noetic" ]; then
+                pixi project channel add robostack-noetic
+                pixi add ros-noetic-desktop
+            elif [[ "$2" == "jazzy" || "$2" == "kilted" || "$2" == "humble" ]] || [[ -z "$2" ]]; then
+                pixi project channel add robostack-"$2"
+                pixi add ros-"$2"-desktop ros-"$2"-foxglove-bridge ros-"$2"-rmw-zenoh-cpp
+            else
+                echo "Error: Unsupported ROS distro '$2'. Supported: noetic, humble, jazzy, kilted"
+                return 1
             fi
         else
             $HOME/.pixi/bin/pixi "${@:1}"

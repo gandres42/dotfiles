@@ -117,7 +117,22 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
     alias foxglove-bridge="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
-    alias ros2core="ros2 run rmw_zenoh_cpp rmw_zenohd"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+    
+    # ROS2 function wrapper with preserved autocompletion
+    ros2() {
+        if [ "$1" == "core" ]; then
+            ros2 run rmw_zenoh_cpp rmw_zenohd
+            return 1
+        fi
+        command ros2 "${@}"
+    }
+
+    if declare -f _ros2_completion >/dev/null 2>&1; then
+        complete -F _ros2_completion ros2
+    elif complete -p ros2 >/dev/null 2>&1; then
+        _ros2_completion_backup=$(complete -p ros2)
+        eval "${_ros2_completion_backup/ros2/ros2}"
+    fi
 fi

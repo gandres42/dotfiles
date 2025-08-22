@@ -1,7 +1,11 @@
-# SHELL SCRIPTS ---------------------------------------------------------------
+# region: SHELL SCRIPTS -------------------------------------------------------
+
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
-# ALIASES ---------------------------------------------------------------------
+# endregion
+
+# region: ALIASES -------------------------------------------------------------
+
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 alias wp-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
 alias wp-charybdis="waypipe --video=hw ssh -Y charybdis"
@@ -11,7 +15,10 @@ alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 
-# DISTROBOX -------------------------------------------------------------------
+# endregion
+
+# region: DISTROBOX -----------------------------------------------------------
+
 if [[ -n "$CONTAINER_ID" ]]; then
     PS1="📦[\u@${CONTAINER_ID} \W]\$ "
     export QT_QPA_PLATFORM=xcb
@@ -37,7 +44,10 @@ db() {
     fi
 }
 
-# VSCODE AUTO-ACTIVATION ------------------------------------------------------
+# endregion
+
+# region: VSCODE AUTO-ACTIVATION ----------------------------------------------
+
 if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     dir="$PWD"
     while [[ "$dir" != "/" ]]; do
@@ -61,7 +71,9 @@ if [[ "$TERM_PROGRAM" == "vscode" ]]; then
     clear
 fi
 
-# PIXI ------------------------------------------------------------------------
+# endregion
+
+# region: PIXI ----------------------------------------------------------------
 if [[ -e "$HOME/.pixi" ]]; then
     export PATH="/home/gavin/.pixi/bin:$PATH"
     pixi() {
@@ -93,7 +105,10 @@ if [[ -e "$HOME/.pixi" ]]; then
     }
 fi
 
-# TAILSCALE  ------------------------------------------------------------------
+# endregion
+
+# region: TAILSCALE  ----------------------------------------------------------
+
 ts() {
     if [ "$1" == "mull" ]; then
         tailscale set --exit-node=$(tailscale exit-node suggest | awk -F': ' '/Suggested exit node:/ {print $2}' | sed 's/\.$//')
@@ -106,12 +121,15 @@ ts() {
     fi
 }
 
-# ROS -------------------------------------------------------------------------
+# endregion
+
+# region: ROS -----------------------------------------------------------------
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
     alias cbs="catkin build && source devel/setup.bash"
     alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
     export DISABLE_ROS1_EOL_WARNINGS=1
+    export CMAKE_POLICY_VERSION_MINIMUM=3.5
 elif [[ -n "$ROS_DISTRO" ]]; then
     alias cbs="colcon build && source install/setup.bash"
     alias s="source install/setup.bash"
@@ -208,3 +226,5 @@ elif [[ -n "$ROS_DISTRO" ]]; then
         fi
     fi
 fi
+
+# endregion

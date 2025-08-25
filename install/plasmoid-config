@@ -1,8 +1,0 @@
-#!/bin/bash
-if [ "$1" = "deploy" ]; then
-    cp ./config/plasma-org.kde.plasma.desktop-appletsrc $HOME/.config/
-elif [ "$1" = "copy" ]; then
-    cp $HOME/.config/plasma-org.kde.plasma.desktop-appletsrc ./config
-else
-    echo "usage: plasmoid-config <copy | deploy>"
-fi

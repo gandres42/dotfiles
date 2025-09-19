@@ -1,6 +1,7 @@
 # region: SHELL SCRIPTS -------------------------------------------------------
 
 export PATH="$HOME/.dotfiles/scripts:$PATH"
+export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 
 # endregion
 
@@ -46,9 +47,9 @@ db() {
 
 # endregion
 
-# region: VSCODE AUTO-ACTIVATION ----------------------------------------------
+# region: IDE AUTO-ACTIVATION -------------------------------------------------
 
-if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+if [[ "$PPID_NAME" == "code" || "$PPID_NAME" == "pycharm" ]]; then
     dir="$PWD"
     while [[ "$dir" != "/" ]]; do
         if [[ -d "$dir/.pixi" || -d "$dir/.venv" || -e "$dir/.condaenv" ]]; then

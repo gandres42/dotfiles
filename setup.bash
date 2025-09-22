@@ -135,97 +135,99 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias cbs="colcon build && source install/setup.bash"
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
+    alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
+    alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 
-    # Capture the original completion before we override it
-    _ros2_original_completion=""
-    _ros2_original_func=""
-    if complete -p ros2 >/dev/null 2>&1; then
-        _ros2_original_completion=$(complete -p ros2)
-        _ros2_original_func=$(echo "$_ros2_original_completion" | sed -n 's/.*-F \([^ ]*\).*/\1/p')
-        # Store the original function with a different name
-        if [[ -n "$_ros2_original_func" ]] && declare -f "$_ros2_original_func" >/dev/null; then
-            eval "_ros2_backup() { $_ros2_original_func \"\$@\"; }"
-        fi
-    fi
+    # # Capture the original completion before we override it
+    # _ros2_original_completion=""
+    # _ros2_original_func=""
+    # if complete -p ros2 >/dev/null 2>&1; then
+    #     _ros2_original_completion=$(complete -p ros2)
+    #     _ros2_original_func=$(echo "$_ros2_original_completion" | sed -n 's/.*-F \([^ ]*\).*/\1/p')
+    #     # Store the original function with a different name
+    #     if [[ -n "$_ros2_original_func" ]] && declare -f "$_ros2_original_func" >/dev/null; then
+    #         eval "_ros2_backup() { $_ros2_original_func \"\$@\"; }"
+    #     fi
+    # fi
 
-    ros2() {
-        if [ "$1" == "core" ]; then
-            command ros2 run rmw_zenoh_cpp rmw_zenohd
-            return
-        fi
-        if [ "$1" == "foxglove" ]; then
-            command ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true
-            return
-        fi
-        command ros2 "${@}"
-    }
+    # ros2() {
+    #     if [ "$1" == "core" ]; then
+    #         command ros2 run rmw_zenoh_cpp rmw_zenohd
+    #         return
+    #     fi
+    #     if [ "$1" == "foxglove" ]; then
+    #         command ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true
+    #         return
+    #     fi
+    #     command ros2 "${@}"
+    # }
 
-    # Custom completion function that extends ros2 completion
-    _ros2_custom_completion() {
-        local cur prev words cword
-        _init_completion || return
+    # # Custom completion function that extends ros2 completion
+    # _ros2_custom_completion() {
+    #     local cur prev words cword
+    #     _init_completion || return
 
-        local custom_commands="core foxglove"
+    #     local custom_commands="core foxglove"
         
-        if [[ $cword -eq 1 ]]; then
-            # For first argument, combine our custom commands with original ones
-            local original_completions=""
-            if declare -f _ros2_backup >/dev/null; then
-                # Get original completions by calling the backup function
-                local old_compreply=("${COMPREPLY[@]}")
-                COMPREPLY=()
-                _ros2_backup "$@" 2>/dev/null || true
-                original_completions="${COMPREPLY[*]}"
-                COMPREPLY=("${old_compreply[@]}")
-            fi
+    #     if [[ $cword -eq 1 ]]; then
+    #         # For first argument, combine our custom commands with original ones
+    #         local original_completions=""
+    #         if declare -f _ros2_backup >/dev/null; then
+    #             # Get original completions by calling the backup function
+    #             local old_compreply=("${COMPREPLY[@]}")
+    #             COMPREPLY=()
+    #             _ros2_backup "$@" 2>/dev/null || true
+    #             original_completions="${COMPREPLY[*]}"
+    #             COMPREPLY=("${old_compreply[@]}")
+    #         fi
             
-            # Combine custom and original completions
-            COMPREPLY=($(compgen -W "$custom_commands $original_completions" -- "$cur"))
-        else
-            # For sub-commands, use the original completion function
-            if declare -f _ros2_backup >/dev/null; then
-                _ros2_backup "$@"
-            fi
-        fi
-    }
+    #         # Combine custom and original completions
+    #         COMPREPLY=($(compgen -W "$custom_commands $original_completions" -- "$cur"))
+    #     else
+    #         # For sub-commands, use the original completion function
+    #         if declare -f _ros2_backup >/dev/null; then
+    #             _ros2_backup "$@"
+    #         fi
+    #     fi
+    # }
 
-    # Function to ensure our completion stays active
-    _ensure_ros2_custom_completion() {
-        local current_completion=$(complete -p ros2 2>/dev/null | grep -o '_ros2_custom_completion' || echo "")
-        if [[ "$current_completion" != "_ros2_custom_completion" ]]; then
-            # Re-capture original completion if it changed
-            if complete -p ros2 >/dev/null 2>&1; then
-                local new_completion=$(complete -p ros2)
-                local new_func=$(echo "$new_completion" | sed -n 's/.*-F \([^ ]*\).*/\1/p')
-                if [[ -n "$new_func" ]] && declare -f "$new_func" >/dev/null; then
-                    eval "_ros2_backup() { $new_func \"\$@\"; }"
-                fi
-            fi
-            complete -F _ros2_custom_completion ros2
-        fi
-    }
+    # # Function to ensure our completion stays active
+    # _ensure_ros2_custom_completion() {
+    #     local current_completion=$(complete -p ros2 2>/dev/null | grep -o '_ros2_custom_completion' || echo "")
+    #     if [[ "$current_completion" != "_ros2_custom_completion" ]]; then
+    #         # Re-capture original completion if it changed
+    #         if complete -p ros2 >/dev/null 2>&1; then
+    #             local new_completion=$(complete -p ros2)
+    #             local new_func=$(echo "$new_completion" | sed -n 's/.*-F \([^ ]*\).*/\1/p')
+    #             if [[ -n "$new_func" ]] && declare -f "$new_func" >/dev/null; then
+    #                 eval "_ros2_backup() { $new_func \"\$@\"; }"
+    #             fi
+    #         fi
+    #         complete -F _ros2_custom_completion ros2
+    #     fi
+    # }
 
-    # Apply the custom completion initially
-    complete -F _ros2_custom_completion ros2
+    # # Apply the custom completion initially
+    # complete -F _ros2_custom_completion ros2
     
-    # Hook into the 's' alias to reapply completion after sourcing
-    alias s="source install/setup.bash && _ensure_ros2_custom_completion"
+    # # Hook into the 's' alias to reapply completion after sourcing
+    # alias s="source install/setup.bash && _ensure_ros2_custom_completion"
     
-    # Add automatic restoration via PROMPT_COMMAND
-    _ros2_prompt_hook() {
-        _ensure_ros2_custom_completion
-    }
+    # # Add automatic restoration via PROMPT_COMMAND
+    # _ros2_prompt_hook() {
+    #     _ensure_ros2_custom_completion
+    # }
     
-    # Add our hook to PROMPT_COMMAND (only if not already there)
-    if [[ "$PROMPT_COMMAND" != *"_ros2_prompt_hook"* ]]; then
-        if [[ -n "$PROMPT_COMMAND" ]]; then
-            export PROMPT_COMMAND="$PROMPT_COMMAND; _ros2_prompt_hook"
-        else
-            export PROMPT_COMMAND="_ros2_prompt_hook"
-        fi
-    fi
+    # # Add our hook to PROMPT_COMMAND (only if not already there)
+    # if [[ "$PROMPT_COMMAND" != *"_ros2_prompt_hook"* ]]; then
+    #     if [[ -n "$PROMPT_COMMAND" ]]; then
+    #         export PROMPT_COMMAND="$PROMPT_COMMAND; _ros2_prompt_hook"
+    #     else
+    #         export PROMPT_COMMAND="_ros2_prompt_hook"
+    #     fi
+    # fi
 fi
 
 # endregion

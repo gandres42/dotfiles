@@ -49,10 +49,10 @@ db() {
 
 # region: IDE AUTO-ACTIVATION -------------------------------------------------
 
-if [[ "$PPID_NAME" == "code" || "$PPID_NAME" == "pycharm" ]]; then
+if [[ "$PPID_NAME" == "code" || "$PPID_NAME" == "pycharm" || "$PPID_NAME" == "codium" ]]; then
     dir="$PWD"
     while [[ "$dir" != "/" ]]; do
-        if [[ -d "$dir/.pixi" || -d "$dir/.venv" || -e "$dir/.condaenv" ]]; then
+        if [[ -d "$dir/.pixi" || -d "$dir/.venv" ]]; then
             break
         fi
         dir="$(dirname "$dir")"

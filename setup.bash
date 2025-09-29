@@ -22,7 +22,7 @@ alias dcr="cp -r ~/.dotfiles/install/.devcontainer . && echo 'created .devcontai
 # region: DISTROBOX -----------------------------------------------------------
 
 if [[ -n "$CONTAINER_ID" ]]; then
-    PS1="📦$PS1"
+    PS1="📦 $PS1"
     export QT_QPA_PLATFORM=xcb
     [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
     [ -f /opt/ros/foxy/setup.bash ] && source /opt/ros/foxy/setup.bash
@@ -139,7 +139,7 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     export DISABLE_ROS1_EOL_WARNINGS=1
     export CMAKE_POLICY_VERSION_MINIMUM=3.5
 elif [[ -n "$ROS_DISTRO" ]]; then
-    alias basics-install="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
+    alias rosbasics="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
     alias cbs="colcon build && source install/setup.bash"
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"

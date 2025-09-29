@@ -15,15 +15,23 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # update and install packages
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y python3-pip
+RUN apt-get install -y python3-pip curl
 
-# dev environment setup
+# set default shell
+RUN chsh -s /bin/bash $USERNAME
+
+# persist env globally
+ENV UV_SYSTEM_PYTHON=1
+ENV UV_BREAK_SYSTEM_PACKAGES=true
+
+# install uv as root
+RUN curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR="/usr/local/bin" sh
+RUN echo 'Defaults env_keep += "UV_SYSTEM_PYTHON UV_BREAK_SYSTEM_PACKAGES"' >> /etc/sudoers.d/$USERNAME
+
+# then switch to non-root user
 USER $USERNAME
 WORKDIR /home/$USERNAME
-RUN echo '[pip]\nprefix = ".local"' > uv.toml
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV UV_SYSTEM_PYTHON true
+ENV UV_BREAK_SYSTEM_PACKAGES true
 RUN git clone https://github.com/gandres42/dotfiles.git && mv dotfiles .dotfiles
 RUN echo 'source ~/.dotfiles/setup.bash' >> ~/.bashrc
-ENV SHELL /bin/bash
-ENV CONTAINER_ID $CONTAINER_ID
-CMD ["/bin/bash"]

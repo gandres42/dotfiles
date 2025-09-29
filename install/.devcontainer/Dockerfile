@@ -13,25 +13,22 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-# update and install packages
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y python3-pip curl
-
-# set default shell
-RUN chsh -s /bin/bash $USERNAME
-
-# persist env globally
+# install uv
+RUN apt-get update && apt-get install curl && curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR="/usr/local/bin" sh
 ENV UV_SYSTEM_PYTHON=1
 ENV UV_BREAK_SYSTEM_PACKAGES=true
-
-# install uv as root
-RUN curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR="/usr/local/bin" sh
 RUN echo 'Defaults env_keep += "UV_SYSTEM_PYTHON UV_BREAK_SYSTEM_PACKAGES"' >> /etc/sudoers.d/$USERNAME
 
-# then switch to non-root user
+# update and install packages
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y python3-pip python-is-python3
+RUN /usr/local/bin/uv pip install numpy open3d pybind11-stubgen
+RUN pybind11-stubgen -o "$(python -c 'import site; print(site.getsitepackages()[0])')" --root-suffix "" open3d
+
+# dev environemnt setup
+RUN chsh -s /bin/bash $USERNAME
 USER $USERNAME
 WORKDIR /home/$USERNAME
-ENV UV_SYSTEM_PYTHON true
-ENV UV_BREAK_SYSTEM_PACKAGES true
 RUN git clone https://github.com/gandres42/dotfiles.git && mv dotfiles .dotfiles
 RUN echo 'source ~/.dotfiles/setup.bash' >> ~/.bashrc
+ENV CONTAINER_ID $CONTAINER_ID

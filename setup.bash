@@ -22,7 +22,7 @@ alias dcr="cp -r ~/.dotfiles/install/.devcontainer . && echo 'created .devcontai
 # region: DISTROBOX -----------------------------------------------------------
 
 if [[ -n "$CONTAINER_ID" ]]; then
-    PS1="📦[\u@${CONTAINER_ID} \W]\$ "
+    PS1="📦$PS1"
     export QT_QPA_PLATFORM=xcb
     [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
     [ -f /opt/ros/foxy/setup.bash ] && source /opt/ros/foxy/setup.bash

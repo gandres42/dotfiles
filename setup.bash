@@ -22,7 +22,7 @@ alias dcr="cp -r ~/.dotfiles/install/.devcontainer . && echo 'created .devcontai
 # region: DISTROBOX -----------------------------------------------------------
 
 if [[ -n "$CONTAINER_ID" ]]; then
-    PS1="📦 $PS1"
+#     PS1="📦 $PS1"
     export QT_QPA_PLATFORM=xcb
     [ -f /opt/ros/noetic/setup.bash ] && source /opt/ros/noetic/setup.bash
     [ -f /opt/ros/foxy/setup.bash ] && source /opt/ros/foxy/setup.bash
@@ -50,7 +50,10 @@ db() {
 
 # region: IDE AUTO-ACTIVATION -------------------------------------------------
 
-if [[ "$PPID_NAME" == "code" || "$PPID_NAME" == "pycharm" || "$PPID_NAME" == "codium" || -n "$PIXI_ACTIVATE" ]]; then
+# TERM_PROGRAM
+IDE_PROGRAMS=("code" "pycharm" "codium" "clion" "vscode")
+
+if [[ " ${IDE_PROGRAMS[@]} " =~ " ${PPID_NAME} " || " ${IDE_PROGRAMS[@]} " =~ " ${TERM_PROGRAM} " || -n "$PIXI_ACTIVATE" ]]; then
     dir="$PWD"
     while [[ "$dir" != "/" ]]; do
         if [[ -d "$dir/.pixi" || -d "$dir/.venv" ]]; then
@@ -133,7 +136,8 @@ ts() {
 
 # region: ROS -----------------------------------------------------------------
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
-    alias cbs="catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
+    alias cbs="catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS=\"-isystem /opt/ros/noetic/include\" && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
+    # alias cbs="catkin build && source devel/setup.bash"
     alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
     export DISABLE_ROS1_EOL_WARNINGS=1
@@ -141,6 +145,7 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
 elif [[ -n "$ROS_DISTRO" ]]; then
     alias rosbasics="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
     alias cbs="colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
+    # alias cbs="colcon build && source install/setup.bash"
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
     alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"

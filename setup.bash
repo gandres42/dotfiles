@@ -15,7 +15,7 @@ alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
-alias dp="devpod-cli"
+alias dotfile-edit="code $HOME/.dotfiles"
 
 # endregion
 
@@ -60,7 +60,6 @@ db() {
 
 # region: IDE AUTO-ACTIVATION -------------------------------------------------
 
-# TERM_PROGRAM
 IDE_PROGRAMS=("code" "pycharm" "codium" "clion" "vscode")
 
 if [[ " ${IDE_PROGRAMS[@]} " =~ " ${PPID_NAME} " || " ${IDE_PROGRAMS[@]} " =~ " ${TERM_PROGRAM} " || -n "$PIXI_ACTIVATE" ]]; then

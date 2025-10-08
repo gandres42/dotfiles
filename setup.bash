@@ -16,6 +16,7 @@ alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 alias dcr="cp -r ~/.dotfiles/install/.devcontainer . && echo 'created .devcontainer'"
+alias dp="devpod-cli"
 
 # endregion
 

@@ -27,10 +27,10 @@
         }
     },
     "mounts": [
-       "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached,optional=true",
-       "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached,optional=true",
-       "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/${env:USER}/.ssh,readonly,optional=true",
-       "type=bind,source=/home/${localEnv:USER}/.dotfiles,target=/home/${env:USER}/.dotfiles,readonly,optional=true",
-       "type=bind,source=/home/${localEnv:USER}/Datasets,target=/home/${env:USER}/datasets,optional=true"
+       "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+       "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
+       "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/${env:USER}/.ssh,readonly",
+       "type=bind,source=/home/${localEnv:USER}/.dotfiles,target=/home/${env:USER}/.dotfiles,readonly",
+       "type=bind,source=/home/${localEnv:USER}/Datasets,target=/home/${env:USER}/datasets"
     ]
 }

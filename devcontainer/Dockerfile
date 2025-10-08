@@ -14,7 +14,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # update sources and install basic tools
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install git wget python3-pip python-is-python3 jq
+RUN apt-get install -y git wget python3-pip python-is-python3 jq
 
 # install uv
 RUN apt-get update && apt-get install curl && curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR="/usr/local/bin" sh

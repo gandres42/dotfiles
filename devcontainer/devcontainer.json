@@ -6,7 +6,7 @@
         "dockerfile": "Dockerfile",
         "args": {
             "USERNAME": "${env:USER}",
-            "CONTAINER_ID": "${containerName}"
+            "CONTAINER_ID": "WSNAME"
         }
     },
     "workspaceFolder": "/home/${env:USER}/WSNAME",

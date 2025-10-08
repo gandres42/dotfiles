@@ -1,5 +1,6 @@
 FROM osrf/ros:jazzy-desktop-full
 ARG USERNAME=USERNAME
+ARG CONTAINER_ID=CONTAINER_ID
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
@@ -27,3 +28,4 @@ RUN chsh -s /bin/bash $USERNAME
 USER $USERNAME
 WORKDIR /home/$USERNAME
 RUN echo 'source ~/.dotfiles/setup.bash' >> ~/.bashrc && echo 'alias uv="sudo uv"' >> ~/.bashrc
+ENV CONTAINER_ID $CONTAINER_ID

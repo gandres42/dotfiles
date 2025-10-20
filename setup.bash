@@ -22,9 +22,15 @@ alias dotfile-edit="code $HOME/.dotfiles"
 # region: DEVCONTAINERS -------------------------------------------------------
 
 dcr() {
-    local wsname="${1:-$(basename "$PWD")}"
+    if [ $# -ne 1 ]; then
+        echo "Usage: dcr <base-image>"
+        return 1
+    fi
+    local wsname="$(basename "$PWD")"
+    local baseimage="$1"
     cp -r "$HOME/.dotfiles/devcontainer" .devcontainer
-    find .devcontainer -type f -exec sed -i "s/WSNAME/$wsname/g" {} +
+    find .devcontainer -type f -exec sed -i "s|WSNAME|$wsname|g" {} +
+    find .devcontainer -type f -exec sed -i "s|BASEIMAGE|$baseimage|g" {} +
 }
 
 # endregion
@@ -157,6 +163,7 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
     alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
+    alias rosbridge="ros2 launch rosbridge_server rosbridge_websocket_launch.xml"
     alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp

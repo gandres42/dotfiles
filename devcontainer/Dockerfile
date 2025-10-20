@@ -1,4 +1,4 @@
-FROM osrf/ros:jazzy-desktop-full
+FROM BASEIMAGE
 ARG USERNAME=USERNAME
 ARG CONTAINER_ID=CONTAINER_ID
 ARG USER_UID=1000
@@ -14,8 +14,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # update sources and install basic tools
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y git wget python3-pip python-is-python3 jq
+RUN apt-get upgrade -y
+RUN apt-get install -y ssh curl git wget python3-pip python-is-python3 jq
 
 # install uv
 RUN apt-get update && apt-get install curl && curl -LsSf https://astral.sh/uv/install.sh | UV_INSTALL_DIR="/usr/local/bin" sh
@@ -26,6 +26,5 @@ RUN echo 'Defaults env_keep += "UV_SYSTEM_PYTHON UV_BREAK_SYSTEM_PACKAGES"' >> /
 # dev environemnt setup
 RUN chsh -s /bin/bash $USERNAME
 USER $USERNAME
-WORKDIR /home/$USERNAME
-RUN echo 'source ~/.dotfiles/setup.bash' >> ~/.bashrc && echo 'alias uv="sudo uv"' >> ~/.bashrc
+RUN echo "source /home/$USERNAME/.dotfiles/setup.bash" >> /home/$USERNAME/.bashrc && echo 'alias uv="sudo uv"' >> ~/.bashrc
 ENV CONTAINER_ID $CONTAINER_ID

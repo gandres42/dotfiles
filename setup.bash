@@ -101,8 +101,6 @@ if [[ -e "$HOME/.pixi" ]]; then
             bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
         elif [ "$1" == "init" ]; then
             $HOME/.pixi/bin/pixi "${@:1}"
-            mkdir -p .vscode
-            echo -e "{\n    \"python.languageServer\": \"None\",\n    \"ty.interpreter\": [\n        \".pixi/envs/default/bin/python\"\n    ]\n}" > .vscode/settings.json
         elif [ "$1" == "pip" ]; then
             if [ -n "$PIXI_PROJECT_NAME" ]; then
                 $HOME/.local/bin/uv "${@:1}" --system
@@ -112,8 +110,6 @@ if [[ -e "$HOME/.pixi" ]]; then
         elif [ "$1" == "ros" ]; then
             if ! pixi list &>/dev/null; then
                 pixi init
-                mkdir -p .vscode
-                echo -e "{\n    \"python.languageServer\": \"None\",\n    \"ty.interpreter\": [\n        \".pixi/envs/default/bin/python\"\n    ]\n}" > .vscode/settings.json
             fi
             if [ "$2" == "noetic" ]; then
                 pixi project channel add robostack-noetic

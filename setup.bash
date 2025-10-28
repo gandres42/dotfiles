@@ -22,9 +22,15 @@ alias dotfile-edit="code $HOME/.dotfiles"
 # region: DEVCONTAINERS -------------------------------------------------------
 
 dcr() {
-    local wsname="${1:-$(basename "$PWD")}"
+    if [ $# -ne 1 ]; then
+        echo "Usage: dcr <base-image>"
+        return 1
+    fi
+    local wsname="$(basename "$PWD")"
+    local baseimage="$1"
     cp -r "$HOME/.dotfiles/devcontainer" .devcontainer
-    find .devcontainer -type f -exec sed -i "s/WSNAME/$wsname/g" {} +
+    find .devcontainer -type f -exec sed -i "s|WSNAME|$wsname|g" {} +
+    find .devcontainer -type f -exec sed -i "s|BASEIMAGE|$baseimage|g" {} +
 }
 
 # endregion
@@ -95,8 +101,6 @@ if [[ -e "$HOME/.pixi" ]]; then
             bash --rcfile <(echo 'eval "$(pixi shell-hook --change-ps1 false)"'; cat ~/.bashrc; echo '[ -f "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash" ] && source "$PIXI_PROJECT_ROOT/.pixi/envs/default/setup.bash"'; echo '[[ -z "$PIXI_PROJECT_ROOT" ]] && exit 1;'; echo 'export PS1="($PIXI_PROJECT_NAME) $PS1"')
         elif [ "$1" == "init" ]; then
             $HOME/.pixi/bin/pixi "${@:1}"
-            mkdir -p .vscode
-            echo -e "{\n    \"python.languageServer\": \"None\",\n    \"ty.interpreter\": [\n        \".pixi/envs/default/bin/python\"\n    ]\n}" > .vscode/settings.json
         elif [ "$1" == "pip" ]; then
             if [ -n "$PIXI_PROJECT_NAME" ]; then
                 $HOME/.local/bin/uv "${@:1}" --system
@@ -106,8 +110,6 @@ if [[ -e "$HOME/.pixi" ]]; then
         elif [ "$1" == "ros" ]; then
             if ! pixi list &>/dev/null; then
                 pixi init
-                mkdir -p .vscode
-                echo -e "{\n    \"python.languageServer\": \"None\",\n    \"ty.interpreter\": [\n        \".pixi/envs/default/bin/python\"\n    ]\n}" > .vscode/settings.json
             fi
             if [ "$2" == "noetic" ]; then
                 pixi project channel add robostack-noetic
@@ -153,18 +155,17 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     export CMAKE_POLICY_VERSION_MINIMUM=3.5
 elif [[ -n "$ROS_DISTRO" ]]; then
     alias rosbasics="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
-    alias cbs="colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
-    # alias cbs="colcon build && source install/setup.bash"
+    alias cbs="colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"    
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
     alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
+    alias rosbridge="ros2 launch rosbridge_server rosbridge_websocket_launch.xml"
     alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 fi
 
 # endregion
-
 
 # region: VARIABLES -----------------------------------------------------------
 

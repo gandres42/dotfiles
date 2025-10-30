@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Supersonic
+Name=Armada
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=34,34,34
+activeBackground=9,9,9
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=34,34,34
+inactiveBackground=9,9,9
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

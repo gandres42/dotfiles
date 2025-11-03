@@ -171,5 +171,6 @@ fi
 # region: VARIABLES -----------------------------------------------------------
 
 export XDG_SESSION_TYPE=x11
-
+export UV_NO_BUILD_ISOLATION=true
+export UV_PYTHON_PREFERENCE="system"
 # endregion -------------------------------------------------------------------

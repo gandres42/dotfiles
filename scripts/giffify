@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+	cat <<'EOF'
+Usage: giffify [-s START] [-e END] [-o OUTPUT] INPUT
+
+Convert INPUT video to a GIF while preserving the native resolution.
+
+Options:
+	-s START   Optional start timestamp (e.g. 5, 00:00:05.5).
+	-e END     Optional end timestamp (cuts before END).
+	-o OUTPUT  Optional output GIF filename.
+	-h         Show this help message.
+EOF
+}
+
+start_ts=""
+end_ts=""
+output_path=""
+
+while getopts "s:e:o:h" opt; do
+	case "$opt" in
+		s) start_ts="$OPTARG" ;;
+		e) end_ts="$OPTARG" ;;
+		o) output_path="$OPTARG" ;;
+		h)
+			usage
+			exit 0
+			;;
+		*)
+			usage >&2
+			exit 1
+			;;
+	esac
+done
+shift $((OPTIND - 1))
+
+if [[ $# -ne 1 ]]; then
+	usage >&2
+	exit 1
+fi
+
+input_path="$1"
+
+if [[ ! -f "$input_path" ]]; then
+	echo "giffify: input file not found: $input_path" >&2
+	exit 1
+fi
+
+if ! command -v ffmpeg >/dev/null 2>&1; then
+	echo "giffify: ffmpeg is required but not installed" >&2
+	exit 1
+fi
+
+if [[ -z "$output_path" ]]; then
+	base_name="${input_path##*/}"
+	output_path="${base_name%.*}.gif"
+fi
+
+seek_args=()
+if [[ -n "$start_ts" ]]; then
+	seek_args+=(-ss "$start_ts")
+fi
+if [[ -n "$end_ts" ]]; then
+	seek_args+=(-to "$end_ts")
+fi
+
+palette_file=$(mktemp --suffix=.png)
+trap 'rm -f "$palette_file"' EXIT
+
+# Generate palette for better GIF quality without altering resolution.
+ffmpeg -hide_banner -loglevel error "${seek_args[@]}" -i "$input_path" \
+	-vf "fps=15,scale=iw:ih:flags=lanczos,palettegen" -y "$palette_file"
+
+ffmpeg -hide_banner -loglevel error "${seek_args[@]}" -i "$input_path" -i "$palette_file" \
+	-filter_complex "[0:v]fps=15,scale=iw:ih:flags=lanczos[vid];[vid][1:v]paletteuse=dither=bayer" \
+	-gifflags -transdiff -y "$output_path"
+
+echo "GIF created: $output_path"

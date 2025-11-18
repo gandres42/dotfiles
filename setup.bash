@@ -161,7 +161,8 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
     alias rosbridge="ros2 launch rosbridge_server rosbridge_websocket_launch.xml"
     alias rosbridge-remote="(ros2 run rosapi rosapi_node 2>&1 & ros2 run rosbridge_server rosbridge_websocket --ros-args -p use_compression:=true -p compression_type:=png -p qos_depth:=1 -p qos_reliability:=best_effort -p qos_history:=keep_last 2>&1)"
-    alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
+    alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml"
+    alias foxglove-remote="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp
 fi
@@ -173,4 +174,5 @@ fi
 export XDG_SESSION_TYPE=x11
 export UV_NO_BUILD_ISOLATION=true
 export UV_PYTHON_PREFERENCE="system"
+
 # endregion -------------------------------------------------------------------

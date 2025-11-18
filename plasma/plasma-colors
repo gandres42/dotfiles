@@ -1,5 +1,6 @@
 #!/bin/bash
-if [ "$1" = "deploy" ]; then
+if [ "$1" = "set" ]; then
+    rm $HOME/.local/share/color-schemes/*
     rsync -aP --ignore-existing ./config/color-schemes/ $HOME/.local/share/color-schemes
     cp ./config/kwinrulesrc ~/.config
     qdbus org.kde.KWin /KWin reconfigure
@@ -7,5 +8,5 @@ elif [ "$1" = "copy" ]; then
     cp -r $HOME/.local/share/color-schemes ./config
     cp ~/.config/kwinrulesrc ./config/kwinrulesrc
 else
-    echo "usage: plasmoid-config <copy | deploy>"
+    echo "usage: plasmoid-config <copy | set>"
 fi

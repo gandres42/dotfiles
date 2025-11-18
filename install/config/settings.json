@@ -1,0 +1,21 @@
+{
+    "window.titleBarStyle": "native",
+    "workbench.colorTheme": "Darcula",
+    "window.menuBarVisibility": "toggle",
+    "workbench.activityBar.location": "top",
+    "window.customTitleBarVisibility": "never",
+    "window.zoomLevel": -1,
+    "files.simpleDialog.enable": true,
+    "window.restoreWindows": "none",
+    "workbench.startupEditor": "none",
+    "dev.containers.dockerComposePath": "docker compose",
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "remote.autoForwardPorts": false,
+    "editor.fontSize": 12,
+    "terminal.integrated.fontSize": 13,
+    "editor.minimap.enabled": false,
+    "files.autoSave": "onFocusChange",
+    "editor.inlineSuggest.enabled": false,
+    "files.autoSaveDelay": 0,
+    "editor.cursorSmoothCaretAnimation": "on"
+}

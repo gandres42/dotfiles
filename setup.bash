@@ -7,9 +7,7 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 
 # region: ALIASES -------------------------------------------------------------
 
-alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
-alias wp-keats="waypipe -c lz4=8 --video=hw ssh -Y -C keats"
-alias wp-charybdis="waypipe --video=hw ssh -Y charybdis"
+alias wake-severn="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"

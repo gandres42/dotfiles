@@ -8,5 +8,5 @@ elif [ "$1" = "copy" ]; then
     cp -r $HOME/.local/share/color-schemes ./config
     cp ~/.config/kwinrulesrc ./config/kwinrulesrc
 else
-    echo "usage: plasmoid-config <copy | set>"
+    echo "usage: plasma-colors <copy | set>"
 fi

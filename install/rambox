@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# config
+owner="ramboxapp"
+repo="download"
+bin="rambox"
+
+# download and unzip latest version
+cd $HOME/.local/src
+url=$(curl -s "https://api.github.com/repos/$owner/$repo/releases/latest" \
+  | grep browser_download_url \
+  | grep linux-x64.tar.gz \
+  | cut -d '"' -f 4)
+filename=$(basename "$url")
+dirname="${filename%.tar.gz}"
+wget "$url" && tar -xvf $filename
+rm $filename
+
+# symlink bin into .local/bin
+ln -sf $PWD/$dirname/$bin $HOME/.local/bin/$bin
+
+# create desktop file
+url=$(curl -s "https://api.github.com/users/$owner" \
+  | grep -Eo '"avatar_url": *"[^"]+"' \
+  | cut -d'"' -f4)
+
+wget -O $HOME/.local/share/icons/$bin.png "$url"
+
+echo \
+"[Desktop Entry]
+Name=Rambox
+Exec=rambox --no-sandbox %U
+Terminal=false
+Type=Application
+Icon=$HOME/.local/share/icons/$bin.png
+StartupWMClass=Rambox
+Categories=Network;
+Comment=Workspace simplifier" \
+> $HOME/.local/share/applications/$bin.desktop
+
+update-desktop-database $HOME/.local/share/applications
+
+# extra setup
+src_dir="$HOME/.local/src/$dirname"
+npx asar extract $src_dir/resources/app.asar /tmp/rambox_asar
+cd /tmp/rambox_asar/tray
+for f in *_light.png *_light.ico *_light@2x.png; do
+    dark="${f/_light/_dark}"
+    [ -f "$dark" ] && cp "$dark" "$f"
+done
+npx asar pack /tmp/rambox_asar /tmp/app.asar
+cp /tmp/app.asar $src_dir/resources/app.asar
+rm /tmp/app.asar

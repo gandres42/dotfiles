@@ -1,2 +1,0 @@
-#!/bin/bash
-sed -i 's/readonly property int smallIconSize: Kirigami\.Units\.iconSizes\.smallMedium/readonly property int smallIconSize: Kirigami.Units.iconSizes.small/' "/usr/share/plasma/plasmoids/org.kde.plasma.private.systemtray/contents/ui/main.qml"

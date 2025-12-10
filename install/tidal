@@ -1,43 +1,18 @@
 #!/bin/bash
-
-# config
-OWNER="Mastermindzh"
-REPO="tidal-hifi"
-BIN="tidal-hifi"
-ICON_URL="https://i.redd.it/download-custom-tidal-icons-for-android-macos-and-windows-v0-b0al8m0bbcuc1.png?width=1024&format=png&auto=webp&s=ea75b6a0ba1bdfb5a524463212314b0506355130"
-
-# download and unzip latest version
-cd $HOME/.local/src
-url=$(curl -s "https://api.github.com/repos/$OWNER/$REPO/releases/latest" \
+flatpak install --user com.mastermindzh.tidal-hifi
+cd /tmp
+url=$(curl -s "https://api.github.com/repos/jxnxsdev/TidaLuna-Installer/releases/latest" \
   | grep browser_download_url \
-  | grep unpacked.tar.gz \
+  | grep linux-x86_64.tar.gz \
   | cut -d '"' -f 4)
-
 filename=$(basename "$url")
-wget "$url" && tar -xvf $filename
-dirname="tidal-hifi"
-mv linux-unpacked tidal-hifi
+dirname="${filename%.tar.gz}"
+wget -q "$url" && tar -xf $filename
 rm $filename
+echo "/home/gavin/.local/share/flatpak/app/com.mastermindzh.tidal-hifi/current/active/files/lib/tidal-hifi/resources"
 
-# symlink bin into .local/bin
-ln -sf $PWD/$dirname/$BIN $HOME/.local/bin/$BIN
-
-# create desktop file
-url=$(curl -s "https://api.github.com/users/$OWNER" \
-  | grep -Eo '"avatar_url": *"[^"]+"' \
-  | cut -d'"' -f4)
-
-wget $ICON_URL -O $HOME/.local/share/icons/$BIN.png
-
-echo \
-"[Desktop Entry]
-Name=Tidal
-Exec=tidal-hifi %U
-Terminal=false
-Type=Application
-Icon=$HOME/.local/share/icons/$BIN.png
-StartupWMClass=tidal-hifi
-Comment=tidal-hifi" \
-> $HOME/.local/share/applications/$BIN.desktop
-
-update-desktop-database $HOME/.local/share/applications
+cleanup() {
+  rm -f /tmp/luna-installer
+}
+trap cleanup EXIT
+/tmp/luna-installer

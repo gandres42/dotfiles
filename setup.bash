@@ -8,12 +8,14 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 # region: ALIASES -------------------------------------------------------------
 
 alias wake-severn="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
+alias fp="flatpak --user"
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 alias dotfile-edit="code $HOME/.dotfiles"
+alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
 
 # endregion
 
@@ -157,8 +159,6 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
     alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
-    alias rosbridge="ros2 launch rosbridge_server rosbridge_websocket_launch.xml"
-    alias rosbridge-remote="(ros2 run rosapi rosapi_node 2>&1 & ros2 run rosbridge_server rosbridge_websocket --ros-args -p use_compression:=true -p compression_type:=png -p qos_depth:=1 -p qos_reliability:=best_effort -p qos_history:=keep_last 2>&1)"
     alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml"
     alias foxglove-remote="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification

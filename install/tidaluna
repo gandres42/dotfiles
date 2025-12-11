@@ -1,5 +1,5 @@
 #!/bin/bash
-flatpak install --user com.mastermindzh.tidal-hifi
+# flatpak install --user com.mastermindzh.tidal-hifi
 cd /tmp
 url=$(curl -s "https://api.github.com/repos/jxnxsdev/TidaLuna-Installer/releases/latest" \
   | grep browser_download_url \

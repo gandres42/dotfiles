@@ -1,0 +1,9 @@
+#!/bin/bash
+folders=("Desktop" "Documents" "Music" "Obsidian" "Pictures" "Videos")
+
+cmd="rclone sync $HOME discovision:/home/gavin/snapshot/$HOSTNAME" # --filter \"- **/.directory\""
+for s in "${folders[@]}"; do
+  cmd+=" --filter \"+ /$s/**\""
+done
+cmd+=" --filter \"- *\" --progress"
+eval "$cmd"

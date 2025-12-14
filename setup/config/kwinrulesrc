@@ -69,7 +69,7 @@ wmclassmatch=1
 
 [8b58850e-7920-4e44-be28-5a8a12b39ee2]
 Description=Application settings for com.github.iwalton3.jellyfin-media-player
-decocolor=Jellyfin
+decocolor=Black
 decocolorrule=2
 wmclass=\scom.github.iwalton3.jellyfin-media-player
 wmclasscomplete=true

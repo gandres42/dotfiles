@@ -16,6 +16,7 @@ alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 alias dotfile-edit="code $HOME/.dotfiles"
 alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
+alias smi="watch -t -n 0.1 nvidia-smi"
 
 # endregion
 
@@ -126,6 +127,23 @@ if [[ -e "$HOME/.pixi" ]]; then
         fi
     }
 fi
+
+# region: UV ------------------------------------------------------------------
+
+if [[ -e "$HOME/.local/bin/uv" ]]; then
+    uv() {
+        if [ "$1" == "shell" ]; then
+            p="$(uv run python -c 'import sys; print(sys.prefix)')" && [ "$p" = "/usr" ] || source "$p/bin/activate"
+        else
+            $HOME/.local/bin/uv "${@:1}"
+        fi
+    }
+fi
+
+# endregion
+
+
+
 
 # endregion
 

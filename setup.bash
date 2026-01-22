@@ -185,8 +185,7 @@ ts() {
             for tarfile in /tmp/*.tar.gz; do
                 if [ -f "$tarfile" ]; then
                     echo "Extracting: $(basename "$tarfile")"
-                    tar -xzf "$tarfile" -C "$dest"
-                    echo "Deleting: $tarfile"
+                    tar -xvzf "$tarfile" -C "$dest"
                     rm "$tarfile"
                 fi
             done

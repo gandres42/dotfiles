@@ -142,9 +142,6 @@ fi
 
 # endregion
 
-
-
-
 # endregion
 
 # region: TAILSCALE  ----------------------------------------------------------
@@ -156,10 +153,59 @@ ts() {
     elif [ "$1" == "unmull" ]; then
         tailscale set --exit-node=
         ipcheck
+    elif [ "$1" == "tar" ]; then
+        if [ "$2" == "cp" ]; then
+            if [ $# -lt 4 ]; then
+                echo "Usage: ts tar cp <file-or-directory> <hostname>:"
+                return 1
+            fi
+            local source="$3"
+            local hostname="$4"
+            
+            # Validate hostname ends with colon
+            if [[ ! "$hostname" =~ :$ ]]; then
+                echo "Error: hostname must end with ':'"
+                echo "Usage: ts tar cp <file-or-directory> <hostname>:"
+                return 1
+            fi
+            
+            local basename=$(basename "$source")
+            local archive="/tmp/${basename}.tar.gz"
+            
+            echo "Creating archive: $archive"
+            tar -czf "$archive" -C "$(dirname "$source")" "$(basename "$source")"
+            
+            echo "Copying to $hostname"
+            ts file cp "$archive" "${hostname}"
+            
+            echo "Cleaning up local archive"
+            rm "$archive"
+        elif [ "$2" == "get" ]; then
+            echo "Receiving files to /tmp"
+            ts file get /tmp
+            
+            echo "Extracting tar.gz files from /tmp to current directory"
+            for tarfile in /tmp/*.tar.gz; do
+                if [ -f "$tarfile" ]; then
+                    echo "Extracting: $(basename "$tarfile")"
+                    tar -xzf "$tarfile" -C .
+                    echo "Deleting: $tarfile"
+                    rm "$tarfile"
+                fi
+            done
+            echo "Done"
+        else
+            echo "Usage: ts tar <cp|get>"
+            echo "  ts tar cp <file-or-directory> <hostname>:  - Archive and send to host"
+            echo "  ts tar get                                 - Receive and extract archives"
+            return 1
+        fi
     else
         tailscale "${@:1}"
     fi
 }
+
+
 
 # endregion
 

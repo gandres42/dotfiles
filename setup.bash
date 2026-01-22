@@ -153,10 +153,10 @@ ts() {
     elif [ "$1" == "unmull" ]; then
         tailscale set --exit-node=
         ipcheck
-    elif [ "$1" == "tar" ]; then
+    elif [ "$1" == "folder" ]; then
         if [ "$2" == "cp" ]; then
             if [ $# -lt 4 ]; then
-                echo "Usage: ts tar cp <file-or-directory> <hostname>:"
+                echo "Usage: ts folder cp <file-or-directory> <hostname>:"
                 return 1
             fi
             local source="$3"
@@ -165,39 +165,35 @@ ts() {
             # Validate hostname ends with colon
             if [[ ! "$hostname" =~ :$ ]]; then
                 echo "Error: hostname must end with ':'"
-                echo "Usage: ts tar cp <file-or-directory> <hostname>:"
                 return 1
             fi
             
             local basename=$(basename "$source")
             local archive="/tmp/${basename}.tar.gz"
             
-            echo "Creating archive: $archive"
             tar -czf "$archive" -C "$(dirname "$source")" "$(basename "$source")"
-            
-            echo "Copying to $hostname"
             ts file cp "$archive" "${hostname}"
-            
-            echo "Cleaning up local archive"
             rm "$archive"
         elif [ "$2" == "get" ]; then
-            echo "Receiving files to /tmp"
-            ts file get /tmp
+            if [ $# -lt 3 ]; then
+                echo "Usage: ts folder get <destination-path>"
+                return 1
+            fi
+            local dest="$3"
             
-            echo "Extracting tar.gz files from /tmp to current directory"
+            ts file get /tmp
             for tarfile in /tmp/*.tar.gz; do
                 if [ -f "$tarfile" ]; then
                     echo "Extracting: $(basename "$tarfile")"
-                    tar -xzf "$tarfile" -C .
+                    tar -xzf "$tarfile" -C "$dest"
                     echo "Deleting: $tarfile"
                     rm "$tarfile"
                 fi
             done
-            echo "Done"
         else
-            echo "Usage: ts tar <cp|get>"
-            echo "  ts tar cp <file-or-directory> <hostname>:  - Archive and send to host"
-            echo "  ts tar get                                 - Receive and extract archives"
+            echo "Usage: ts folder <cp|get>"
+            echo "  ts folder cp <file-or-directory> <hostname>:  - Archive and send to host"
+            echo "  ts folder get <destination-path>              - Receive and extract archives"
             return 1
         fi
     else

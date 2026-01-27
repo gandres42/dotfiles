@@ -14,6 +14,26 @@ wmclass=\sobsidian
 wmclasscomplete=true
 wmclassmatch=1
 
+[2f257454-6826-433c-bdaa-ac9af50a4b3f]
+Description=Application settings for FLTK
+clientmachine=localhost
+noborder=true
+noborderrule=3
+size=800,800
+sizerule=2
+wmclass=FLTK
+wmclassmatch=1
+
+[36c2e8a0-3d4e-48a6-a843-b5a8a20ad358]
+Description=Application settings for luna
+decocolor=Black
+decocolorrule=2
+desktopfile=com.mastermindzh.tidal-hifi
+desktopfilerule=3
+wmclass=\sluna
+wmclasscomplete=true
+wmclassmatch=1
+
 [3b2dfbdb-504c-471d-afe3-33af4a75e4f3]
 Description=Application settings for jetbrains-studio
 clientmachine=localhost
@@ -38,6 +58,18 @@ decocolorrule=2
 wmclass=obsidian
 wmclassmatch=1
 
+[535b27a3-43ca-46d9-92bb-7ed222e04aeb]
+Description=Application settings for tidal-hifi
+clientmachine=localhost
+decocolor=Black
+decocolorrule=2
+wmclass=tidal-hifi
+wmclassmatch=1
+
+[5b0f633a-51c8-48a0-84e0-7d9ba76634f9]
+decocolor=Spotify
+decocolorrule=2
+
 [67cbe49a-5a5a-40a3-ba13-54fc496b28dc]
 Description=Application settings for Lichtblick
 clientmachine=localhost
@@ -59,6 +91,17 @@ wmclass=dopamine Dopamine
 wmclasscomplete=true
 wmclassmatch=1
 
+[73f3b2e6-59a1-4ab3-a1df-2c2c1b85ecf8]
+Description=Window settings for discord
+clientmachine=localhost
+noborderrule=3
+title=#general | ROB 599: Mobile Robotics - Discord
+types=1
+windowrole=browser-window
+windowrolematch=1
+wmclass=discord
+wmclassmatch=1
+
 [80922fad-8f2d-4344-94e2-7416dfae28db]
 Description=Application settings for org.kde.konsole
 decocolor=Konsole
@@ -75,6 +118,14 @@ wmclass=\scom.github.iwalton3.jellyfin-media-player
 wmclasscomplete=true
 wmclassmatch=1
 
+[9299865b-979f-4c89-95ae-28ec4fbb4cc6]
+Description=Application settings for vesktop
+clientmachine=localhost
+decocolor=Vencord
+decocolorrule=2
+wmclass=vesktop
+wmclassmatch=1
+
 [982638ba-09b8-456f-a787-d324f84f6ce2]
 Description=Application settings for Code
 clientmachine=localhost
@@ -85,8 +136,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=21
-rules=1b12366d-a958-45b0-a3ef-6ce3128d35f6,d3d58168-e776-4e9c-bd4c-f44a8708ed36,c25abd92-9585-41fa-9f04-4aa2cdcd8ac1,efbc8c29-480b-4114-bc3c-3c0a92159405,67cbe49a-5a5a-40a3-ba13-54fc496b28dc,e112e8fd-1850-4236-b93b-0677a1b965ac,c8b18be1-c8e1-42d2-acab-eb6dce55f9a4,45c9df1b-ec68-4f94-bbde-b2671475144b,cff720d2-e6fd-413e-82a8-2cfaa7548756,c0876af3-8625-43a9-bc51-ed8b03901df5,be386724-dc4c-41c2-9e9d-6fb942e2d419,2b9d0ada-45d0-42b3-8e43-6fc9618997aa,6df4c75d-571a-4d09-90c1-5945acf27484,add0a6ae-660e-41d9-b1a5-241d875f6930,3b2dfbdb-504c-471d-afe3-33af4a75e4f3,8b58850e-7920-4e44-be28-5a8a12b39ee2,cc643c9d-8fc8-41bc-a8e3-00d8a1acc403,f62a7666-9dc1-4831-8cb1-788e63db2cda,f62b71f4-bb0b-4c95-99c3-3cd97159ed5a,982638ba-09b8-456f-a787-d324f84f6ce2,3c48ebfc-329b-4a5a-b9b2-c3e9a5467c5d
+count=26
+rules=535b27a3-43ca-46d9-92bb-7ed222e04aeb,9299865b-979f-4c89-95ae-28ec4fbb4cc6,2f257454-6826-433c-bdaa-ac9af50a4b3f,73f3b2e6-59a1-4ab3-a1df-2c2c1b85ecf8,36c2e8a0-3d4e-48a6-a843-b5a8a20ad358,1b12366d-a958-45b0-a3ef-6ce3128d35f6,d3d58168-e776-4e9c-bd4c-f44a8708ed36,c25abd92-9585-41fa-9f04-4aa2cdcd8ac1,efbc8c29-480b-4114-bc3c-3c0a92159405,67cbe49a-5a5a-40a3-ba13-54fc496b28dc,e112e8fd-1850-4236-b93b-0677a1b965ac,c8b18be1-c8e1-42d2-acab-eb6dce55f9a4,45c9df1b-ec68-4f94-bbde-b2671475144b,cff720d2-e6fd-413e-82a8-2cfaa7548756,c0876af3-8625-43a9-bc51-ed8b03901df5,be386724-dc4c-41c2-9e9d-6fb942e2d419,2b9d0ada-45d0-42b3-8e43-6fc9618997aa,6df4c75d-571a-4d09-90c1-5945acf27484,add0a6ae-660e-41d9-b1a5-241d875f6930,3b2dfbdb-504c-471d-afe3-33af4a75e4f3,8b58850e-7920-4e44-be28-5a8a12b39ee2,cc643c9d-8fc8-41bc-a8e3-00d8a1acc403,f62a7666-9dc1-4831-8cb1-788e63db2cda,f62b71f4-bb0b-4c95-99c3-3cd97159ed5a,982638ba-09b8-456f-a787-d324f84f6ce2,3c48ebfc-329b-4a5a-b9b2-c3e9a5467c5d
 
 [add0a6ae-660e-41d9-b1a5-241d875f6930]
 Description=Application settings for discord
@@ -114,7 +165,7 @@ wmclassmatch=1
 
 [c25abd92-9585-41fa-9f04-4aa2cdcd8ac1]
 Description=Application settings for com.mastermindzh.tidal-hifi
-decocolor=Spotify
+decocolor=Black
 decocolorrule=2
 desktops=\\0
 desktopsrule=3

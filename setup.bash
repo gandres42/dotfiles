@@ -213,18 +213,17 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     export DISABLE_ROS1_EOL_WARNINGS=1
     export CMAKE_POLICY_VERSION_MINIMUM=3.5
 elif [[ -n "$ROS_DISTRO" ]]; then
-    alias rosbasics="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
+
     cbs() {
         colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json
     }
+    
+    roscore(){ [[ -n "$ZENOH_PORT" ]] && ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$ZENOH_PORT\"]" ros2 run rmw_zenoh_cpp rmw_zenohd "$@" || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }
+    [[ -n "$ZENOH_PORT" ]] && export ZENOH_CONFIG_OVERRIDE='connect/endpoints=["tcp/127.0.0.1:'"$ZENOH_PORT"'"]'
+    
+    alias rosbasics="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
-    # alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
-
-    roscore(){ [[ "$1" == -p ]] && { ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$2\"];" ros2 run rmw_zenoh_cpp rmw_zenohd "${@:3}"; } || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }
-
-# ...existing code...
-
     alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml"
     alias foxglove-remote="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification

@@ -219,7 +219,12 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     }
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"
-    alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
+    # alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
+
+    roscore(){ [[ "$1" == -p ]] && { ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$2\"];" ros2 run rmw_zenoh_cpp rmw_zenohd "${@:3}"; } || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }
+
+# ...existing code...
+
     alias foxglove="ros2 launch foxglove_bridge foxglove_bridge_launch.xml"
     alias foxglove-remote="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification

@@ -1,21 +1,44 @@
 {
     "window.titleBarStyle": "native",
-    "workbench.colorTheme": "Darcula",
     "window.menuBarVisibility": "toggle",
     "workbench.activityBar.location": "top",
     "window.customTitleBarVisibility": "never",
-    "window.zoomLevel": -1,
     "files.simpleDialog.enable": true,
     "window.restoreWindows": "none",
     "workbench.startupEditor": "none",
     "dev.containers.dockerComposePath": "docker compose",
     "github.copilot.nextEditSuggestions.enabled": false,
     "remote.autoForwardPorts": false,
-    "editor.fontSize": 12,
-    "terminal.integrated.fontSize": 13,
     "editor.minimap.enabled": false,
     "files.autoSave": "onFocusChange",
     "editor.inlineSuggest.enabled": false,
     "files.autoSaveDelay": 0,
-    "editor.cursorSmoothCaretAnimation": "on"
+    "editor.cursorSmoothCaretAnimation": "on",
+    "python.terminal.activateEnvironment": false,
+    "extensions.ignoreRecommendations": true,
+    "print.sourcecode.fontSize": "9pt",
+    "terminal.integrated.commandsToSkipShell": [
+        "matlab.interrupt"
+    ],
+    "terminal.integrated.shellIntegration.enabled": false,
+    "maptz.regionfolder": {
+        "[cpp]": {
+            "foldEndRegex": "^[\\s]*#pragma[\\s]*endregion.*$",
+            "foldStartRegex": "^[\\s]*#pragma[\\s]*region[\\s]*(.*)[\\s]*$"
+        },
+    },
+    "editor.inlayHints.enabled": "off",
+    "chat.viewSessions.orientation": "stacked",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "git.openRepositoryInParentFolders": "never",
+    "editor.fontFamily": "'JetBrains Mono', monospace",
+    "window.zoomLevel": -1,
+    "editor.lineHeight": 1.7,
+    "editor.fontWeight": "500",
+    "workbench.colorTheme": "Armada",
+    "workbench.colorCustomizations": {
+		"activityBarTop.background": "#090909",
+		"sideBarActivityBarTop.border": "#090909",
+    },
+    "workbench.iconTheme": "vs-seti"
 }

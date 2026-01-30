@@ -32,13 +32,16 @@
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "git.openRepositoryInParentFolders": "never",
     "editor.fontFamily": "'JetBrains Mono', monospace",
-    "window.zoomLevel": -1,
     "editor.lineHeight": 1.7,
     "editor.fontWeight": "500",
     "workbench.colorTheme": "Armada",
     "workbench.colorCustomizations": {
 		"activityBarTop.background": "#090909",
 		"sideBarActivityBarTop.border": "#090909",
+        "editorIndentGuide.background1": "#2a2a2a",
+        "editorIndentGuide.activeBackground1": "#505050"
     },
-    "workbench.iconTheme": "vs-seti"
+    "workbench.iconTheme": "vs-seti",
+    "editor.fontSize": 13,
+    "terminal.integrated.fontSize": 13
 }

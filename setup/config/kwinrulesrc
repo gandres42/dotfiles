@@ -63,6 +63,8 @@ Description=Application settings for tidal-hifi
 clientmachine=localhost
 decocolor=Black
 decocolorrule=2
+desktops=\\0
+desktopsrule=3
 wmclass=tidal-hifi
 wmclassmatch=1
 
@@ -158,7 +160,7 @@ wmclassmatch=1
 
 [c0876af3-8625-43a9-bc51-ed8b03901df5]
 Description=Application settings for code
-decocolor=Code
+decocolor=Fleet
 decocolorrule=2
 wmclass=code
 wmclassmatch=1

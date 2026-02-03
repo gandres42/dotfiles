@@ -1,2 +1,11 @@
+#!/bin/bash
+
+# uninstall junk
 sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca
 sudo dnf install -y qt
+
+# install flatpaks
+flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak --user override --filesystem=xdg-config/gtk-3.0:ro
+flatpak --user override --filesystem=xdg-config/gtk-4.0:ro
+flatpak --user install net.waterfox.waterfox com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch

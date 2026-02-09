@@ -1,11 +1,31 @@
 #!/bin/bash
 
 # uninstall junk
-sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca
+sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail
 sudo dnf install -y qt
 
-# install flatpaks
+# update packages
+sudo dnf check-update
+sudo dnf upgrade -y
+
+# install vscode
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+sudo dnf check-update
+sudo dnf install code
+
+# setup flathub and install flatpaks
 flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak --user override --filesystem=xdg-config/gtk-3.0:ro
 flatpak --user override --filesystem=xdg-config/gtk-4.0:ro
-flatpak --user install net.waterfox.waterfox com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch
+flatpak --user install net.waterfox.waterfox com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch org.zotero.Zotero org.onlyoffice.desktopeditors
+
+# config setup
+$HOME/.dotfiles/setup/colors set
+$HOME/.dotfiles/setup/vscode set
+sudo $HOME/.dotfiles/setup/tray-icons
+
+# install packages from source
+mkdir $HOME/.local/src
+$HOME/.dotfiles/installers/lichtblick
+$HOME/.dotfiles/installers/rambox

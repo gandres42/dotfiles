@@ -17,6 +17,7 @@ alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 alias dotfile-edit="code $HOME/.dotfiles"
 alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
 alias smi="watch -t -n 0.1 nvidia-smi"
+alias open3d-stubs='pybind11-stubgen -o $(uv run python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
 
 # endregion
 
@@ -117,7 +118,7 @@ if [[ -e "$HOME/.pixi" ]]; then
                 pixi add ros-noetic-desktop
             elif [[ "$2" == "jazzy" || "$2" == "kilted" || "$2" == "humble" ]] || [[ -z "$2" ]]; then
                 pixi project channel add robostack-"$2"
-                pixi add ros-"$2"-desktop ros-"$2"-foxglove-bridge ros-"$2"-rmw-zenoh-cpp
+                pixi add ros-"$2"-desktop ros-"$2"-foxglove-bridge ros-"$2"-rmw-zenoh-cpp colcon-common-extensions
             else
                 echo "Error: Unsupported ROS distro '$2'. Supported: noetic, humble, jazzy, kilted"
                 return 1
@@ -217,9 +218,7 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     cbs() {
         colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json
     }
-    
     roscore(){ [[ -n "$ZENOH_PORT" ]] && ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$ZENOH_PORT\"]" ros2 run rmw_zenoh_cpp rmw_zenohd "$@" || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }
-    [[ -n "$ZENOH_PORT" ]] && export ZENOH_CONFIG_OVERRIDE='connect/endpoints=["tcp/127.0.0.1:'"$ZENOH_PORT"'"]'
     
     alias rosbasics="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
     alias s="source install/setup.bash"

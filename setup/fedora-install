@@ -29,3 +29,6 @@ sudo $HOME/.dotfiles/setup/tray-icons
 mkdir $HOME/.local/src
 $HOME/.dotfiles/installers/lichtblick
 $HOME/.dotfiles/installers/rambox
+
+# add dotfiles to bashrc
+echo "source $HOME/.dotfiles/setup.bash" >> $HOME/.bashrc

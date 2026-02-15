@@ -68,7 +68,7 @@ db() {
 
 # region: IDE AUTO-ACTIVATION -------------------------------------------------
 
-IDE_PROGRAMS=("code" "pycharm" "codium" "clion" "vscode")
+IDE_PROGRAMS=("code" "pycharm" "codium" "clion" "vscode" "zed")
 
 if [[ " ${IDE_PROGRAMS[@]} " =~ " ${PPID_NAME} " || " ${IDE_PROGRAMS[@]} " =~ " ${TERM_PROGRAM} " || -n "$PIXI_ACTIVATE" ]]; then
     dir="$PWD"

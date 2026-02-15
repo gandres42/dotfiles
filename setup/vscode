@@ -1,8 +1,0 @@
-#!/bin/bash
-if [ "$1" = "set" ]; then
-    cp ./config/settings.json $HOME/.config/Code/User/
-elif [ "$1" = "copy" ]; then
-    cp $HOME/.config/Code/User/settings.json ./config/
-else
-    echo "usage: vscode-setup <copy | set>"
-fi

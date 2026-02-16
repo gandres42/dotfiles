@@ -16,9 +16,7 @@ sudo dnf install code
 
 # setup flathub and install flatpaks
 flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak --user override --filesystem=xdg-config/gtk-3.0:ro
-flatpak --user override --filesystem=xdg-config/gtk-4.0:ro
-flatpak --user install net.waterfox.waterfox com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch org.zotero.Zotero org.onlyoffice.desktopeditors
+flatpak --user install com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch org.zotero.Zotero org.onlyoffice.desktopeditors
 
 # config setup
 $HOME/.dotfiles/setup/colors set

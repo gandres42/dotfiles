@@ -17,7 +17,7 @@ alias ipcheck="curl -s http://ip-api.com/json/ | jq"
 alias dotfile-edit="code $HOME/.dotfiles"
 alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
 alias smi="watch -t -n 0.1 nvidia-smi"
-alias open3d-stubs='pybind11-stubgen -o $(uv run python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
+alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
 
 # endregion
 

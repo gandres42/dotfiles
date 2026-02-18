@@ -20,9 +20,17 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-python.python",
+                "detachhead.basedpyright",
                 "llvm-vs-code-extensions.vscode-clangd",
-                "ms-vscode.cmake-tools"
+                "maptz.regionfolder",
+                "mechatroner.rainbow-csv",
+                "ms-python.debugpy",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.vscode-python-envs",
+                "ms-vscode-remote.remote-containers",
+                "ms-vscode-remote.remote-ssh",
+                "ms-vscode.remote-explorer"
             ]
         }
     },

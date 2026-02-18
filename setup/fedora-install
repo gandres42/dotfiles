@@ -20,13 +20,13 @@ flatpak --user install com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.spee
 
 # config setup
 $HOME/.dotfiles/setup/colors set
-$HOME/.dotfiles/setup/vscode set
 sudo $HOME/.dotfiles/setup/tray-icons
 
 # install packages from source
 mkdir $HOME/.local/src
 $HOME/.dotfiles/installers/lichtblick
 $HOME/.dotfiles/installers/rambox
+$HOME/.dotfiles/installers/waterfox
 
 # add dotfiles to bashrc
 echo "source $HOME/.dotfiles/setup.bash" >> $HOME/.bashrc

@@ -1,13 +1,13 @@
 #!/bin/bash
-wget -P ~/.local/src https://cdn.waterfox.com/waterfox/releases/6.6.8/Linux_x86_64/waterfox-6.6.8.tar.bz2
-tar -xjf ~/.local/src/waterfox-6.6.8.tar.bz2 -C ~/.local/src
-wget -O ~/.local/src/waterfox/icons/waterfox.png https://user-images.githubusercontent.com/53346722/62109388-cfde1f00-b271-11e9-90ba-2ed0efa3b8e9.png
+wget -P /usr/lib64 https://cdn.waterfox.com/waterfox/releases/6.6.8/Linux_x86_64/waterfox-6.6.8.tar.bz2
+tar -xjf /usr/lib64/waterfox-6.6.8.tar.bz2 -C /usr/lib64
+wget -O /usr/lib64/waterfox/icons/waterfox.png https://user-images.githubusercontent.com/53346722/62109388-cfde1f00-b271-11e9-90ba-2ed0efa3b8e9.png
 echo \
 "[Desktop Entry]
 Version=1.0
 Name=Waterfox
-Exec=~/.local/src/waterfox/waterfox %u
-Icon=/home/gavin/.local/src/waterfox/icons/waterfox.png
+Exec=waterfox %u
+Icon=/usr/lib64/waterfox/icons/waterfox.png
 Terminal=false
 Type=Application
 MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
@@ -20,13 +20,13 @@ X-Flatpak=net.waterfox.waterfox
 
 [Desktop Action new-window]
 Name=Open a New Window
-Exec=~/.local/src/waterfox/waterfox %u
+Exec=waterfox %u
 
 [Desktop Action new-private-window]
 Name=Open a New Private Window
-Exec=~/.local/src/waterfox/waterfox --private-window %u
+Exec=waterfox --private-window %u
 
 [Desktop Action profilemanager]
 Name=Open the Profile Manager
-Exec=~/.local/src/waterfox/waterfox --ProfileManager" \
-> $HOME/.local/share/applications/waterfox.desktop
+Exec=waterfox --ProfileManager" \
+> /usr/share/applications/waterfox.desktop

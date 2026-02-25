@@ -24,5 +24,5 @@ RUN echo 'Defaults env_keep += "UV_SYSTEM_PYTHON UV_BREAK_SYSTEM_PACKAGES"' >> /
 # dev environemnt setup
 RUN chsh -s /bin/bash $USERNAME
 USER $USERNAME
-RUN echo "source /home/$USERNAME/.dotfiles/setup.bash" >> /home/$USERNAME/.bashrc && echo 'alias uv="sudo uv"' >> ~/.bashrc
+RUN echo "source /home/$USERNAME/.dotfiles/setup.bash" >> ~/.bashrc && echo 'alias uv="sudo uv"' >> ~/.bashrc
 ENV CONTAINER_ID $CONTAINER_ID

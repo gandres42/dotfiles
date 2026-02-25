@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Code
+Name=Gazebo
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=58,58,60
+activeBackground=48,48,48
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=58,58,60
+inactiveBackground=48,48,48
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

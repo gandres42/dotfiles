@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Shotcut
+Name=Deezer
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=37,48,63
+activeBackground=20,18,22
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=37,48,63
+inactiveBackground=20,18,22
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

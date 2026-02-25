@@ -2,6 +2,7 @@
 wget -P /usr/lib64 https://cdn.waterfox.com/waterfox/releases/6.6.8/Linux_x86_64/waterfox-6.6.8.tar.bz2
 tar -xjf /usr/lib64/waterfox-6.6.8.tar.bz2 -C /usr/lib64
 wget -O /usr/lib64/waterfox/icons/waterfox.png https://user-images.githubusercontent.com/53346722/62109388-cfde1f00-b271-11e9-90ba-2ed0efa3b8e9.png
+ln -s /usr/lib64/waterfox/waterfox /usr/local/bin/waterfox
 echo \
 "[Desktop Entry]
 Version=1.0

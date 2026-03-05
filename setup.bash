@@ -8,7 +8,7 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 # region: ALIASES -------------------------------------------------------------
 
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
-alias fp="flatpak --user"
+# alias fp="flatpak --user"
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"

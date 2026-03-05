@@ -42,6 +42,7 @@ update-desktop-database $HOME/.local/share/applications
 
 # extra setup
 src_dir="$HOME/.local/src/$dirname"
+echo $src_dir
 npx asar extract $src_dir/resources/app.asar /tmp/rambox_asar
 cd /tmp/rambox_asar/tray
 for f in *_light.png *_light.ico *_light@2x.png; do
@@ -50,4 +51,4 @@ for f in *_light.png *_light.ico *_light@2x.png; do
 done
 npx asar pack /tmp/rambox_asar /tmp/app.asar
 cp /tmp/app.asar $src_dir/resources/app.asar
-rm /tmp/app.asar
+# rm /tmp/app.asar

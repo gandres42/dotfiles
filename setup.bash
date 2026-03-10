@@ -8,7 +8,6 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 # region: ALIASES -------------------------------------------------------------
 
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
-# alias fp="flatpak --user"
 alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
@@ -50,19 +49,87 @@ if [[ -n "$CONTAINER_ID" ]]; then
 fi
 
 db() {
-    if [ "$1" == "code" ]; then
-        distrobox-code "$2"
-    elif [ "$1" == "uncode" ]; then
-        distrobox-uncode "$2"
-    elif [ "$1" == "startall" ]; then
-        distrobox-startall
-    elif [ "$1" == "create" ]; then
-        distrobox "${@:1}"
-        distrobox-codeall
-    else
-        distrobox "${@:1}"
-    fi
+    local OUTPUT_DIR="${HOME}/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/nameConfigs"
+
+    case "$1" in
+        code)
+            if [ -z "$2" ]; then
+                echo "Usage: db code <distrobox_name>"
+                return 1
+            fi
+            mkdir -p "$OUTPUT_DIR"
+            cat > "${OUTPUT_DIR}/$2.json" <<EOF
+{
+  "name": "$2",
+  "remoteUser": "\${localEnv:USER}",
+  "settings": {
+    "remote.containers.copyGitConfig": false,
+    "remote.containers.gitCredentialHelperConfigLocation": "none",
+    "terminal.integrated.profiles.linux": {
+      "shell": {
+        "path": "\${localEnv:SHELL}",
+        "args": [
+          "-l"
+        ]
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "shell"
+  },
+  "remoteEnv": {
+    "COLORTERM": "\${localEnv:COLORTERM}",
+    "DBUS_SESSION_BUS_ADDRESS": "\${localEnv:DBUS_SESSION_BUS_ADDRESS}",
+    "DESKTOP_SESSION": "\${localEnv:DESKTOP_SESSION}",
+    "DISPLAY": "\${localEnv:DISPLAY}",
+    "LANG": "\${localEnv:LANG}",
+    "SHELL": "\${localEnv:SHELL}",
+    "SSH_AUTH_SOCK": "\${localEnv:SSH_AUTH_SOCK}",
+    "TERM": "\${localEnv:TERM}",
+    "VTE_VERSION": "\${localEnv:VTE_VERSION}",
+    "XDG_CURRENT_DESKTOP": "\${localEnv:XDG_CURRENT_DESKTOP}",
+    "XDG_DATA_DIRS": "\${localEnv:XDG_DATA_DIRS}",
+    "XDG_MENU_PREFIX": "\${localEnv:XDG_MENU_PREFIX}",
+    "XDG_RUNTIME_DIR": "\${localEnv:XDG_RUNTIME_DIR}",
+    "XDG_SESSION_DESKTOP": "\${localEnv:XDG_SESSION_DESKTOP}",
+    "XDG_SESSION_TYPE": "\${localEnv:XDG_SESSION_TYPE}",
+    "QT_AUTO_SCREEN_SCALE_FACTOR": "0",
+    "CONTAINER_ID": "$2"
+  }
 }
+EOF
+            ;;
+        uncode)
+            if [ -z "$2" ]; then
+                echo "Usage: db uncode <distrobox_name>"
+                return 1
+            fi
+            rm "${OUTPUT_DIR}/$2.json"
+            echo "${OUTPUT_DIR}/$2.json has been deleted"
+            ;;
+        codeall)
+            xhost si:localuser:gavin > /dev/null 2>&1
+            rm "$OUTPUT_DIR"/* > /dev/null 2>&1
+            local containers
+            containers=$(distrobox list | tail -n +2 | awk -F '|' '{gsub(/^ +| +$/,"",$2); print $2}')
+            for container in $containers; do
+                db code "$container"
+            done
+            ;;
+        startall)
+            xhost si:localuser:gavin
+            for container in $(podman ps -a --filter "status=exited" --format "{{.Names}}"); do
+                distrobox-enter -n "$container" -- bash -c "exit"
+            done
+            ;;
+        create)
+            distrobox "${@:1}"
+            db codeall
+            ;;
+        *)
+            distrobox "${@:1}"
+            ;;
+    esac
+}
+
 
 # endregion
 
@@ -143,8 +210,6 @@ fi
 
 # endregion
 
-# endregion
-
 # region: TAILSCALE  ----------------------------------------------------------
 
 ts() {
@@ -206,6 +271,7 @@ ts() {
 # endregion
 
 # region: ROS -----------------------------------------------------------------
+
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
     alias cbs="catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS=\"-isystem /opt/ros/noetic/include\" && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
     # alias cbs="catkin build && source devel/setup.bash"

@@ -15,8 +15,8 @@ sudo dnf check-update
 sudo dnf install code
 
 # setup flathub and install flatpaks
-flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak --user install com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch org.zotero.Zotero org.onlyoffice.desktopeditors
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch org.zotero.Zotero org.onlyoffice.desktopeditors
 
 # config setup
 $HOME/.dotfiles/setup/colors set
@@ -25,8 +25,6 @@ sudo $HOME/.dotfiles/setup/tray-icons
 # install packages from source
 mkdir $HOME/.local/src
 $HOME/.dotfiles/installers/lichtblick
-$HOME/.dotfiles/installers/rambox
-$HOME/.dotfiles/installers/waterfox
 
 # add dotfiles to bashrc
 echo "source $HOME/.dotfiles/setup.bash" >> $HOME/.bashrc

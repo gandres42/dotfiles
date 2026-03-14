@@ -8,7 +8,8 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 # region: ALIASES -------------------------------------------------------------
 
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
-alias die="kill -9 %1"
+alias die="alias kill9wait='kill -9 %1 && wait %1 2>/dev/null'"
+alias hitman='die && echo "excellent work, 47.  now find an exit."'
 alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
@@ -196,18 +197,6 @@ if [[ -e "$HOME/.pixi" ]]; then
     }
 fi
 
-# region: UV ------------------------------------------------------------------
-
-if [[ -e "$HOME/.local/bin/uv" ]]; then
-    uv() {
-        if [ "$1" == "shell" ]; then
-            p="$(uv run python -c 'import sys; print(sys.prefix)')" && [ "$p" = "/usr" ] || source "$p/bin/activate"
-        else
-            $HOME/.local/bin/uv "${@:1}"
-        fi
-    }
-fi
-
 # endregion
 
 # region: TAILSCALE  ----------------------------------------------------------
@@ -266,14 +255,12 @@ ts() {
     fi
 }
 
-
-
 # endregion
 
 # region: ROS -----------------------------------------------------------------
 
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
-    alias cbs="catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS=\"-isystem /opt/ros/noetic/include\" && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
+    alias cbs="catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS=\"−isystem /opt/ros/noetic/include\" && source devel/setup.bash && ls build/*/compile_commands.json >/dev/null 2>&1 && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
     # alias cbs="catkin build && source devel/setup.bash"
     alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
@@ -282,7 +269,7 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
 elif [[ -n "$ROS_DISTRO" ]]; then
 
     cbs() {
-        colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json
+        colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && ls build/*/compile_commands.json >/dev/null 2>&1 && jq -s 'add' build/*/compile_commands.json > compile_commands.json
     }
     roscore(){ [[ -n "$ZENOH_PORT" ]] && ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$ZENOH_PORT\"]" ros2 run rmw_zenoh_cpp rmw_zenohd "$@" || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }
     
@@ -293,6 +280,9 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias foxglove-remote="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+    export QT_QUICK_CONTROLS_MATERIAL_THEME=Dark
+    export QT_QUICK_CONTROLS_MATERIAL_PRIMARY=\#303030
+    export QT_QUICK_CONTROLS_MATERIAL_ACCENT=Orange
 fi
 
 # endregion

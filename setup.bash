@@ -9,7 +9,6 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
 alias die="alias kill9wait='kill -9 %1 && wait %1 2>/dev/null'"
-alias hitman='die && echo "excellent work, 47.  now find an exit."'
 alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
@@ -18,8 +17,22 @@ alias dotfile-edit="code $HOME/.dotfiles"
 alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
 alias smi="watch -t -n 0.1 nvidia-smi"
 alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
+alias vault-setup='ln -s ../.attachments Attachments && ln -s ../.obsidian .obsidian'
 
 # endregion
+
+hitman() {
+    local pid
+    pid=$(jobs -p %1) || return 1
+
+    kill -9 -- -"$pid" 2>/dev/null   # kill entire process group
+
+    while kill -0 "$pid" 2>/dev/null; do
+        sleep 0.05
+    done
+
+    echo "excellent work, 47"
+}
 
 # region: DEVCONTAINERS -------------------------------------------------------
 

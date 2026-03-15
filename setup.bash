@@ -272,8 +272,12 @@ ts() {
 
 # region: ROS -----------------------------------------------------------------
 
+unalias cbs 2>/dev/null
+
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
-    alias cbs="catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS=\"−isystem /opt/ros/noetic/include\" && source devel/setup.bash && ls build/*/compile_commands.json >/dev/null 2>&1 && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
+    function cbs {
+        catkin build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS='-isystem /opt/ros/noetic/include' && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json
+    }
     # alias cbs="catkin build && source devel/setup.bash"
     alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
@@ -281,7 +285,7 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     export CMAKE_POLICY_VERSION_MINIMUM=3.5
 elif [[ -n "$ROS_DISTRO" ]]; then
 
-    cbs() {
+    function cbs {
         colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && ls build/*/compile_commands.json >/dev/null 2>&1 && jq -s 'add' build/*/compile_commands.json > compile_commands.json
     }
     roscore(){ [[ -n "$ZENOH_PORT" ]] && ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$ZENOH_PORT\"]" ros2 run rmw_zenoh_cpp rmw_zenohd "$@" || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }

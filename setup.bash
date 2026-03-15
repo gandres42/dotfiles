@@ -8,7 +8,6 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 # region: ALIASES -------------------------------------------------------------
 
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
-alias die="alias kill9wait='kill -9 %1 && wait %1 2>/dev/null'"
 alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
@@ -18,10 +17,13 @@ alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27
 alias smi="watch -t -n 0.1 nvidia-smi"
 alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
 alias vault-setup='ln -s ../.attachments Attachments && ln -s ../.obsidian .obsidian'
+alias xpra-server="xpra start :100 --daemon=no --bind-tcp=0.0.0.0:15000"
 
 # endregion
 
-hitman() {
+# region: PKILL ---------------------------------------------------------------
+
+die() {
     local pid
     pid=$(jobs -p %1) || return 1
 
@@ -30,9 +32,15 @@ hitman() {
     while kill -0 "$pid" 2>/dev/null; do
         sleep 0.05
     done
-
-    echo "excellent work, 47"
 }
+
+hitman() {
+    die && echo "excellent work, 47"
+}
+
+# endregion
+
+
 
 # region: DEVCONTAINERS -------------------------------------------------------
 
@@ -309,5 +317,9 @@ fi
 # export XDG_SESSION_TYPE=x11
 export UV_NO_BUILD_ISOLATION=true
 export UV_PYTHON_PREFERENCE="system"
+
+if xpra list | grep -q LIVE; then
+  export DISPLAY=:100
+fi
 
 # endregion -------------------------------------------------------------------

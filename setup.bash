@@ -23,7 +23,7 @@ alias xpra-server="xpra start :100 --daemon=no --bind-tcp=0.0.0.0:15000"
 
 # region: PKILL ---------------------------------------------------------------
 
-die() {
+hitman() {
     local pid
     pid=$(jobs -p %1) || return 1
 
@@ -32,10 +32,7 @@ die() {
     while kill -0 "$pid" 2>/dev/null; do
         sleep 0.05
     done
-}
-
-hitman() {
-    die && echo "excellent work, 47"
+    echo "excellent work, 47"
 }
 
 # endregion
@@ -318,8 +315,11 @@ fi
 export UV_NO_BUILD_ISOLATION=true
 export UV_PYTHON_PREFERENCE="system"
 
-if xpra list | grep -q LIVE; then
-  export DISPLAY=:100
+if command -v xpra >/dev/null 2>&1; then
+    xpra_socket_base="${XPRA_SOCKET_DIR:-${XDG_RUNTIME_DIR:-/run/user/$UID}/xpra}"
+    if [[ -S "$xpra_socket_base/:100" ]] || pgrep -u "$UID" -f 'xpra.*:100' >/dev/null 2>&1; then
+        export DISPLAY=:100
+    fi
 fi
 
 # endregion -------------------------------------------------------------------

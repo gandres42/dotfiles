@@ -53,6 +53,10 @@ Description=Application settings for obsidian
 clientmachine=localhost
 decocolor=Obsidian
 decocolorrule=2
+position=0,0
+positionrule=4
+size=1200,800
+sizerule=4
 wmclass=obsidian
 wmclassmatch=1
 
@@ -294,14 +298,6 @@ wmclass=DesktopEditors ONLYOFFICE
 wmclasscomplete=true
 wmclassmatch=1
 
-[d8e283af-6367-4e14-94be-67aa297e32fd]
-Description=Application settings for FFPWA-01KKA9VBQEB6JZ76KK0Q7X288W
-decocolor=Black
-decocolorrule=2
-wmclass=firefox-bin FFPWA-01KKA9VBQEB6JZ76KK0Q7X288W
-wmclasscomplete=true
-wmclassmatch=1
-
 [e112e8fd-1850-4236-b93b-0677a1b965ac]
 Description=Application settings for konsole
 clientmachine=localhost
@@ -321,14 +317,6 @@ wmclassmatch=1
 [e8da418b-3e5e-4e04-a355-9480cf4461b6]
 decocolor=Brave
 decocolorrule=2
-
-[e9ed2b98-f348-4000-9a78-0cd53bedb4f7]
-Description=Application settings for deezer-enhanced
-clientmachine=localhost
-decocolor=Black
-decocolorrule=2
-wmclass=deezer-enhanced
-wmclassmatch=1
 
 [edeb93c7-9722-4089-94f7-dec8f35cd7fd]
 Description=Window settings for python3.12

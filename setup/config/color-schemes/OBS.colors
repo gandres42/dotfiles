@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Rambox
+Name=OBS
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=20,20,20
+activeBackground=29,31,38
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=20,20,20
+inactiveBackground=29,31,38
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

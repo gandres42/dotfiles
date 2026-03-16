@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Zed
+Name=Ferdium
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=9,9,9
+activeBackground=45,47,49
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=45,45,45
+inactiveBackground=45,47,49
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

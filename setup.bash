@@ -8,7 +8,6 @@ export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
 # region: ALIASES -------------------------------------------------------------
 
 alias wake-keats="ssh discovision \"wakeonlan D8:5E:D3:D9:EF:E4\""
-alias die="kill -9 %1"
 alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
@@ -17,8 +16,28 @@ alias dotfile-edit="code $HOME/.dotfiles"
 alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
 alias smi="watch -t -n 0.1 nvidia-smi"
 alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
+alias vault-setup='ln -s ../.attachments Attachments && ln -s ../.obsidian .obsidian'
+alias xpra-server="xpra start :100 --daemon=no --bind-tcp=0.0.0.0:15000"
 
 # endregion
+
+# region: PKILL ---------------------------------------------------------------
+
+hitman() {
+    local pid
+    pid=$(jobs -p %1) || return 1
+
+    kill -9 -- -"$pid" 2>/dev/null   # kill entire process group
+
+    while kill -0 "$pid" 2>/dev/null; do
+        sleep 0.05
+    done
+    echo "excellent work, 47"
+}
+
+# endregion
+
+
 
 # region: DEVCONTAINERS -------------------------------------------------------
 
@@ -196,18 +215,6 @@ if [[ -e "$HOME/.pixi" ]]; then
     }
 fi
 
-# region: UV ------------------------------------------------------------------
-
-if [[ -e "$HOME/.local/bin/uv" ]]; then
-    uv() {
-        if [ "$1" == "shell" ]; then
-            p="$(uv run python -c 'import sys; print(sys.prefix)')" && [ "$p" = "/usr" ] || source "$p/bin/activate"
-        else
-            $HOME/.local/bin/uv "${@:1}"
-        fi
-    }
-fi
-
 # endregion
 
 # region: TAILSCALE  ----------------------------------------------------------
@@ -266,14 +273,16 @@ ts() {
     fi
 }
 
-
-
 # endregion
 
 # region: ROS -----------------------------------------------------------------
 
+unalias cbs 2>/dev/null
+
 if [[ "$ROS_DISTRO" == "noetic" ]]; then
-    alias cbs="catkin build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS=\"-isystem /opt/ros/noetic/include\" && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json"
+    function cbs {
+        catkin build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS='-isystem /opt/ros/noetic/include' && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json
+    }
     # alias cbs="catkin build && source devel/setup.bash"
     alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
@@ -281,8 +290,8 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     export CMAKE_POLICY_VERSION_MINIMUM=3.5
 elif [[ -n "$ROS_DISTRO" ]]; then
 
-    cbs() {
-        colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json
+    function cbs {
+        colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && ls build/*/compile_commands.json >/dev/null 2>&1 && jq -s 'add' build/*/compile_commands.json > compile_commands.json
     }
     roscore(){ [[ -n "$ZENOH_PORT" ]] && ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$ZENOH_PORT\"]" ros2 run rmw_zenoh_cpp rmw_zenohd "$@" || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }
     
@@ -293,6 +302,9 @@ elif [[ -n "$ROS_DISTRO" ]]; then
     alias foxglove-remote="ros2 launch foxglove_bridge foxglove_bridge_launch.xml use_compression:=true"
     export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
     export RMW_IMPLEMENTATION=rmw_zenoh_cpp
+    export QT_QUICK_CONTROLS_MATERIAL_THEME=Dark
+    export QT_QUICK_CONTROLS_MATERIAL_PRIMARY=\#303030
+    export QT_QUICK_CONTROLS_MATERIAL_ACCENT=Orange
 fi
 
 # endregion
@@ -302,5 +314,12 @@ fi
 # export XDG_SESSION_TYPE=x11
 export UV_NO_BUILD_ISOLATION=true
 export UV_PYTHON_PREFERENCE="system"
+
+if command -v xpra >/dev/null 2>&1; then
+    xpra_socket_base="${XPRA_SOCKET_DIR:-${XDG_RUNTIME_DIR:-/run/user/$UID}/xpra}"
+    if [[ -S "$xpra_socket_base/:100" ]] || pgrep -u "$UID" -f 'xpra.*:100' >/dev/null 2>&1; then
+        export DISPLAY=:100
+    fi
+fi
 
 # endregion -------------------------------------------------------------------

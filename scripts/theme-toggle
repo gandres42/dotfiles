@@ -8,14 +8,14 @@ for line in lines:
     if '(current color scheme)' in line:
         current_theme = line.replace('*', '').replace('(current color scheme)', '').replace(' ', '')
 
-if current_theme == 'BreezeLight':
-    subprocess.run(['plasma-apply-colorscheme', 'BreezeDark'])
+if current_theme == 'BreezeLighter':
+    subprocess.run(['plasma-apply-colorscheme', 'BreezeDarker'])
     subprocess.run(['/usr/libexec/plasma-changeicons', 'breeze-dark'])
     # subprocess.run(['sed', '-i', "'s/^decocolor=Brave$/decocolor=BraveDark/'", '/home/gavin/.config/kwinrulesrc'])
     # subprocess.run(['sed', '-i', 's/^decocolor=Brave$/decocolor=BraveDark/', '/home/gavin/.config/kwinrulesrc'])
 
-elif current_theme == 'BreezeDark':
-    subprocess.run(['plasma-apply-colorscheme', 'BreezeLight'])
+elif current_theme == 'BreezeDarker':
+    subprocess.run(['plasma-apply-colorscheme', 'BreezeLighter'])
     subprocess.run(['/usr/libexec/plasma-changeicons', 'breeze'])
     # subprocess.run(['sed', '-i', "'s/^decocolor=BraveDark$/decocolor=Brave/'", '/home/gavin/.config/kwinrulesrc'])
     # subprocess.run(['sed', '-i', 's/^decocolor=BraveDark$/decocolor=Brave/', '/home/gavin/.config/kwinrulesrc'])

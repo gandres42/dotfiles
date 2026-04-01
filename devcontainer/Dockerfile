@@ -3,6 +3,7 @@ ARG USERNAME=USERNAME
 ARG CONTAINER_ID=CONTAINER_ID
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+ENV DEBIAN_FRONTEND=noninteractive
 
 # create non-root user and add to sudo
 RUN if id -u $USER_UID ; then userdel `id -un $USER_UID` ; fi
@@ -24,5 +25,5 @@ RUN echo 'Defaults env_keep += "UV_SYSTEM_PYTHON UV_BREAK_SYSTEM_PACKAGES"' >> /
 # dev environemnt setup
 RUN chsh -s /bin/bash $USERNAME
 USER $USERNAME
-RUN echo "source /home/$USERNAME/.dotfiles/setup.bash" >> ~/.bashrc && echo 'alias uv="sudo uv"' >> ~/.bashrc
+RUN echo "source /home/$USERNAME/.dotfiles/setup.bash" >> ~/.bashrc && echo 'alias uv="sudo uv"' >> ~/.bashrc && echo 'export PIP_BREAK_SYSTEM_PACKAGES=1' >> ~/.bashrc
 ENV CONTAINER_ID $CONTAINER_ID

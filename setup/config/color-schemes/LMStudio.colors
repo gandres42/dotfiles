@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Konsole
+Name=LMStudio
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=30,30,30
+activeBackground=36,36,36
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=30,30,30
+inactiveBackground=36,36,36
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

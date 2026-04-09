@@ -309,15 +309,15 @@ fi
 
 # region: VARIABLES -----------------------------------------------------------
 
-# export XDG_SESSION_TYPE=x11
+export XDG_SESSION_TYPE=x11
 export UV_NO_BUILD_ISOLATION=true
 export UV_PYTHON_PREFERENCE="system"
 
-if command -v xpra >/dev/null 2>&1; then
-    xpra_socket_base="${XPRA_SOCKET_DIR:-${XDG_RUNTIME_DIR:-/run/user/$UID}/xpra}"
-    if [[ -S "$xpra_socket_base/:100" ]] || pgrep -u "$UID" -f 'xpra.*:100' >/dev/null 2>&1; then
-        export DISPLAY=:100
-    fi
-fi
+# if command -v xpra >/dev/null 2>&1; then
+#     xpra_socket_base="${XPRA_SOCKET_DIR:-${XDG_RUNTIME_DIR:-/run/user/$UID}/xpra}"
+#     if [[ -S "$xpra_socket_base/:100" ]] || pgrep -u "$UID" -f 'xpra.*:100' >/dev/null 2>&1; then
+#         export DISPLAY=:100
+#     fi
+# fi
 
 # endregion -------------------------------------------------------------------

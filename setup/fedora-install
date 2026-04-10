@@ -7,6 +7,7 @@ sudo dnf install -y qt
 # update packages
 sudo dnf check-update
 sudo dnf upgrade -y
+sudo dnf install speedcrunch haruna
 
 # install vscode
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
@@ -16,15 +17,7 @@ sudo dnf install code
 
 # setup flathub and install flatpaks
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install com.mastermindzh.tidal-hifi md.obsidian.Obsidian org.speedcrunch.SpeedCrunch org.zotero.Zotero org.onlyoffice.desktopeditors
+flatpak install md.obsidian.Obsidian org.zotero.Zotero org.onlyoffice.desktopeditors
 
 # config setup
 $HOME/.dotfiles/setup/colors set
-sudo $HOME/.dotfiles/setup/tray-icons
-
-# install packages from source
-mkdir $HOME/.local/src
-$HOME/.dotfiles/installers/lichtblick
-
-# add dotfiles to bashrc
-echo "source $HOME/.dotfiles/setup.bash" >> $HOME/.bashrc

@@ -12,7 +12,7 @@ alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
-alias dotfile-edit="code $HOME/.dotfiles"
+alias dotfile-edit="codium $HOME/.dotfiles"
 alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
 alias smi="watch -t -n 0.1 nvidia-smi"
 alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
@@ -175,6 +175,8 @@ if [[ " ${IDE_PROGRAMS[@]} " =~ " ${PPID_NAME} " || " ${IDE_PROGRAMS[@]} " =~ " 
         mamba activate $(cat .condaenv)
     fi
     clear
+
+    export XDG_SESSION_TYPE=x11
 fi
 
 # endregion
@@ -224,48 +226,6 @@ ts() {
     elif [ "$1" == "unmull" ]; then
         tailscale set --exit-node=
         ipcheck
-    elif [ "$1" == "folder" ]; then
-        if [ "$2" == "cp" ]; then
-            if [ $# -lt 4 ]; then
-                echo "Usage: ts folder cp <file-or-directory> <hostname>:"
-                return 1
-            fi
-            local source="$3"
-            local hostname="$4"
-            
-            # Validate hostname ends with colon
-            if [[ ! "$hostname" =~ :$ ]]; then
-                echo "Error: hostname must end with ':'"
-                return 1
-            fi
-            
-            local basename=$(basename "$source")
-            local archive="/tmp/${basename}.tar.gz"
-            
-            tar -czf "$archive" -C "$(dirname "$source")" "$(basename "$source")"
-            ts file cp "$archive" "${hostname}"
-            rm "$archive"
-        elif [ "$2" == "get" ]; then
-            if [ $# -lt 3 ]; then
-                echo "Usage: ts folder get <destination-path>"
-                return 1
-            fi
-            local dest="$3"
-            
-            ts file get /tmp
-            for tarfile in /tmp/*.tar.gz; do
-                if [ -f "$tarfile" ]; then
-                    echo "Extracting: $(basename "$tarfile")"
-                    tar -xvzf "$tarfile" -C "$dest"
-                    rm "$tarfile"
-                fi
-            done
-        else
-            echo "Usage: ts folder <cp|get>"
-            echo "  ts folder cp <file-or-directory> <hostname>:  - Archive and send to host"
-            echo "  ts folder get <destination-path>              - Receive and extract archives"
-            return 1
-        fi
     else
         tailscale "${@:1}"
     fi
@@ -281,7 +241,6 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     function cbs {
         catkin build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_FLAGS='-isystem /opt/ros/noetic/include' && source devel/setup.bash && jq -s 'add' build/*/compile_commands.json > compile_commands.json
     }
-    # alias cbs="catkin build && source devel/setup.bash"
     alias s="source devel/setup.bash"
     alias plotjuggler="rosrun plotjuggler plotjuggler -n"
     export DISABLE_ROS1_EOL_WARNINGS=1
@@ -309,15 +268,7 @@ fi
 
 # region: VARIABLES -----------------------------------------------------------
 
-export XDG_SESSION_TYPE=x11
 export UV_NO_BUILD_ISOLATION=true
 export UV_PYTHON_PREFERENCE="system"
-
-# if command -v xpra >/dev/null 2>&1; then
-#     xpra_socket_base="${XPRA_SOCKET_DIR:-${XDG_RUNTIME_DIR:-/run/user/$UID}/xpra}"
-#     if [[ -S "$xpra_socket_base/:100" ]] || pgrep -u "$UID" -f 'xpra.*:100' >/dev/null 2>&1; then
-#         export DISPLAY=:100
-#     fi
-# fi
 
 # endregion -------------------------------------------------------------------

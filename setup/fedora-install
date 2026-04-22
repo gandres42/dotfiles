@@ -2,22 +2,39 @@
 
 # uninstall junk
 sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail
-sudo dnf install -y qt
 
 # update packages
 sudo dnf check-update
 sudo dnf upgrade -y
 sudo dnf install speedcrunch haruna
 
-# install vscode
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-sudo dnf check-update
-sudo dnf install code
+# install other junk
+sudo dnf install -y qt speedcrunch haruna
+
+# install vscodium
+sudo tee -a /etc/yum.repos.d/vscodium.repo << 'EOF'
+[gitlab.com_paulcarroty_vscodium_repo]
+name=gitlab.com_paulcarroty_vscodium_repo
+baseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+metadata_expire=1h
+EOF
+sudo dnf install -y vscodium
+
+# install webapp-manager
+sudo dnf copr enable adriend/fedora-apps
+sudo dnf install -y webappmanager
+
+# install nocsd
+sudo dnf copr enable hazel-bunny/ricing
+sudo dnf install -y gtk-nocsd
 
 # setup flathub and install flatpaks
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install md.obsidian.Obsidian org.zotero.Zotero org.onlyoffice.desktopeditors
+flatpak install md.obsidian.Obsidian org.zotero.Zotero org.onlyoffice.desktopeditors org.jellyfin.JellyfinDesktop org.ferdium.Ferdium
 
 # config setup
 $HOME/.dotfiles/setup/colors set

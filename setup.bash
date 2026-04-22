@@ -182,6 +182,7 @@ fi
 # endregion
 
 # region: PIXI ----------------------------------------------------------------
+
 if [[ -e "$HOME/.pixi" ]]; then
     export PATH="/home/gavin/.pixi/bin:$PATH"
     pixi() {

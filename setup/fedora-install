@@ -26,7 +26,7 @@ sudo dnf install -y vscodium
 
 # install webapp-manager
 sudo dnf copr enable adriend/fedora-apps
-sudo dnf install -y webappmanager
+sudo dnf install -y webapp-manager
 
 # install nocsd
 sudo dnf copr enable hazel-bunny/ricing

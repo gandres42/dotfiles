@@ -1,182 +1,21 @@
-[06f88e74-a0c1-4314-b470-248271d0d5be]
-Description=Window settings for ORB-SLAM2: Current Frame0
-clientmachine=localhost
-minimize=true
-minimizerule=3
-title=ORB-SLAM2: Current Frame0
-titlematch=1
-wmclassmatch=1
-
-[0f9418df-13b7-43bc-82bf-49ee2a9fdeaa]
-Description=Application settings for LM-Studio
-decocolor=LMStudio
+[5a2adbf0-1a69-4495-82e4-476b09a089cb]
+Description=Vesktop
+decocolor=Discord
 decocolorrule=2
-wmclass=lm-studio LM-Studio
-wmclasscomplete=true
-wmclassmatch=1
-
-[22437067-dd2a-4c6f-b29a-f600815b2929]
-Description=Application settings for Gazebo GUI
-clientmachine=localhost
-decocolor=Gazebo
-decocolorrule=2
-maximizehoriz=true
-maximizehorizrule=3
-maximizevert=true
-maximizevertrule=3
-screenrule=3
-wmclass=gz-sim-gui Gazebo GUI
-wmclasscomplete=true
-wmclassmatch=1
-
-[2b9d0ada-45d0-42b3-8e43-6fc9618997aa]
-Description=Application settings for obsidian
-decocolor=Obsidian
-decocolorrule=2
-wmclass=\sobsidian
-wmclasscomplete=true
-wmclassmatch=1
-
-[2de47764-d345-467d-920e-f6e2eaa6173a]
-Description=Application settings for FFPWA-01KNJE6ZEY3YKADDN88HXSXSWH
-decocolor=Black
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-size=1334,802
-sizerule=4
-wmclass=firefox-bin FFPWA-01KNJE6ZEY3YKADDN88HXSXSWH
-wmclasscomplete=true
-wmclassmatch=1
-
-[2f257454-6826-433c-bdaa-ac9af50a4b3f]
-Description=Application settings for FLTK
-clientmachine=localhost
-size=700,700
-sizerule=2
-wmclass=FLTK
-wmclassmatch=1
-
-[36c2e8a0-3d4e-48a6-a843-b5a8a20ad358]
-Description=Application settings for luna
-decocolor=Black
-decocolorrule=2
-desktopfile=com.mastermindzh.tidal-hifi
-desktopfilerule=3
-wmclass=\sluna
-wmclasscomplete=true
-wmclassmatch=1
-
-[3a58ffa7-0b91-4348-aaae-bf5d6dd988a1]
-Description=Application settings for Deezer
-clientmachine=localhost
-decocolor=Deezer
-decocolorrule=2
-wmclass=deezer Deezer
-wmclasscomplete=true
-wmclassmatch=1
-
-[3b2dfbdb-504c-471d-afe3-33af4a75e4f3]
-Description=Application settings for jetbrains-studio
-clientmachine=localhost
-decocolor=JetBrains
-decocolorrule=2
-wmclass=jetbrains-studio
-wmclassmatch=1
-
-[3c48ebfc-329b-4a5a-b9b2-c3e9a5467c5d]
-Description=Application settings for org.raspberrypi.rpi-imager
-decocolor=RPIImager
-decocolorrule=2
-wmclass=rpi-imager org.raspberrypi.rpi-imager
-wmclasscomplete=true
-wmclassmatch=1
-
-[45c9df1b-ec68-4f94-bbde-b2671475144b]
-Description=Application settings for obsidian
-clientmachine=localhost
-decocolor=Obsidian
-decocolorrule=2
-position=50,50
-positionrule=4
-size=1500,1000
-sizerule=4
-wmclass=obsidian
-wmclassmatch=1
-
-[535b27a3-43ca-46d9-92bb-7ed222e04aeb]
-Description=Application settings for tidal-hifi
-clientmachine=localhost
-decocolor=Black
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-wmclass=tidal-hifi
+wmclass=vesktop
 wmclassmatch=1
 
 [5b0f633a-51c8-48a0-84e0-7d9ba76634f9]
 decocolor=Spotify
 decocolorrule=2
 
-[67cbe49a-5a5a-40a3-ba13-54fc496b28dc]
-Description=Application settings for Lichtblick
+[60d9be3a-1e38-475f-95c0-ec0ed1548c46]
+Description=Ferdium
 clientmachine=localhost
-decocolor=BreezeClassicDark
+decocolor=Ferdium
 decocolorrule=2
-noborderrule=3
-wmclass=lichtblick Lichtblick
+wmclass=ferdium Ferdium
 wmclasscomplete=true
-wmclassmatch=1
-
-[695edeb8-2d30-4f9d-b334-0216297cf0d0]
-Description=Window settings for CloudCompare
-position=2239,880
-positionrule=3
-title=Ply File Open
-types=1
-wmclass=\sCloudCompare
-wmclasscomplete=true
-wmclassmatch=1
-
-[6df4c75d-571a-4d09-90c1-5945acf27484]
-Description=Application settings for Dopamine
-clientmachine=localhost
-decocolor=Dopamine
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-wmclass=dopamine Dopamine
-wmclasscomplete=true
-wmclassmatch=1
-
-[712b2db9-66b6-455f-9076-1037a35deb10]
-Description=Application settings for cool-retro-term.cool-retro-term
-decocolor=Black
-decocolorrule=2
-size=1000,500
-sizerule=3
-wmclass=cool-retro-term cool-retro-term.cool-retro-term
-wmclasscomplete=true
-wmclassmatch=1
-
-[73f3b2e6-59a1-4ab3-a1df-2c2c1b85ecf8]
-Description=Window settings for discord
-clientmachine=localhost
-noborderrule=3
-title=#general | ROB 599: Mobile Robotics - Discord
-types=1
-windowrole=browser-window
-windowrolematch=1
-wmclass=discord
-wmclassmatch=1
-
-[77fe44ae-60e6-4105-9245-48ba7d5d4efa]
-Description=Application settings for deezer-desktop
-decocolor=Deezer
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-wmclass=deezer-desktop
 wmclassmatch=1
 
 [80922fad-8f2d-4344-94e2-7416dfae28db]
@@ -187,255 +26,39 @@ wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
-[88e60be2-fe0b-4a60-becd-d659d483cc3f]
-Description=Application settings for chrome-www.deezer.com__us_-Default
-decocolor=Black
-decocolorrule=2
-size=1287,774
-sizerule=4
-wmclass=chromium-browser chrome-www.deezer.com__us_-Default
-wmclasscomplete=true
-wmclassmatch=1
-
-[8b58850e-7920-4e44-be28-5a8a12b39ee2]
-Description=Application settings for com.github.iwalton3.jellyfin-media-player
-decocolor=Black
-decocolorrule=2
-wmclass=\scom.github.iwalton3.jellyfin-media-player
-wmclasscomplete=true
-wmclassmatch=1
-
-[9232956d-4bfb-43ed-a492-d6a0d0196d9c]
-Description=Application settings for dev.zed.Zed
-decocolor=Zed
-decocolorrule=2
-wmclass=zed-editor dev.zed.Zed
-wmclasscomplete=true
-wmclassmatch=1
-
-[9299865b-979f-4c89-95ae-28ec4fbb4cc6]
-Description=Application settings for vesktop
-clientmachine=localhost
-decocolor=Discord
-decocolorrule=2
-wmclass=vesktop
-wmclassmatch=1
-
-[9761d81e-3812-4107-8b9e-9effea2e586a]
-Description=Application settings for Chromium-browser
-clientmachine=localhost
-decocolor=Black
-decocolorrule=2
-desktopfile=deezer
-desktopfilerule=3
-desktops=\\0
-desktopsrule=3
-wmclass=www.deezer.com__us Chromium-browser
-wmclasscomplete=true
-wmclassmatch=1
-
-[982638ba-09b8-456f-a787-d324f84f6ce2]
-Description=Application settings for Code
-clientmachine=localhost
-decocolor=Black
-decocolorrule=2
-wmclass=code Code
-wmclasscomplete=true
-wmclassmatch=1
-
-[General]
-count=45
-rules=c831b1e0-26db-460b-8df5-b2c2665db202,2de47764-d345-467d-920e-f6e2eaa6173a,88e60be2-fe0b-4a60-becd-d659d483cc3f,06f88e74-a0c1-4314-b470-248271d0d5be,3a58ffa7-0b91-4348-aaae-bf5d6dd988a1,bd6af952-ac3b-4183-97bf-5bda3d3c9d59,c434fdfa-84d9-4bb2-94f7-2ad47eba24a6,0f9418df-13b7-43bc-82bf-49ee2a9fdeaa,22437067-dd2a-4c6f-b29a-f600815b2929,a2264fdc-dce5-4ac3-a3dc-e84e4f30e2c3,a43afaa4-6c0e-4060-a5d8-481c0aeed1f6,e9ed2b98-f348-4000-9a78-0cd53bedb4f7,9761d81e-3812-4107-8b9e-9effea2e586a,77fe44ae-60e6-4105-9245-48ba7d5d4efa,ac11c8ff-8846-4daa-b4d7-c671b4c11cde,e4cd05bd-6c5e-433f-9e8e-e11b08b3e97c,ba19f7e7-b0af-4b4f-9f6a-cffd2a595329,9232956d-4bfb-43ed-a492-d6a0d0196d9c,712b2db9-66b6-455f-9076-1037a35deb10,695edeb8-2d30-4f9d-b334-0216297cf0d0,edeb93c7-9722-4089-94f7-dec8f35cd7fd,535b27a3-43ca-46d9-92bb-7ed222e04aeb,9299865b-979f-4c89-95ae-28ec4fbb4cc6,2f257454-6826-433c-bdaa-ac9af50a4b3f,73f3b2e6-59a1-4ab3-a1df-2c2c1b85ecf8,36c2e8a0-3d4e-48a6-a843-b5a8a20ad358,d3d58168-e776-4e9c-bd4c-f44a8708ed36,c25abd92-9585-41fa-9f04-4aa2cdcd8ac1,efbc8c29-480b-4114-bc3c-3c0a92159405,67cbe49a-5a5a-40a3-ba13-54fc496b28dc,e112e8fd-1850-4236-b93b-0677a1b965ac,c8b18be1-c8e1-42d2-acab-eb6dce55f9a4,45c9df1b-ec68-4f94-bbde-b2671475144b,cff720d2-e6fd-413e-82a8-2cfaa7548756,c0876af3-8625-43a9-bc51-ed8b03901df5,be386724-dc4c-41c2-9e9d-6fb942e2d419,2b9d0ada-45d0-42b3-8e43-6fc9618997aa,6df4c75d-571a-4d09-90c1-5945acf27484,add0a6ae-660e-41d9-b1a5-241d875f6930,3b2dfbdb-504c-471d-afe3-33af4a75e4f3,8b58850e-7920-4e44-be28-5a8a12b39ee2,f62a7666-9dc1-4831-8cb1-788e63db2cda,f62b71f4-bb0b-4c95-99c3-3cd97159ed5a,982638ba-09b8-456f-a787-d324f84f6ce2,3c48ebfc-329b-4a5a-b9b2-c3e9a5467c5d
-
-[a2264fdc-dce5-4ac3-a3dc-e84e4f30e2c3]
-Description=Application settings for LM Studio
-decocolor=LMStudio
-decocolorrule=2
-wmclass=lm-studio LM Studio
-wmclasscomplete=true
-wmclassmatch=1
-
-[a43afaa4-6c0e-4060-a5d8-481c0aeed1f6]
-Description=Application settings for Ferdium
-clientmachine=localhost
-decocolor=Ferdium
-decocolorrule=2
-wmclass=ferdium Ferdium
-wmclasscomplete=true
-wmclassmatch=1
-
-[ac11c8ff-8846-4daa-b4d7-c671b4c11cde]
-Description=Application settings for dev.aunetx.deezer
-decocolor=Deezer
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-wmclass=\sdev.aunetx.deezer
-wmclasscomplete=true
-wmclassmatch=1
-
-[add0a6ae-660e-41d9-b1a5-241d875f6930]
-Description=Application settings for discord
-clientmachine=localhost
-decocolor=Discord
-decocolorrule=2
-wmclass=discord
-wmclassmatch=1
-
-[ba19f7e7-b0af-4b4f-9f6a-cffd2a595329]
-Description=Application settings for dev.zed.Zed-Preview
-decocolor=Black
-decocolorrule=2
-wmclass=zed-editor dev.zed.Zed-Preview
-wmclasscomplete=true
-wmclassmatch=1
-
-[bd6af952-ac3b-4183-97bf-5bda3d3c9d59]
-Description=Application settings for com.obsproject.Studio
-decocolor=OBS
-decocolorrule=2
-wmclass=\scom.obsproject.Studio
-wmclasscomplete=true
-wmclassmatch=1
-
-[be386724-dc4c-41c2-9e9d-6fb942e2d419]
-Description=Application settings for ferdium
-decocolor=Ferdium
-decocolorrule=2
-fsplevelrule=2
-minimizerule=4
-wmclass=ferdium
-wmclassmatch=1
-
-[c0876af3-8625-43a9-bc51-ed8b03901df5]
-Description=Application settings for code
-decocolor=Fleet
-decocolorrule=2
-wmclass=code
-wmclassmatch=1
-
-[c25abd92-9585-41fa-9f04-4aa2cdcd8ac1]
-Description=Application settings for com.mastermindzh.tidal-hifi
+[85ee356c-724c-4146-8905-20030bef384e]
+Description=WebApp-Deezer
 decocolor=Black
 decocolorrule=2
 desktops=\\0
 desktopsrule=3
-wmclass=\scom.mastermindzh.tidal-hifi
+wmclass=WebApp-Deezer
 wmclasscomplete=true
-wmclassmatch=1
+wmclassmatch=2
 
-[c434fdfa-84d9-4bb2-94f7-2ad47eba24a6]
-Description=Application settings for feh
-above=true
-aboverule=3
-clientmachine=localhost
-wmclass=feh
-wmclassmatch=1
-
-[c831b1e0-26db-460b-8df5-b2c2665db202]
-Description=Application settings for openshot
-clientmachine=localhost
-decocolor=OpenShot
-decocolorrule=2
-wmclass=openshot-qt openshot
-wmclasscomplete=true
-wmclassmatch=1
-
-[c8b18be1-c8e1-42d2-acab-eb6dce55f9a4]
-Description=Application settings for rambox
-clientmachine=localhost
-decocolor=Rambox
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-wmclass=rambox
-wmclassmatch=1
-
-[ca87971c-afcc-46fe-9fd9-71faac55b813]
+[8aa42957-e55f-4cf1-8730-50f7e80d595c]
+Description=Codium
 decocolor=Code
 decocolorrule=2
+wmclass=codium
+wmclassmatch=1
 
-[cff720d2-e6fd-413e-82a8-2cfaa7548756]
-Description=Application settings for org.kde.konsole
+[930158f0-6ff0-4499-9137-ffaff689a462]
+Description=Konsole
 decocolor=Konsole
 decocolorrule=2
 wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
-[d3d58168-e776-4e9c-bd4c-f44a8708ed36]
-Description=Application settings for ONLYOFFICE
-clientmachine=localhost
-noborderrule=3
-wmclass=DesktopEditors ONLYOFFICE
-wmclasscomplete=true
-wmclassmatch=1
+[General]
+count=5
+rules=60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e,8aa42957-e55f-4cf1-8730-50f7e80d595c
 
-[e112e8fd-1850-4236-b93b-0677a1b965ac]
-Description=Application settings for konsole
-clientmachine=localhost
-decocolor=Konsole
+[ca87971c-afcc-46fe-9fd9-71faac55b813]
+decocolor=Code
 decocolorrule=2
-wmclass=konsole
-wmclassmatch=1
-
-[e4cd05bd-6c5e-433f-9e8e-e11b08b3e97c]
-Description=Application settings for gazebo
-clientmachine=localhost
-decocolor=Gazebo
-decocolorrule=2
-wmclass=gazebo
-wmclassmatch=1
 
 [e8da418b-3e5e-4e04-a355-9480cf4461b6]
 decocolor=Brave
 decocolorrule=2
-
-[e9ed2b98-f348-4000-9a78-0cd53bedb4f7]
-Description=Application settings for deezer-enhanced
-clientmachine=localhost
-decocolor=Black
-decocolorrule=2
-wmclass=deezer-enhanced
-wmclassmatch=1
-
-[edeb93c7-9722-4089-94f7-dec8f35cd7fd]
-Description=Window settings for python3.12
-size=1123,647
-sizerule=3
-title=Sonar
-titlematch=1
-types=1
-wmclass=python3.12
-wmclassmatch=1
-
-[efbc8c29-480b-4114-bc3c-3c0a92159405]
-Description=Application settings for Foxglove
-clientmachine=localhost
-decocolor=BreezeClassicDark
-decocolorrule=2
-noborderrule=3
-wmclass=foxglove Foxglove
-wmclasscomplete=true
-wmclassmatch=1
-
-[f62a7666-9dc1-4831-8cb1-788e63db2cda]
-Description=Application settings for steam
-clientmachine=localhost
-decocolor=BreezeClassicDark
-decocolorrule=2
-noborderrule=3
-wmclass=steamwebhelper steam
-wmclasscomplete=true
-wmclassmatch=1
-
-[f62b71f4-bb0b-4c95-99c3-3cd97159ed5a]
-Description=Application settings for Spotify
-clientmachine=localhost
-decocolor=Spotify
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-wmclass=spotify Spotify
-wmclasscomplete=true
-wmclassmatch=1

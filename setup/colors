@@ -7,7 +7,8 @@ if [ "$1" = "set" ]; then
 elif [ "$1" = "copy" ]; then
     rm ./config/color-schemes/*
     cp -r $HOME/.local/share/color-schemes ./config
-    cp ~/.config/kwinrulesrc ./config/kwinrulesrc
+    rm ./config/kwinrulesrc
+    cp ~/.config/kwinrulesrc ./config
 else
     echo "usage: plasma-colors <copy | set>"
 fi

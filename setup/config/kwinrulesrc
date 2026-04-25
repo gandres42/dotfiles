@@ -1,3 +1,11 @@
+[0c10a3ee-87e1-4b79-b72a-3090a7713950]
+Description=Obsidian
+clientmachine=localhost
+decocolor=Obsidian
+decocolorrule=2
+wmclass=obsidian
+wmclassmatch=1
+
 [5a2adbf0-1a69-4495-82e4-476b09a089cb]
 Description=Vesktop
 decocolor=Discord
@@ -52,8 +60,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=5
-rules=60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e,8aa42957-e55f-4cf1-8730-50f7e80d595c
+count=6
+rules=0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e,8aa42957-e55f-4cf1-8730-50f7e80d595c
 
 [ca87971c-afcc-46fe-9fd9-71faac55b813]
 decocolor=Code

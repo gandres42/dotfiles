@@ -59,6 +59,14 @@ decocolorrule=2
 wmclass=codium
 wmclassmatch=1
 
+[8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae]
+Description=Jellyfin
+decocolor=Black
+decocolorrule=2
+wmclass=WebApp-Jellyfin
+wmclasscomplete=true
+wmclassmatch=2
+
 [930158f0-6ff0-4499-9137-ffaff689a462]
 Description=Konsole
 decocolor=Konsole
@@ -68,8 +76,16 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=7
-rules=50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e,8aa42957-e55f-4cf1-8730-50f7e80d595c
+count=9
+rules=b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e,8aa42957-e55f-4cf1-8730-50f7e80d595c
+
+[b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0]
+Description=Mission Center
+decocolor=LibadwaitaDark
+decocolorrule=2
+wmclass=\sio.missioncenter.MissionCenter
+wmclasscomplete=true
+wmclassmatch=1
 
 [ca87971c-afcc-46fe-9fd9-71faac55b813]
 decocolor=Code

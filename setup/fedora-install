@@ -22,7 +22,7 @@ repo_gpgcheck=1
 gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 metadata_expire=1h
 EOF
-sudo dnf install -y vscodium
+sudo dnf install -y codium
 
 # install webapp-manager
 sudo dnf copr enable adriend/fedora-apps

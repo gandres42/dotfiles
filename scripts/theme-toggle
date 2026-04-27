@@ -1,23 +1,41 @@
 #!/usr/bin/env python3
+import re
 import subprocess
-import time
-result = subprocess.run(['plasma-apply-colorscheme', '-l'], stdout=subprocess.PIPE).stdout.decode()
-lines = result.split('\n')
+
+def replace_decocolor(old_value: str, new_value: str, file_path: str) -> None:
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    updated = re.sub(
+        rf"^decocolor={re.escape(old_value)}$",
+        f"decocolor={new_value}",
+        content,
+        flags=re.MULTILINE,
+    )
+
+    if updated != content:
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(updated)
+
+result = subprocess.run(["plasma-apply-colorscheme", "-l"], stdout=subprocess.PIPE, check=False).stdout.decode()
+
+lines = result.split("\n")
 current_theme = None
 for line in lines:
-    if '(current color scheme)' in line:
-        current_theme = line.replace('*', '').replace('(current color scheme)', '').replace(' ', '')
+    if "(current color scheme)" in line:
+        current_theme = (
+            line.replace("*", "")
+            .replace("(current color scheme)", "")
+            .replace(" ", "")
+        )
 
-if current_theme == 'BreezeLight':
-    subprocess.run(['plasma-apply-colorscheme', 'BreezeDark'])
-    subprocess.run(['/usr/libexec/plasma-changeicons', 'breeze-dark'])
-    # subprocess.run(['sed', '-i', "'s/^decocolor=Brave$/decocolor=BraveDark/'", '/home/gavin/.config/kwinrulesrc'])
-    # subprocess.run(['sed', '-i', 's/^decocolor=Brave$/decocolor=BraveDark/', '/home/gavin/.config/kwinrulesrc'])
-
-elif current_theme == 'BreezeDark':
-    subprocess.run(['plasma-apply-colorscheme', 'BreezeLight'])
-    subprocess.run(['/usr/libexec/plasma-changeicons', 'breeze'])
-    # subprocess.run(['sed', '-i', "'s/^decocolor=BraveDark$/decocolor=Brave/'", '/home/gavin/.config/kwinrulesrc'])
-    # subprocess.run(['sed', '-i', 's/^decocolor=BraveDatrk$/decocolor=Brave/', '/home/gavin/.config/kwinrulesrc'])
-
-# subprocess.run(['qdbus', 'org.kde.KWin', '/KWin', 'reconfigure'])
+kwinrulesrc = "/home/gavin/.config/kwinrulesrc"
+if current_theme == "BreezeLight":
+    subprocess.run(["plasma-apply-colorscheme", "BreezeDark"], check=False)
+    subprocess.run(["/usr/libexec/plasma-changeicons", "breeze-dark"], check=False)
+    replace_decocolor("LibadwaitaLight", "LibadwaitaDark", kwinrulesrc)
+elif current_theme == "BreezeDark":
+    subprocess.run(["plasma-apply-colorscheme", "BreezeLight"], check=False)
+    subprocess.run(["/usr/libexec/plasma-changeicons", "breeze"], check=False)
+    replace_decocolor("LibadwaitaDark", "LibadwaitaLight", kwinrulesrc)
+subprocess.run(["qdbus", "org.kde.KWin", "/KWin", "reconfigure"], check=False)

@@ -18,6 +18,7 @@ alias smi="watch -t -n 0.1 nvidia-smi"
 alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
 alias vault-setup='ln -s ../.attachments Attachments && ln -s ../.obsidian .obsidian'
 alias xpra-server="xpra start :100 --daemon=no --bind-tcp=0.0.0.0:15000"
+alias betterfox="wget https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js"
 
 # endregion
 

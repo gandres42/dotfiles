@@ -6,10 +6,9 @@ sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamos
 # update packages
 sudo dnf check-update
 sudo dnf upgrade -y
-sudo dnf install speedcrunch haruna
 
-# install other junk
-sudo dnf install -y qt speedcrunch haruna
+# install bunk
+sudo dnf install -y speedcrunch haruna qt git
 
 # install vscodium
 sudo tee -a /etc/yum.repos.d/vscodium.repo << 'EOF'
@@ -34,7 +33,12 @@ sudo dnf install -y gtk-nocsd
 
 # setup flathub and install flatpaks
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install md.obsidian.Obsidian org.zotero.Zotero org.onlyoffice.desktopeditors org.jellyfin.JellyfinDesktop org.ferdium.Ferdium
+flatpak install md.obsidian.Obsidian \
+    org.zotero.Zotero \
+    org.onlyoffice.desktopeditors \
+    org.jellyfin.JellyfinDesktop \
+    org.ferdium.Ferdium \
+    io.missioncenter.MissionCenter
 
 # config setup
 $HOME/.dotfiles/setup/colors set

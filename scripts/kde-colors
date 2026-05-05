@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ "$1" = "set" ]; then
+    rm -f $HOME/.local/share/color-schemes/*
+    rsync -aP --ignore-existing $HOME/.dotfiles/colors/color-schemes/ $HOME/.local/share/color-schemes
+    cp $HOME/.dotfiles/colors/kwinrulesrc $HOME/.config
+    qdbus org.kde.KWin /KWin reconfigure
+elif [ "$1" = "copy" ]; then
+    rm -f $HOME/.dotfiles/colors/color-schemes/*
+    cp -r $HOME/.local/share/color-schemes/* $HOME/.dotfiles/colors/color-schemes/
+    rm -f $HOME/.dotfiles/colors/kwinrulesrc
+    cp $HOME/.config/kwinrulesrc $HOME/.dotfiles/colors/
+else
+    echo "usage: kde-colors <copy | set>"
+fi

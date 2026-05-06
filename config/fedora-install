@@ -1,14 +1,20 @@
 #!/bin/bash
 
 # uninstall junk
-sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail
+sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail firefox
 
 # update packages
 sudo dnf check-update
 sudo dnf upgrade -y
 
+# enable rpmfusion
+sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# install ffmpeg
+sudo dnf install -y ffmpeg --allowerasing
+
 # install bunk
-sudo dnf install -y speedcrunch haruna qt git
+sudo dnf install -y speedcrunch haruna qt git jetbrains-mono-fonts
 
 # install vscodium
 sudo tee -a /etc/yum.repos.d/vscodium.repo << 'EOF'
@@ -24,21 +30,26 @@ EOF
 sudo dnf install -y codium
 
 # install webapp-manager
-sudo dnf copr enable adriend/fedora-apps
+sudo dnf copr enable -y adriend/fedora-apps
 sudo dnf install -y webapp-manager
 
 # install nocsd
-sudo dnf copr enable hazel-bunny/ricing
+sudo dnf copr enable -y hazel-bunny/ricing
 sudo dnf install -y gtk-nocsd
 
+# install waterfox
+sudo dnf copr enable -y deltacopy/waterfox
+sudo dnf install -y waterfox
+
 # setup flathub and install flatpaks
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install md.obsidian.Obsidian \
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y md.obsidian.Obsidian \
     org.zotero.Zotero \
     org.onlyoffice.desktopeditors \
     org.jellyfin.JellyfinDesktop \
     org.ferdium.Ferdium \
     io.missioncenter.MissionCenter
 
-# config setup
-$HOME/.dotfiles/setup/colors set
+# colors
+$HOME/.dotfiles/scripts/kde-colors set
+cp -r $HOME/.dotfiles/config/konsole $HOME/.local/share

@@ -5,8 +5,8 @@ if [ "$1" = "set" ]; then
     cp $HOME/.dotfiles/colors/kwinrulesrc $HOME/.config
     qdbus org.kde.KWin /KWin reconfigure
 elif [ "$1" = "copy" ]; then
-    rm -f $HOME/.dotfiles/colors/color-schemes/*
-    cp -r $HOME/.local/share/color-schemes/* $HOME/.dotfiles/colors/color-schemes/
+    rm -rf $HOME/.dotfiles/colors/color-schemes
+    cp -r $HOME/.local/share/color-schemes $HOME/.dotfiles/colors
     rm -f $HOME/.dotfiles/colors/kwinrulesrc
     cp $HOME/.config/kwinrulesrc $HOME/.dotfiles/colors/
 else

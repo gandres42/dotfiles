@@ -15,6 +15,15 @@ wmclass=lichtblick Lichtblick
 wmclasscomplete=true
 wmclassmatch=1
 
+[14b1e5d3-fa0b-4bf8-b30a-63027ae55785]
+Description=Discord
+clientmachine=localhost
+decocolor=BreezeClassicDark
+decocolorrule=2
+noborderrule=2
+wmclass=discord
+wmclassmatch=1
+
 [50fed318-1809-4e66-a682-b77774a46e76]
 Description=Jellyfin
 decocolor=Black
@@ -85,8 +94,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=10
-rules=6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e
+count=11
+rules=14b1e5d3-fa0b-4bf8-b30a-63027ae55785,6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e
 
 [b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0]
 Description=Mission Center

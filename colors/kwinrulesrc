@@ -43,6 +43,13 @@ wmclass=ferdium Ferdium
 wmclasscomplete=true
 wmclassmatch=1
 
+[6b2bc20b-5889-4e61-b580-a2a5b0dd2beb]
+Description=Code
+decocolor=Code
+decocolorrule=2
+wmclass=code
+wmclassmatch=1
+
 [80922fad-8f2d-4344-94e2-7416dfae28db]
 Description=Application settings for org.kde.konsole
 decocolor=Konsole
@@ -60,13 +67,6 @@ desktopsrule=3
 wmclass=WebApp-Deezer
 wmclasscomplete=true
 wmclassmatch=2
-
-[8aa42957-e55f-4cf1-8730-50f7e80d595c]
-Description=Codium
-decocolor=Code
-decocolorrule=2
-wmclass=codium
-wmclassmatch=1
 
 [8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae]
 Description=Jellyfin
@@ -86,7 +86,7 @@ wmclassmatch=1
 
 [General]
 count=10
-rules=12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e,8aa42957-e55f-4cf1-8730-50f7e80d595c
+rules=6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e
 
 [b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0]
 Description=Mission Center

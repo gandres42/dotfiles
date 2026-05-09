@@ -20,9 +20,31 @@ Description=Discord
 clientmachine=localhost
 decocolor=BreezeClassicDark
 decocolorrule=2
+desktops=\\0
+desktopsrule=2
 noborderrule=2
 wmclass=discord
 wmclassmatch=1
+
+[394ceb9d-284a-43c1-abb1-3cf98759c232]
+Description=Deezer
+decocolor=Black
+decocolorrule=2
+desktopfile=WebApp-Deezer1216
+desktopfilerule=2
+size=1000,750
+sizerule=4
+wmclass=chrome-deezer.com__us-Default
+wmclasscomplete=true
+wmclassmatch=2
+
+[400b2faf-f254-480d-9a4d-67bb4e2f75de]
+decocolor=Black
+decocolorrule=2
+size=1184,770
+sizerule=4
+wmclass=chrome-deezer.com__us-Default
+wmclassmatch=2
 
 [50fed318-1809-4e66-a682-b77774a46e76]
 Description=Jellyfin
@@ -48,6 +70,8 @@ Description=Ferdium
 clientmachine=localhost
 decocolor=Ferdium
 decocolorrule=2
+desktops=\\0
+desktopsrule=2
 wmclass=ferdium Ferdium
 wmclasscomplete=true
 wmclassmatch=1
@@ -67,23 +91,8 @@ wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
-[85ee356c-724c-4146-8905-20030bef384e]
-Description=WebApp-Deezer
-decocolor=Black
-decocolorrule=2
-desktops=\\0
-desktopsrule=3
-wmclass=WebApp-Deezer
-wmclasscomplete=true
-wmclassmatch=2
-
-[8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae]
-Description=Jellyfin
-decocolor=Black
-decocolorrule=2
-wmclass=WebApp-Jellyfin
-wmclasscomplete=true
-wmclassmatch=2
+[9219328d-80c9-499b-b662-a18f3e31980c]
+Description=Deezer
 
 [930158f0-6ff0-4499-9137-ffaff689a462]
 Description=Konsole
@@ -94,12 +103,12 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=11
-rules=14b1e5d3-fa0b-4bf8-b30a-63027ae55785,6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,8e507fe5-cb4c-4b1a-b98a-c2b97b3701ae,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb,85ee356c-724c-4146-8905-20030bef384e
+count=10
+rules=394ceb9d-284a-43c1-abb1-3cf98759c232,14b1e5d3-fa0b-4bf8-b30a-63027ae55785,6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb
 
 [b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0]
 Description=Mission Center
-decocolor=LibadwaitaDark
+decocolor=LibadwaitaLight
 decocolorrule=2
 wmclass=\sio.missioncenter.MissionCenter
 wmclasscomplete=true
@@ -108,6 +117,18 @@ wmclassmatch=1
 [ca87971c-afcc-46fe-9fd9-71faac55b813]
 decocolor=Code
 decocolorrule=2
+
+[e7dbe32b-8e91-4148-bb8c-4664b55670a6]
+Description=Deezer
+decocolor=Black
+decocolorrule=2
+desktopfile=WebApp-Deezer2101
+desktopfilerule=2
+size=1000,750
+sizerule=4
+wmclass=chrome-deezer.com
+wmclasscomplete=true
+wmclassmatch=2
 
 [e8da418b-3e5e-4e04-a355-9480cf4461b6]
 decocolor=Brave

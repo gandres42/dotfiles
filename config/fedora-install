@@ -10,11 +10,8 @@ sudo dnf upgrade -y
 # enable rpmfusion
 sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-# install ffmpeg
-sudo dnf install -y ffmpeg --allowerasing
-
 # install bunk
-sudo dnf install -y speedcrunch haruna qt git jetbrains-mono-fonts
+sudo dnf install -y speedcrunch haruna qt git jetbrains-mono-fonts ffmpeg --allowerasing
 
 # install vscodium
 sudo tee -a /etc/yum.repos.d/vscodium.repo << 'EOF'
@@ -41,6 +38,10 @@ sudo dnf install -y gtk-nocsd
 sudo dnf copr enable -y deltacopy/waterfox
 sudo dnf install -y waterfox
 
+# install rounded corners
+sudo dnf copr enable -y matinlotfali/KDE-Rounded-Corners
+sudo dnf install -y kwin-effect-roundcorners
+
 # setup flathub and install flatpaks
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y md.obsidian.Obsidian \
@@ -53,3 +54,9 @@ flatpak install -y md.obsidian.Obsidian \
 # colors
 $HOME/.dotfiles/scripts/kde-colors set
 cp -r $HOME/.dotfiles/config/konsole $HOME/.local/share
+
+# konsave restore
+sudo dnf install -y python3-pip
+pip3 install konsave
+konsave -i $HOME/.dotfiles/config/klean.knsv
+konsave -a klean

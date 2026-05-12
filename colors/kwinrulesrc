@@ -1,3 +1,15 @@
+[00b9e9e9-897e-4369-a42f-247e71707798]
+Description=Window settings for python3.12
+position=237,293
+positionrule=3
+size=1389,478
+sizerule=3
+title=feature_matches
+titlematch=1
+types=1
+wmclass=python3.12
+wmclassmatch=1
+
 [0c10a3ee-87e1-4b79-b72a-3090a7713950]
 Description=Obsidian
 clientmachine=localhost
@@ -17,6 +29,8 @@ wmclassmatch=1
 
 [14b1e5d3-fa0b-4bf8-b30a-63027ae55785]
 Description=Discord
+above=true
+aboverule=3
 clientmachine=localhost
 decocolor=BreezeClassicDark
 decocolorrule=2
@@ -25,18 +39,6 @@ desktopsrule=2
 noborderrule=2
 wmclass=discord
 wmclassmatch=1
-
-[394ceb9d-284a-43c1-abb1-3cf98759c232]
-Description=Deezer
-decocolor=Black
-decocolorrule=2
-desktopfile=WebApp-Deezer1216
-desktopfilerule=2
-size=1000,750
-sizerule=4
-wmclass=chrome-deezer.com__us-Default
-wmclasscomplete=true
-wmclassmatch=2
 
 [400b2faf-f254-480d-9a4d-67bb4e2f75de]
 decocolor=Black
@@ -67,6 +69,8 @@ decocolorrule=2
 
 [60d9be3a-1e38-475f-95c0-ec0ed1548c46]
 Description=Ferdium
+above=true
+aboverule=3
 clientmachine=localhost
 decocolor=Ferdium
 decocolorrule=2
@@ -103,16 +107,26 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=10
-rules=394ceb9d-284a-43c1-abb1-3cf98759c232,14b1e5d3-fa0b-4bf8-b30a-63027ae55785,6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb
+count=11
+rules=00b9e9e9-897e-4369-a42f-247e71707798,be0397bb-061d-4680-b8a8-e63d01a40e5c,14b1e5d3-fa0b-4bf8-b30a-63027ae55785,6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb
 
 [b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0]
 Description=Mission Center
-decocolor=LibadwaitaLight
+decocolor=LibadwaitaDark
 decocolorrule=2
 wmclass=\sio.missioncenter.MissionCenter
 wmclasscomplete=true
 wmclassmatch=1
+
+[be0397bb-061d-4680-b8a8-e63d01a40e5c]
+Description=Deezer
+decocolor=Black
+decocolorrule=2
+size=1200,700
+sizerule=4
+wmclass=WebApp-Deezer
+wmclasscomplete=true
+wmclassmatch=2
 
 [ca87971c-afcc-46fe-9fd9-71faac55b813]
 decocolor=Code

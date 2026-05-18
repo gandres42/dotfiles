@@ -1,15 +1,3 @@
-[00b9e9e9-897e-4369-a42f-247e71707798]
-Description=Window settings for python3.12
-position=237,293
-positionrule=3
-size=1389,478
-sizerule=3
-title=feature_matches
-titlematch=1
-types=1
-wmclass=python3.12
-wmclassmatch=1
-
 [0c10a3ee-87e1-4b79-b72a-3090a7713950]
 Description=Obsidian
 clientmachine=localhost
@@ -38,6 +26,21 @@ desktops=\\0
 desktopsrule=2
 noborderrule=2
 wmclass=discord
+wmclassmatch=1
+
+[2a012e0e-9511-4377-8936-648ad968e109]
+Description=Deezer Desktop
+decocolor=Deezer
+decocolorrule=2
+wmclass=\sdev.aunetx.deezer
+wmclasscomplete=true
+wmclassmatch=1
+
+[3493730d-0d7c-4678-83aa-814c591ab104]
+Description=Rasterman
+clientmachine=localhost
+noborderrule=2
+wmclass=main.py
 wmclassmatch=1
 
 [400b2faf-f254-480d-9a4d-67bb4e2f75de]
@@ -95,6 +98,16 @@ wmclass=konsole org.kde.konsole
 wmclasscomplete=true
 wmclassmatch=1
 
+[8b2061c1-b0d4-4535-b232-efca9a6f6a5b]
+Description=Ghostty
+decocolor=Ghostty
+decocolorrule=2
+size=1195,596
+sizerule=3
+wmclass=ghostty com.mitchellh.ghostty
+wmclasscomplete=true
+wmclassmatch=1
+
 [9219328d-80c9-499b-b662-a18f3e31980c]
 Description=Deezer
 
@@ -107,8 +120,8 @@ wmclasscomplete=true
 wmclassmatch=1
 
 [General]
-count=11
-rules=00b9e9e9-897e-4369-a42f-247e71707798,be0397bb-061d-4680-b8a8-e63d01a40e5c,14b1e5d3-fa0b-4bf8-b30a-63027ae55785,6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb
+count=14
+rules=3493730d-0d7c-4678-83aa-814c591ab104,8b2061c1-b0d4-4535-b232-efca9a6f6a5b,eeab1c28-35c2-4bba-882c-5d90b4e042e5,2a012e0e-9511-4377-8936-648ad968e109,be0397bb-061d-4680-b8a8-e63d01a40e5c,14b1e5d3-fa0b-4bf8-b30a-63027ae55785,6b2bc20b-5889-4e61-b580-a2a5b0dd2beb,12810cf6-6305-4912-821d-ec4831ec72ba,b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0,50fed318-1809-4e66-a682-b77774a46e76,0c10a3ee-87e1-4b79-b72a-3090a7713950,60d9be3a-1e38-475f-95c0-ec0ed1548c46,930158f0-6ff0-4499-9137-ffaff689a462,5a2adbf0-1a69-4495-82e4-476b09a089cb
 
 [b31fe1fa-7d3c-4aac-8c3d-b0880b0393c0]
 Description=Mission Center
@@ -147,3 +160,11 @@ wmclassmatch=2
 [e8da418b-3e5e-4e04-a355-9480cf4461b6]
 decocolor=Brave
 decocolorrule=2
+
+[eeab1c28-35c2-4bba-882c-5d90b4e042e5]
+Description=Application settings for steam
+clientmachine=localhost
+noborderrule=2
+wmclass=steamwebhelper steam
+wmclasscomplete=true
+wmclassmatch=1

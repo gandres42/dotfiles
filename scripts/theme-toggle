@@ -17,25 +17,12 @@ def replace_decocolor(old_value: str, new_value: str, file_path: str) -> None:
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(updated)
 
-result = subprocess.run(["plasma-apply-colorscheme", "-l"], stdout=subprocess.PIPE, check=False).stdout.decode()
-
-lines = result.split("\n")
-current_theme = None
-for line in lines:
-    if "(current color scheme)" in line:
-        current_theme = (
-            line.replace("*", "")
-            .replace("(current color scheme)", "")
-            .replace(" ", "")
-        )
-
+current_theme = subprocess.run("kreadconfig5 --key LookAndFeelPackage", stdout=subprocess.PIPE, shell=True).stdout.decode()
 kwinrulesrc = "/home/gavin/.config/kwinrulesrc"
-if current_theme == "BreezeLight":
-    subprocess.run(["plasma-apply-colorscheme", "BreezeDark"], check=False)
-    subprocess.run(["/usr/libexec/plasma-changeicons", "breeze-dark"], check=False)
-    replace_decocolor("LibadwaitaLight", "LibadwaitaDark", kwinrulesrc)
-elif current_theme == "BreezeDark":
-    subprocess.run(["plasma-apply-colorscheme", "BreezeLight"], check=False)
-    subprocess.run(["/usr/libexec/plasma-changeicons", "breeze"], check=False)
-    replace_decocolor("LibadwaitaDark", "LibadwaitaLight", kwinrulesrc)
-subprocess.run(["qdbus", "org.kde.KWin", "/KWin", "reconfigure"], check=False)
+if "org.kde.breezetwilight.desktop" in current_theme:
+    subprocess.run("lookandfeeltool -a org.kde.breezedark.desktop", stdout=subprocess.PIPE, shell=True)
+    # replace_decocolor("LibadwaitaLight", "LibadwaitaDark", kwinrulesrc)
+elif "org.kde.breezedark.desktop" in current_theme:
+    subprocess.run("lookandfeeltool -a org.kde.breezetwilight.desktop", stdout=subprocess.PIPE, shell=True)
+    # replace_decocolor("LibadwaitaDark", "LibadwaitaLight", kwinrulesrc)
+# subprocess.run(["qdbus", "org.kde.KWin", "/KWin", "reconfigure"], check=False)

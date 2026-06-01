@@ -12,13 +12,14 @@ alias c="clear"
 alias re-source="source ~/.bashrc"
 alias get-mit="wget https://www.mit.edu/~amini/LICENSE.md"
 alias ipcheck="curl -s http://ip-api.com/json/ | jq"
-alias dotfile-edit="code $HOME/.dotfiles"
+alias dotfile-edit="codium $HOME/.dotfiles"
 alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
 alias smi="watch -t -n 0.1 nvidia-smi"
 alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
 alias vault-setup='ln -s ../.attachments Attachments && ln -s ../.obsidian .obsidian'
 alias xpra-server="xpra start :100 --daemon=no --bind-tcp=0.0.0.0:15000"
 alias betterfox="wget https://raw.githubusercontent.com/yokoffing/Betterfox/main/user.js"
+alias db="distrobox"
 
 # endregion
 
@@ -65,89 +66,6 @@ if [[ -n "$CONTAINER_ID" ]]; then
     [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
     [ -f /opt/ros/kilted/setup.bash ] && source /opt/ros/kilted/setup.bash
 fi
-
-db() {
-    local OUTPUT_DIR="${HOME}/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/nameConfigs"
-
-    case "$1" in
-        code)
-            if [ -z "$2" ]; then
-                echo "Usage: db code <distrobox_name>"
-                return 1
-            fi
-            mkdir -p "$OUTPUT_DIR"
-            cat > "${OUTPUT_DIR}/$2.json" <<EOF
-{
-  "name": "$2",
-  "remoteUser": "\${localEnv:USER}",
-  "settings": {
-    "remote.containers.copyGitConfig": false,
-    "remote.containers.gitCredentialHelperConfigLocation": "none",
-    "terminal.integrated.profiles.linux": {
-      "shell": {
-        "path": "\${localEnv:SHELL}",
-        "args": [
-          "-l"
-        ]
-      }
-    },
-    "terminal.integrated.defaultProfile.linux": "shell"
-  },
-  "remoteEnv": {
-    "COLORTERM": "\${localEnv:COLORTERM}",
-    "DBUS_SESSION_BUS_ADDRESS": "\${localEnv:DBUS_SESSION_BUS_ADDRESS}",
-    "DESKTOP_SESSION": "\${localEnv:DESKTOP_SESSION}",
-    "DISPLAY": "\${localEnv:DISPLAY}",
-    "LANG": "\${localEnv:LANG}",
-    "SHELL": "\${localEnv:SHELL}",
-    "SSH_AUTH_SOCK": "\${localEnv:SSH_AUTH_SOCK}",
-    "TERM": "\${localEnv:TERM}",
-    "VTE_VERSION": "\${localEnv:VTE_VERSION}",
-    "XDG_CURRENT_DESKTOP": "\${localEnv:XDG_CURRENT_DESKTOP}",
-    "XDG_DATA_DIRS": "\${localEnv:XDG_DATA_DIRS}",
-    "XDG_MENU_PREFIX": "\${localEnv:XDG_MENU_PREFIX}",
-    "XDG_RUNTIME_DIR": "\${localEnv:XDG_RUNTIME_DIR}",
-    "XDG_SESSION_DESKTOP": "\${localEnv:XDG_SESSION_DESKTOP}",
-    "XDG_SESSION_TYPE": "\${localEnv:XDG_SESSION_TYPE}",
-    "QT_AUTO_SCREEN_SCALE_FACTOR": "0",
-    "CONTAINER_ID": "$2"
-  }
-}
-EOF
-            ;;
-        uncode)
-            if [ -z "$2" ]; then
-                echo "Usage: db uncode <distrobox_name>"
-                return 1
-            fi
-            rm "${OUTPUT_DIR}/$2.json"
-            echo "${OUTPUT_DIR}/$2.json has been deleted"
-            ;;
-        codeall)
-            xhost si:localuser:gavin > /dev/null 2>&1
-            rm "$OUTPUT_DIR"/* > /dev/null 2>&1
-            local containers
-            containers=$(distrobox list | tail -n +2 | awk -F '|' '{gsub(/^ +| +$/,"",$2); print $2}')
-            for container in $containers; do
-                db code "$container"
-            done
-            ;;
-        startall)
-            xhost si:localuser:gavin
-            for container in $(podman ps -a --filter "status=exited" --format "{{.Names}}"); do
-                distrobox-enter -n "$container" -- bash -c "exit"
-            done
-            ;;
-        create)
-            distrobox "${@:1}"
-            db codeall
-            ;;
-        *)
-            distrobox "${@:1}"
-            ;;
-    esac
-}
-
 
 # endregion
 
@@ -248,12 +166,11 @@ if [[ "$ROS_DISTRO" == "noetic" ]]; then
     export DISABLE_ROS1_EOL_WARNINGS=1
     export CMAKE_POLICY_VERSION_MINIMUM=3.5
 elif [[ -n "$ROS_DISTRO" ]]; then
-
     function cbs {
         colcon build "$@" --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash && ls build/*/compile_commands.json >/dev/null 2>&1 && jq -s 'add' build/*/compile_commands.json > compile_commands.json
     }
-    roscore(){ [[ -n "$ZENOH_PORT" ]] && ZENOH_CONFIG_OVERRIDE="listen/endpoints=[\"tcp/[::]:$ZENOH_PORT\"]" ros2 run rmw_zenoh_cpp rmw_zenohd "$@" || ros2 run rmw_zenoh_cpp rmw_zenohd "$@"; }
-    
+
+    alias roscore="ros2 run rmw_zenoh_cpp rmw_zenohd"
     alias rosbasics="sudo apt install ros-$ROS_DISTRO-rmw-zenoh-cpp ros-$ROS_DISTRO-foxglove-bridge"
     alias s="source install/setup.bash"
     alias plotjuggler="ros2 run plotjuggler plotjuggler -n"

@@ -20,17 +20,17 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "detachhead.basedpyright",
+                "3xpo.regionfolding",
+                "astral-sh.ty",
                 "llvm-vs-code-extensions.vscode-clangd",
-                "maptz.regionfolder",
                 "mechatroner.rainbow-csv",
                 "ms-python.debugpy",
                 "ms-python.python",
                 "ms-python.vscode-pylance",
                 "ms-python.vscode-python-envs",
-                "ms-vscode-remote.remote-containers",
-                "ms-vscode-remote.remote-ssh",
-                "ms-vscode.remote-explorer"
+                "tomoki1207.pdf",
+                "twxs.cmake",
+                "Anthropic.claude-code"
             ]
         }
     },

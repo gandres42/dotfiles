@@ -13,30 +13,31 @@ sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-rel
 # install bunk
 sudo dnf install -y speedcrunch haruna qt git jetbrains-mono-fonts ffmpeg --allowerasing
 
-# install vscodium
-sudo tee -a /etc/yum.repos.d/vscodium.repo << 'EOF'
-[gitlab.com_paulcarroty_vscodium_repo]
-name=gitlab.com_paulcarroty_vscodium_repo
-baseurl=https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
-metadata_expire=1h
-EOF
-sudo dnf install -y codium
+# install vscode
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+sudo dnf install code
 
 # install webapp-manager
 sudo dnf copr enable -y adriend/fedora-apps
 sudo dnf install -y webapp-manager
 
-# install nocsd
-sudo dnf copr enable -y hazel-bunny/ricing
-sudo dnf install -y gtk-nocsd
+# install kde-rounded-corners
+sudo dnf install -y git cmake gcc-c++ extra-cmake-modules kwin-devel kf6-kconfigwidgets-devel libepoxy-devel kf6-kcmutils-devel kf6-ki18n-devel qt6-qtbase-private-devel wayland-devel libdrm-devel
+mkdir -p ~/.local/src && cd ~/.local/src
+git clone https://github.com/matinlotfali/KDE-Rounded-Corners.git
+cd KDE-Rounded-Corners
+mkdir build 
+cd build
+cmake ..
+cmake --build . -j
+sudo make install
 
-# install rounded corners
-sudo dnf copr enable -y matinlotfali/KDE-Rounded-Corners
-sudo dnf install -y kwin-effect-roundcorners
+# install systray mod
+cd ~/.local/src
+git clone git@github.com:gandres42/systray-mod.git
+cd systray-mod && git checkout native
+sudo make deps
 
 # setup flathub and install flatpaks
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

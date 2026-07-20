@@ -65,6 +65,7 @@ if [[ -n "$CONTAINER_ID" ]]; then
     [ -f /opt/ros/humble/setup.bash ] && source /opt/ros/humble/setup.bash
     [ -f /opt/ros/jazzy/setup.bash ] && source /opt/ros/jazzy/setup.bash
     [ -f /opt/ros/kilted/setup.bash ] && source /opt/ros/kilted/setup.bash
+    [ -f /opt/ros/lyrical/setup.bash ] && source /opt/ros/lyrical/setup.bash
 fi
 
 # endregion
@@ -122,8 +123,8 @@ if [[ -e "$HOME/.pixi" ]]; then
             if [ "$2" == "noetic" ]; then
                 pixi project channel add robostack-noetic
                 pixi add ros-noetic-desktop
-            elif [[ "$2" == "jazzy" || "$2" == "kilted" || "$2" == "humble" ]] || [[ -z "$2" ]]; then
-                pixi project channel add robostack-"$2"
+            elif [[ "$2" == "jazzy" || "$2" == "kilted" || "$2" == "humble" || "$2" == "lyrical" ]] || [[ -z "$2" ]]; then
+                pixi project channel add https://prefix.dev/robostack-"$2"
                 pixi add ros-"$2"-desktop ros-"$2"-foxglove-bridge ros-"$2"-rmw-zenoh-cpp colcon-common-extensions
             else
                 echo "Error: Unsupported ROS distro '$2'. Supported: noetic, humble, jazzy, kilted"

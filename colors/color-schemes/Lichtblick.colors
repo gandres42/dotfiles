@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Ghostty
+Name=Lichtblick
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=24,24,24
+activeBackground=56,57,61
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=24,24,24
+inactiveBackground=56,57,61
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

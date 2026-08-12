@@ -21,7 +21,7 @@
         "vscode": {
             "extensions": [
                 "3xpo.regionfolding",
-                "astral-sh.ty",
+                "meta.pyrefly",
                 "llvm-vs-code-extensions.vscode-clangd",
                 "mechatroner.rainbow-csv",
                 "ms-python.debugpy",

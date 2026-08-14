@@ -1,0 +1,28 @@
+:root {
+    --background-primary: #000000 !important; /* background */
+    --background-secondary: #000000 !important; /* modal background */
+    --text-primary: #ffffff !important; /* content-color active */
+    --text-intermediate: #ffffff !important; /* content-color inactive */
+    --tempo-colors-background-accent-primary-default: #bb73ff !important; /* accent */
+    --divider-secondary: #707070 !important; /* borders */
+}
+div.css-1sb63b3 {
+  background-color: black;
+  border-right: solid 1px #363636;
+}
+
+div.css-pgc5ve {
+  background-color: black;
+}
+
+div.css-1dlutpr {
+  background-color: black;
+}
+
+div.chakra-stack.css-1frms0p {
+  background-color: black;
+}
+
+div.css-1x466dw {
+  background-color: black;
+}

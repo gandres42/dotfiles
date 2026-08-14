@@ -16,28 +16,17 @@ sudo dnf install -y speedcrunch haruna qt git jetbrains-mono-fonts ffmpeg --allo
 # install vscode
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
 echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-sudo dnf install code
+sudo dnf install -y code
 
 # install webapp-manager
 sudo dnf copr enable -y adriend/fedora-apps
 sudo dnf install -y webapp-manager
 
-# install kde-rounded-corners
-sudo dnf install -y git cmake gcc-c++ extra-cmake-modules kwin-devel kf6-kconfigwidgets-devel libepoxy-devel kf6-kcmutils-devel kf6-ki18n-devel qt6-qtbase-private-devel wayland-devel libdrm-devel
-mkdir -p ~/.local/src && cd ~/.local/src
+# clone utils
+mkdir -p $HOME/Utilities
+cd $HOME/Utilities
 git clone https://github.com/matinlotfali/KDE-Rounded-Corners.git
-cd KDE-Rounded-Corners
-mkdir build 
-cd build
-cmake ..
-cmake --build . -j
-sudo make install
-
-# install systray mod
-cd ~/.local/src
 git clone git@github.com:gandres42/systray-mod.git
-cd systray-mod && git checkout native
-sudo make deps
 
 # setup flathub and install flatpaks
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -47,6 +36,24 @@ flatpak install -y md.obsidian.Obsidian \
     org.jellyfin.JellyfinDesktop \
     org.ferdium.Ferdium \
     io.missioncenter.MissionCenter
+
+# install appman
+cd $HOME/.dotfiles/config
+wget -q https://raw.githubusercontent.com/ivan-hc/AM/main/AM-INSTALLER
+chmod a+x ./AM-INSTALLER
+./AM-INSTALLER -i appman
+appman_location="$HOME/.applications" appman -v
+rm AM-INSTALLER
+
+# install lichtblick
+appman install lichtblick
+
+# install deezer-enhanced
+appman install deezer-enhanced
+mkdir -p $HOME/.config/deezer-enhanced
+ln -s $HOME/.dotfiles/config/deezer.css $HOME/.config/deezer-enhanced/style.css
+mkdir -p $HOME/.config/deezer-enhanced/assets
+wget -O $HOME/.config/deezer-enhanced/assets/icon.png https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/deezer.png
 
 # colors
 $HOME/.dotfiles/scripts/kde-colors set

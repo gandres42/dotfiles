@@ -30,12 +30,12 @@ git clone git@github.com:gandres42/systray-mod.git
 
 # setup flathub and install flatpaks
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y md.obsidian.Obsidian \
+flatpak install -y \
+    md.obsidian.Obsidian \
     org.zotero.Zotero \
     org.onlyoffice.desktopeditors \
     org.jellyfin.JellyfinDesktop \
-    org.ferdium.Ferdium \
-    io.missioncenter.MissionCenter
+    org.ferdium.Ferdium
 
 # install appman
 cd $HOME/.dotfiles/config

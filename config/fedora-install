@@ -45,15 +45,22 @@ chmod a+x ./AM-INSTALLER
 appman_location="$HOME/.applications" appman -v
 rm AM-INSTALLER
 
-# install lichtblick
-appman install lichtblick
-
 # install deezer-enhanced
 appman install deezer-enhanced
 mkdir -p $HOME/.config/deezer-enhanced
 ln -s $HOME/.dotfiles/config/deezer.css $HOME/.config/deezer-enhanced/style.css
 mkdir -p $HOME/.config/deezer-enhanced/assets
 wget -O $HOME/.config/deezer-enhanced/assets/icon.png https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/deezer.png
+
+# install foxglove-studio
+curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh -s -- --next
+distrobox create -i osrf/ros:lyrical-desktop-full lyrical
+wget https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
+distrobox enter lyrical --exec sudo apt update
+distrobox enter lyrical --exec sudo apt upgrade -y
+distrobox enter lyrical --exec sudo apt install -y $HOME/.dotfiles/config/foxglove-studio-latest-linux-amd64.deb
+distrobox enter lyrical --exec distrobox-export --app foxglove-studio
+rm $HOME/.dotfiles/config/foxglove-studio-latest-linux-amd64.deb
 
 # colors
 $HOME/.dotfiles/scripts/kde-colors set

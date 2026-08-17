@@ -27,6 +27,7 @@ mkdir -p $HOME/Utilities
 cd $HOME/Utilities
 git clone https://github.com/matinlotfali/KDE-Rounded-Corners.git
 git clone git@github.com:gandres42/systray-mod.git
+git clone https://github.com/dhruv8sh/kara.git
 
 # setup flathub and install flatpaks
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

@@ -54,7 +54,7 @@ mkdir -p $HOME/.config/deezer-enhanced/assets
 wget -O $HOME/.config/deezer-enhanced/assets/icon.png https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/deezer.png
 
 # install foxglove-studio
-curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh -s -- --next
+curl -fsSL https://raw.githubusercontent.com/89luca89/distrobox/main/install | sh -s -- --v2
 distrobox create -i osrf/ros:lyrical-desktop-full lyrical
 wget https://get.foxglove.dev/desktop/latest/foxglove-studio-latest-linux-amd64.deb
 distrobox enter lyrical --exec sudo apt update

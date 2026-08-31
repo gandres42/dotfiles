@@ -111,9 +111,9 @@ shadeSortColumn=true
 contrast=4
 
 [WM]
-activeBackground=56,57,61
+activeBackground=53,54,58
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=56,57,61
+inactiveBackground=53,54,58
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

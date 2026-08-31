@@ -104,16 +104,16 @@ ForegroundVisited=155,89,182
 
 [General]
 ColorScheme=BreezeClassicDark
-Name=Ferdium
+Name=Jetbrains
 shadeSortColumn=true
 
 [KDE]
 contrast=4
 
 [WM]
-activeBackground=49,51,52
+activeBackground=38,40,44
 activeBlend=252,252,252
 activeForeground=252,252,252
-inactiveBackground=49,51,52
+inactiveBackground=38,40,44
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177

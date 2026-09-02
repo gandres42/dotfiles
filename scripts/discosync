@@ -9,4 +9,6 @@ for s in "${folders[@]}"; do
   cmd+=" --filter \"+ /$s/**\""
 done
 cmd+=" --filter \"- *\" --progress"
-eval "$cmd"
+
+echo $cmd
+# eval "$cmd"

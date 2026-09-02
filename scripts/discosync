@@ -10,5 +10,4 @@ for s in "${folders[@]}"; do
 done
 cmd+=" --filter \"- *\" --progress"
 
-echo $cmd
-# eval "$cmd"
+eval "$cmd"

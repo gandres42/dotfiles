@@ -72,3 +72,10 @@ sudo dnf install -y python3-pip
 pip3 install konsave
 konsave -i $HOME/.dotfiles/config/klean.knsv
 konsave -a klean
+
+# backups
+pip install rclone-python
+mkdir -p ~/.config/systemd/user
+ln -sf ~/.dotfiles/backup/rcloned.service ~/.config/systemd/user/rcloned.service
+systemctl --user daemon-reload
+systemctl --user enable --now rcloned.service

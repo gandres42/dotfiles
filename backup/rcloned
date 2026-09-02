@@ -1,0 +1,67 @@
+#!/usr/bin/python3
+
+from rclone_python import rclone
+import socket
+from threading import Lock, Timer
+import os
+import pyinotify
+
+BACKUP_FOLDERS = ["Desktop", "Documents", "Music", "Obsidian", "Pictures", "Videos"]
+SYNC_COOLDOWN = 10
+WATCH_MASK = (
+    pyinotify.IN_CLOSE_WRITE
+    | pyinotify.IN_CREATE
+    | pyinotify.IN_DELETE
+    | pyinotify.IN_MOVED_FROM
+    | pyinotify.IN_MOVED_TO
+)
+
+class BackerUpper:
+    def __init__(self, backup_folders: list[str], cooldown: int):
+        self.backup_folders = backup_folders
+        self.cooldown = cooldown
+        self.hostname = socket.gethostname()
+        self.sync_lock = Lock()
+        self.timer = None
+
+        self.filters = []
+        for folder in self.backup_folders:
+            self.filters.append('--filter')
+            self.filters.append(f'"+ /{folder}/**"')
+        self.filters.append('--filter')
+        self.filters.append('"- *"')
+
+    def sync(self):
+        if not self.sync_lock.acquire(blocking=False):
+            return
+
+        if rclone.check_remote_existing('discovision'):
+            rclone.sync('/home/gavin', f'discovision:/home/gavin/snapshot/{self.hostname}', args=self.filters)
+
+        self.sync_lock.release()
+
+    def schedule_sync(self, event=None):
+        if self.timer is not None:
+            self.timer.cancel()
+        self.timer = Timer(self.cooldown, self.sync)
+        self.timer.daemon = True
+        self.timer.start()
+
+    def watch(self):
+        wm = pyinotify.WatchManager()
+        for folder in self.backup_folders:
+            path = os.path.join('/home/gavin', folder)
+            if not os.path.isdir(path):
+                continue
+            wm.add_watch(path, WATCH_MASK, proc_fun=self.schedule_sync, rec=True, auto_add=True)
+
+        notifier = pyinotify.ThreadedNotifier(wm)
+        notifier.daemon = True
+        notifier.start()
+        return notifier
+
+if __name__ == "__main__":
+    backup = BackerUpper(BACKUP_FOLDERS, SYNC_COOLDOWN)
+    notifier = backup.watch()
+    backup.schedule_sync()
+    notifier.join()

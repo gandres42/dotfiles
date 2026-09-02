@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch backup folders and sync to rclone remote on change
+
+[Service]
+ExecStart=%h/.dotfiles/backup/rcloned
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

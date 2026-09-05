@@ -7,9 +7,61 @@
     --divider-secondary: #707070 !important; /* borders */
 }
 
+div.css-1pbcgzy {
+  background-color: black;
+  border: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+div.page-topbar {
+  border: none;
+  padding-top: 0px;
+}
+
+div.chakra-stack.css-1i2n2rp {
+  background-color: black;
+}
+
+div.css-gbzt3z {
+  background-color: black;
+  display: none;
+}
+
+div.css-49bsl7 {
+  background-color: black;
+}
+
+* {
+    scrollbar-width: none;
+}
+
+div.css-1d4hfp6 {
+  border-top: solid #222222 1px;
+}
+
+button.css-b0f6ts {
+  display: none;
+}
+
+div.css-y3oekp {
+  display: none;
+}
+
+a.chakra-link.css-cwqgml {
+  margin-bottom:  -15px;
+}
+
+body {
+  background-color: black;
+}
+
+div.css-1vkmbay {
+  background-color: black;
+}
+
 div.css-1sb63b3 {
   background-color: black;
-  border-right: solid 1px #363636;
 }
 
 div.css-pgc5ve {
@@ -20,10 +72,7 @@ div.css-1dlutpr {
   background-color: black;
 }
 
-div.chakra-stack.css-1frms0p {
+div.css-hqg72s {
   background-color: black;
-}
-
-div.css-1x466dw {
-  background-color: black;
+  border-right: solid #222 1px;
 }

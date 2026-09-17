@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # rounded corners
-cd ~/.local/src/KDE-Rounded-Corners
+cd /home/gavin/Utilities/KDE-Rounded-Corners
 git pull
 rm -rf build
 mkdir build
@@ -11,6 +11,6 @@ cmake --build . -j
 sudo make install
 
 # systray icons
-cd ~/.local/src/systray-mod
+cd /home/gavin/Utilities/systray-mod
 make
 sudo make install

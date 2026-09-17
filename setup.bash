@@ -2,6 +2,10 @@
 
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
+compress() {
+    local dir="${1%/}"  # strip trailing slash if present
+    tar -cvf "${dir}.tar.zst" -I 'zstd -T0' "${dir}/"
+}
 
 # endregion
 

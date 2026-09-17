@@ -2,9 +2,45 @@
 
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 export PPID_NAME=$(ps -o comm= $(ps -o ppid= -p $$))
+
+# endregion
+
+# region: COMPRESSION ---------------------------------------------------------
+
 compress() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: compress_dir <directory>" >&2
+        return 1
+    fi
+
     local dir="${1%/}"  # strip trailing slash if present
-    tar -cvf "${dir}.tar.zst" -I 'zstd -T0' "${dir}/"
+
+    if [[ -z "$dir" ]]; then
+        echo "Error: directory name cannot be empty" >&2
+        return 1
+    fi
+
+    if [[ ! -d "$dir" ]]; then
+        echo "Error: '$dir' is not a directory or does not exist" >&2
+        return 1
+    fi
+
+    if ! command -v zstd &> /dev/null; then
+        echo "Error: zstd is not installed" >&2
+        return 1
+    fi
+
+    local output="${dir}.tar.zst"
+
+    if [[ -e "$output" ]]; then
+        read -p "Warning: '$output' already exists. Overwrite? [y/N] " confirm
+        if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+            echo "Aborted."
+            return 1
+        fi
+    fi
+
+    tar -cvf "$output" -I 'zstd -T0' "${dir}/"
 }
 
 # endregion

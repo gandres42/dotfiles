@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+if kscreen-doctor -o | sed 's/\x1B\[[0-9;]*m//g' | grep -A1 'Output: [0-9]* DP-3 ' | grep -qw enabled; then
+    kscreen-doctor output.DP-3.disable
+else
+    kscreen-doctor output.DP-3.enable
+fi

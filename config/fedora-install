@@ -31,6 +31,7 @@ git clone https://github.com/dhruv8sh/kara.git
 
 # setup flathub and install flatpaks
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-delete fedora
 flatpak install -y \
     md.obsidian.Obsidian \
     org.zotero.Zotero \

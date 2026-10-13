@@ -37,7 +37,9 @@ flatpak install -y \
     org.zotero.Zotero \
     org.onlyoffice.desktopeditors \
     org.jellyfin.JellyfinDesktop \
-    org.ferdium.Ferdium
+    org.ferdium.Ferdium \
+    org.kde.haruna \
+    org.speedcrunch.SpeedCrunch
 
 # install appman
 cd $HOME/.dotfiles/config

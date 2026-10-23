@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# uninstall junk
+sudo apt remove akregator plasma-discover dragonplayer gimp juk kaddressbook kcalc kmag kmail kmousetool konqueror kontrast korganizer libreoffice* xterm sweeper
+sudo apt autoremove -y
+
+# update packages
+sudo apt update
+sudo apt upgrade -y
+
+# install bunk
+sudo apt install -y fonts-jetbrains-mono ffmpeg flatpak curl
+
+# install vscode
+sudo apt install wget gpg &&
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg
+
+echo """Types: deb
+URIs: https://packages.microsoft.com/repos/code
+Suites: stable
+Components: main
+Architectures: amd64,arm64,armhf
+Signed-By: /usr/share/keyrings/microsoft.gpg
+""" | sudo tee /etc/apt/sources.list.d/vscode.sources
+sudo apt update && sudo apt install -y code
+
+# rounded corners
+mkdir -p $HOME/Utilities
+cd $HOME/Utilities
+git clone https://github.com/matinlotfali/KDE-Rounded-Corners.git
+sudo apt install git cmake g++ extra-cmake-modules kwin-dev qt6-base-private-dev qt6-base-dev-tools libkf6kcmutils-dev libdrm-dev
+cd $HOME/Utilities/KDE-Rounded-Corners
+mkdir build
+cd build
+cmake ..
+cmake --build . -j
+sudo make install
+
+# setup flathub and install flatpaks
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y \
+    md.obsidian.Obsidian \
+    org.zotero.Zotero \
+    org.onlyoffice.desktopeditors \
+    org.jellyfin.JellyfinDesktop \
+    org.ferdium.Ferdium \
+    org.kde.haruna \
+    org.speedcrunch.SpeedCrunch
+
+# install deezer-enhanced
+cd $HOME/.dotfiles/config
+wget https://github.com/duzda/deezer-enhanced/releases/download/v1.5.1/deezer-enhanced_1.5.1_amd64.deb
+sudo apt install -y ./deezer-enhanced_1.5.1_amd64.deb
+mkdir -p $HOME/.config/deezer-enhanced
+ln -s $HOME/.dotfiles/config/deezer.css $HOME/.config/deezer-enhanced/style.css
+mkdir -p $HOME/.config/deezer-enhanced/assets
+wget -O $HOME/.config/deezer-enhanced/assets/icon.png https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/deezer.png
+rm deezer-enhanced_1.5.1_amd64.deb
+
+# install lichtblick
+wget https://github.com/lichtblick-suite/lichtblick/releases/download/v1.30.0/lichtblick-1.30.0-linux-amd64.deb
+sudo apt install -y ./lichtblick-1.30.0-linux-amd64.deb
+rm lichtblick-1.30.0-linux-amd64.deb
+
+# colors
+$HOME/.dotfiles/scripts/kde-colors set
+cp -r $HOME/.dotfiles/config/konsole $HOME/.local/share
+
+# konsave restore
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.bashrc
+cd $HOME/.dotfiles/config
+uv venv
+uv pip install konsave
+uv run konsave -i $HOME/.dotfiles/config/klean.knsv
+uv run konsave -a klean
+rm -rf .venv
+
+# backups
+cd $HOME/.dotfiles/config
+uv venv
+uv pip install rclone-python
+mkdir -p ~/.config/systemd/user
+ln -sf ~/.dotfiles/backup/rcloned.service ~/.config/systemd/user/rcloned.service
+systemctl --user daemon-reload
+systemctl --user enable --now rcloned.service
+rm -rf .venv

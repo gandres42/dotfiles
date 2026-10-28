@@ -57,7 +57,6 @@ alias beemovie="curl -sSL https://gist.githubusercontent.com/MattIPv4/045239bc27
 alias open3d-stubs='pybind11-stubgen -o $(python -c "import site; print(site.getsitepackages()[0])") --root-suffix "" open3d'
 alias xpra-server="xpra start :100 --daemon=no --bind-tcp=0.0.0.0:15000"
 alias db="distrobox"
-alias fpk="flatpak --user"
 
 # endregion
 
@@ -95,7 +94,7 @@ dcr() {
 
 # region: PROMPT --------------------------------------------------------------
 
-PS1='\[\e[32m\]\u@\h\[\e[0m\]:\[\e[32m\]\w\[\e[0;31m\]${?#0}\[\e[0m\]\$ '
+PS1='\[\e[32m\]\u@\h\[\e[0m\]:\[\e[32m\]\w\[\e[0m\]\$ '
 
 # endregion
 

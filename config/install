@@ -1,7 +1,7 @@
 #!/bin/bash
 # DISTRO="debian"
 # DISTRO="fedora"
-DISTRO="tumbleweed"
+# DISTRO="tumbleweed"
 
 # DEBLOAT ---------------------------------------------------------------------
 case "$DISTRO" in

@@ -131,7 +131,7 @@ git clone git@github.com:gandres42/systray-mod.git
 
 # COLORS ----------------------------------------------------------------------
 $HOME/.dotfiles/scripts/kde-colors set
-cp -r $HOME/.dotfiles/config/konsole $HOME/.local/share
+cp -r $HOME/.dotfiles/konsole $HOME/.local/share
 
 # VSCODE SETTINGS -------------------------------------------------------------
 $HOME/.dotfiles/scripts/vscode-config set

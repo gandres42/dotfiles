@@ -32,7 +32,7 @@ case "$DISTRO" in
     ;;
 esac
 
-# INSTALL PACKAGES AND VSCODE -------------------------------------------------
+# INSTALL PACKAGES ------------------------------------------------------------
 case "$DISTRO" in
     (debian)
         sudo apt install -y fonts-jetbrains-mono ffmpeg flatpak curl wget gpg git
@@ -93,7 +93,7 @@ appman_location="$HOME/.applications" appman -v
 rm AM-INSTALLER
 
 # DEEZER-ENHANCED -------------------------------------------------------------
-appman install deezer-enhanced
+# appman install deezer-enhanced
 mkdir -p $HOME/.config/deezer-enhanced
 ln -s $HOME/.dotfiles/config/deezer.css $HOME/.config/deezer-enhanced/style.css
 mkdir -p $HOME/.config/deezer-enhanced/assets

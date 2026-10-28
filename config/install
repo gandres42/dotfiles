@@ -1,0 +1,172 @@
+#!/bin/bash
+# DISTRO="debian"
+# DISTRO="fedora"
+DISTRO="tumbleweed"
+
+# DEBLOAT ---------------------------------------------------------------------
+case "$DISTRO" in
+    (debian)
+        sudo apt remove akregator plasma-discover dragonplayer gimp juk kaddressbook kcalc kmag kmail kmousetool konqueror kontrast korganizer libreoffice* xterm sweeper
+        sudo apt autoremove -y
+    ;;
+    (fedora)
+        sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail
+    ;;
+    (tumbleweed)
+        sudo zypper remove -y discover6 git-gui kcalc kompare konversation kuiviewer myrlyn qrca skanlite xterm yast2* vlc
+    ;;
+esac
+
+# UPDATE ----------------------------------------------------------------------
+case "$DISTRO" in
+    (debian)
+        sudo apt update
+        sudo apt upgrade -y
+    ;;
+    (fedora)
+        sudo dnf check-update
+        sudo dnf upgrade -y
+    ;;
+    (tumbleweed)
+        sudo zypper update -y
+    ;;
+esac
+
+# INSTALL PACKAGES AND VSCODE -------------------------------------------------
+case "$DISTRO" in
+    (debian)
+        sudo apt install -y fonts-jetbrains-mono ffmpeg flatpak curl wget gpg git
+        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg
+        echo """Types: deb
+        URIs: https://packages.microsoft.com/repos/code
+        Suites: stable
+        Components: main
+        Architectures: amd64,arm64,armhf
+        Signed-By: /usr/share/keyrings/microsoft.gpg
+        """ | sudo tee /etc/apt/sources.list.d/vscode.sources
+        sudo apt update && sudo apt install -y code
+
+    ;;
+    (fedora)
+        sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        sudo dnf install -y speedcrunch haruna qt git jetbrains-mono-fonts ffmpeg --allowerasing
+        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+        sudo dnf install -y code
+    ;;
+    (tumbleweed)
+        sudo zypper install -y git jetbrains-mono-fonts
+        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/zypp/repos.d/vscode.repo > /dev/null
+        sudo zypper install -y code
+    ;;
+esac
+
+# FLATPAK ---------------------------------------------------------------------
+case "$DISTRO" in
+    (debian)
+        :
+    ;;
+    (fedora)
+        flatpak --user flatpak remote-delete fedora
+    ;;
+    (tumbleweed)
+        :
+    ;;
+esac
+flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak --user install -y \
+    md.obsidian.Obsidian \
+    org.zotero.Zotero \
+    org.onlyoffice.desktopeditors \
+    org.jellyfin.JellyfinDesktop \
+    org.ferdium.Ferdium \
+    org.kde.haruna \
+    org.speedcrunch.SpeedCrunch
+
+# APPMAN ----------------------------------------------------------------------
+cd $HOME/.dotfiles/config
+wget -q https://raw.githubusercontent.com/ivan-hc/AM/main/AM-INSTALLER
+chmod a+x ./AM-INSTALLER
+./AM-INSTALLER -i appman
+appman_location="$HOME/.applications" appman -v
+rm AM-INSTALLER
+
+# DEEZER-ENHANCED -------------------------------------------------------------
+appman install deezer-enhanced
+mkdir -p $HOME/.config/deezer-enhanced
+ln -s $HOME/.dotfiles/config/deezer.css $HOME/.config/deezer-enhanced/style.css
+mkdir -p $HOME/.config/deezer-enhanced/assets
+wget -O $HOME/.config/deezer-enhanced/assets/icon.png https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/deezer.png
+
+# LICHTBLICK ------------------------------------------------------------------
+appman install lichtblick
+
+# UTILITIES -------------------------------------------------------------------
+mkdir -p $HOME/Utilities
+cd $HOME/Utilities
+git clone https://github.com/matinlotfali/KDE-Rounded-Corners.git
+cd KDE-Rounded-Corners
+case "$DISTRO" in
+    (debian)
+        sudo apt install -y git cmake g++ extra-cmake-modules kwin-dev qt6-base-private-dev qt6-base-dev-tools libkf6kcmutils-dev libdrm-dev
+    ;;
+    (fedora)
+        sudo dnf install -y git cmake gcc-c++ extra-cmake-modules kwin-devel kf6-kconfigwidgets-devel libepoxy-devel kf6-kcmutils-devel kf6-ki18n-devel qt6-qtbase-private-devel wayland-devel libdrm-devel
+    ;;
+    (tumbleweed)
+        sudo zypper install -y git cmake gcc-c++ kf6-kconfigwidgets-devel kf6-kcmutils-devel kwin6-devel kf6-kwindowsystem-devel qt6-quick-devel qt6-core-private-devel
+    ;;
+esac
+mkdir build
+cd build
+cmake ..
+cmake --build . -j
+sudo make install
+sh ../tools/load.sh
+
+# SYSTEM TRAY ICONS -----------------------------------------------------------
+cd $HOME/Utilities
+git clone git@github.com:gandres42/systray-mod.git
+
+# COLORS ----------------------------------------------------------------------
+$HOME/.dotfiles/scripts/kde-colors set
+cp -r $HOME/.dotfiles/config/konsole $HOME/.local/share
+
+# KONSAVE RESTORE -------------------------------------------------------------
+case "$DISTRO" in
+    (debian)
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+    ;;
+    (fedora)
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+    ;;
+    (tumbleweed)
+        sudo zypper install -y python3-uv
+    ;;
+esac
+source $HOME/.bashrc
+cd $HOME/.dotfiles/config
+uv venv
+uv pip install konsave
+uv run konsave -i $HOME/.dotfiles/config/klean.knsv
+uv run konsave -a klean
+rm -rf .venv
+
+# GIT CONFIG ------------------------------------------------------------------
+# git config
+# git config --global user.email ""
+# git config --global user.name ""
+git config --global core.pager "less -FRX"
+
+case "$DISTRO" in
+    (debian)
+        :
+    ;;
+    (fedora)
+        :
+    ;;
+    (tumbleweed)
+        :
+    ;;
+esac

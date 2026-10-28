@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ "$1" = "set" ]; then
+    mkdir -p $HOME/.config/Code/User
+    cp $HOME/.dotfiles/vscode/settings.json $HOME/.config/Code/User/settings.json
+    rsync -a --delete $HOME/.dotfiles/vscode/snippets/ $HOME/.config/Code/User/snippets/
+    xargs -n1 code --install-extension < $HOME/.dotfiles/vscode/extensions.txt
+elif [ "$1" = "copy" ]; then
+    mkdir -p $HOME/.dotfiles/vscode
+    cp $HOME/.config/Code/User/settings.json $HOME/.dotfiles/vscode/settings.json
+    rsync -a --delete $HOME/.config/Code/User/snippets/ $HOME/.dotfiles/vscode/snippets/
+    code --list-extensions > $HOME/.dotfiles/vscode/extensions.txt
+else
+    echo "usage: vscode-config <copy | set>"
+fi

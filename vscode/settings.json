@@ -1,0 +1,93 @@
+{
+    // appearance
+    "window.titleBarStyle": "native",
+    "window.menuBarVisibility": "toggle",
+    "window.customTitleBarVisibility": "never",
+    "window.zoomLevel": -1,
+    "files.simpleDialog.enable": true,
+    "workbench.colorTheme": "Armada",
+    "workbench.iconTheme": "air-file-icons",
+    "workbench.colorCustomizations": {
+        "activityBarTop.background": "#090909",
+        "sideBarActivityBarTop.border": "#090909",
+        "sideBar.border": "#090909",
+        "editorIndentGuide.background1": "#2a2a2a",
+        "editorIndentGuide.activeBackground1": "#505050",
+        "panel.border": "#090909"
+    },
+    "workbench.activityBar.location": "top",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "workbench.panel.showLabels": false,
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.experimental.modernUI": false,
+    "breadcrumbs.icons": false,
+    "explorer.decorations.badges": false,
+    "editor.fontFamily": "'JetBrains Mono', monospace",
+    "editor.fontSize": 12,
+    "editor.fontWeight": "700",
+    "editor.lineHeight": 1.7,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.minimap.enabled": false,
+    "editor.bracketPairColorization.enabled": false,
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "diffEditor.renderSideBySide": true,
+
+    // editor
+    "editor.inlineSuggest.enabled": false,
+    "editor.inlayHints.enabled": "off",
+    "editor.foldingStrategy": "indentation",
+    "diffEditor.codeLens": true,
+    "files.autoSave": "onFocusChange",
+    "files.autoSaveDelay": 0,
+
+    // git
+    "git.openRepositoryInParentFolders": "never",
+
+    // remote
+    "remote.autoForwardPorts": false,
+
+    // terminal
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.commandsToSkipShell": [
+        "matlab.interrupt"
+    ],
+    "terminal.integrated.shellIntegration.enabled": false,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+
+    // C++
+    "3xpo.regionfolder": {
+        "[cpp]": {
+            "foldEndRegex": "^[\\s]*#pragma[\\s]*endregion.*$",
+            "foldStartRegex": "^[\\s]*#pragma[\\s]*region[\\s]*(.*)[\\s]*$"
+        },
+    },
+    "clangd.arguments": [
+        "--header-insertion=never"
+    ],
+
+    // python
+    "python.terminal.activateEnvironment": false,
+    "python.languageServer": "None",
+    "python.pyrefly.typeCheckingMode": "basic",
+
+    // ai
+    "claudeCode.preferredLocation": "sidebar",
+    "claudeCode.useCtrlEnterToSend": true,
+    "claudeCode.hideOnboarding": true,
+    "chat.viewSessions.orientation": "stacked",
+    "chat.tips.enabled": false,
+    "chat.commandCenter.enabled": false,
+    "chat.byokUtilityModelDefault": "mainAgent",
+    "inlineChat.askInChat": false,
+    "oaicopilot.baseUrl": "https://claude.chaco-pirate.ts.net/v1",
+
+    // misc
+    "window.restoreWindows": "none",
+    "window.newWindowProfile": "Default",
+    "workbench.startupEditor": "none",
+    "extensions.ignoreRecommendations": true,
+    "update.showReleaseNotes": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false
+}

@@ -162,30 +162,6 @@ rm -rf .venv
 # git config --global user.name ""
 git config --global core.pager "less -FRX"
 
-# CLAUDE CODE -----------------------------------------------------------------
-# install and auth claude code
-curl -fsSL https://claude.ai/install.sh | bash
-claude setup-token
-read -rsp "Paste token: " TOKEN && echo
-echo "export CLAUDE_CODE_OAUTH_TOKEN=\"$TOKEN\"" >> ~/.bashrc
-unset TOKEN
-source ~/.bashrc
-
-# install openai wrapper for vscode inline chat
-cd $HOME/Utilities
-git clone https://github.com/schmarta/claude-code-openai-server.git
-cd claude-code-openai-server/
-uv venv
-uv pip install setuptools
-uv sync
-rm .env.example
-cp $HOME/.dotfiles/claude/.env ./
-
-# create system service around wrapper
-mkdir -p ~/.config/systemd/user
-ln -sf ~/.dotfiles/claude/claude.service ~/.config/systemd/user/claude.service
-systemctl --user enable --now claude.service
-
 # case "$DISTRO" in
 #     (debian)
 #         :

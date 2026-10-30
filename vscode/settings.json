@@ -80,7 +80,7 @@
     "chat.commandCenter.enabled": false,
     "chat.byokUtilityModelDefault": "mainAgent",
     "inlineChat.askInChat": false,
-    "oaicopilot.baseUrl": "https://claude.chaco-pirate.ts.net/v1",
+    "oaicopilot.baseUrl": "http://127.0.0.1:8787/v1",
 
     // misc
     "window.restoreWindows": "none",

@@ -89,5 +89,6 @@
     "extensions.ignoreRecommendations": true,
     "update.showReleaseNotes": false,
     "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false
+    "explorer.confirmDragAndDrop": false,
+    "remote.SSH.useExecServer": false
 }

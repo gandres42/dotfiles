@@ -3,7 +3,14 @@ if [ "$1" = "set" ]; then
     rm -f $HOME/.local/share/color-schemes/*
     rsync -aP --ignore-existing $HOME/.dotfiles/colors/color-schemes/ $HOME/.local/share/color-schemes
     cp $HOME/.dotfiles/colors/kwinrulesrc $HOME/.config
-    qdbus org.kde.KWin /KWin reconfigure
+    # older Plasma reads count/rules instead of Order; add them if missing
+    rc=$HOME/.config/kwinrulesrc
+    if ! grep -q '^rules=' "$rc" && grep -q '^Order=' "$rc"; then
+        order=$(grep '^Order=' "$rc" | cut -d= -f2)
+        count=$(echo "$order" | tr ',' '\n' | wc -l)
+        sed -i "/^Order=/a count=$count\nrules=$order" "$rc"
+    fi
+    qdbus6 org.kde.KWin /KWin org.kde.KWin.reconfigure
 elif [ "$1" = "copy" ]; then
     rm -rf $HOME/.dotfiles/colors/color-schemes
     cp -r $HOME/.local/share/color-schemes $HOME/.dotfiles/colors

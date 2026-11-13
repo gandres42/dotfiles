@@ -6,14 +6,14 @@ DISTRO="fedora"
 # DEBLOAT ---------------------------------------------------------------------
 case "$DISTRO" in
     (debian)
-        sudo apt remove akregator plasma-discover dragonplayer gimp juk kaddressbook kcalc kmag kmail kmousetool konqueror kontrast korganizer libreoffice* xterm sweeper
+        sudo apt remove akregator plasma-discover dragonplayer gimp juk kaddressbook kcalc kmag kmail kmousetool konqueror kontrast korganizer libreoffice* xterm sweeper mpv
         sudo apt autoremove -y
     ;;
     (fedora)
-        sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail
+        sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail mpv
     ;;
     (tumbleweed)
-        sudo zypper remove -y discover6 git-gui kcalc kompare konversation kuiviewer myrlyn qrca skanlite xterm yast2* vlc
+        sudo zypper remove -y discover6 git-gui kcalc kompare konversation kuiviewer myrlyn qrca skanlite xterm yast2* vlc mpv
     ;;
 esac
 
@@ -179,6 +179,17 @@ cp $HOME/.dotfiles/claude/.env ./
 mkdir -p ~/.config/systemd/user
 ln -sf ~/.dotfiles/claude/claude.service ~/.config/systemd/user/claude.service
 systemctl --user enable --now claude.service
+
+# PIXI ------------------------------------------------------------------------
+curl -fsSL https://pixi.sh/install.sh | sh
+source $HOME/.bashrc
+
+# LOFI PLAYER -----------------------------------------------------------------
+cd $HOME/Utilities
+git clone https://github.com/gandres42/lofi-player.git
+cd lofi-player
+pixi run build
+cp lofi-player $HOME/.local/bin
 
 # GIT CONFIG ------------------------------------------------------------------
 # git config

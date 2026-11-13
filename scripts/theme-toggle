@@ -17,7 +17,7 @@ def replace_decocolor(old_value: str, new_value: str, file_path: str) -> None:
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(updated)
 
-current_theme = subprocess.run("kreadconfig5 --key LookAndFeelPackage", stdout=subprocess.PIPE, shell=True).stdout.decode()
+current_theme = subprocess.run("kreadconfig6 --key LookAndFeelPackage", stdout=subprocess.PIPE, shell=True).stdout.decode()
 kwinrulesrc = "/home/gavin/.config/kwinrulesrc"
 if "org.kde.breezetwilight.desktop" in current_theme:
     subprocess.run("lookandfeeltool -a org.kde.breezedark.desktop", stdout=subprocess.PIPE, shell=True)

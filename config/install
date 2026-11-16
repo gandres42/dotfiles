@@ -28,7 +28,7 @@ case "$DISTRO" in
         sudo dnf upgrade -y
     ;;
     (tumbleweed)
-        sudo zypper update -y
+        sudo zypper dup -y
     ;;
 esac
 
@@ -55,10 +55,13 @@ case "$DISTRO" in
         sudo dnf install -y code
     ;;
     (tumbleweed)
-        sudo zypper install -y git jetbrains-mono-fonts
-        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
-        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/zypp/repos.d/vscode.repo > /dev/null
-        sudo zypper install -y code
+        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+        sudo zypper ar -f https://packages.microsoft.com/yumrepos/vscode vscode
+        sudo zypper ar -f https://download.opensuse.org/repositories/games:/tools/openSUSE_Tumbleweed/games:tools.repo
+        sudo zypper ar -cfp 90 https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
+        sudo zypper --gpg-auto-import-keys ref
+        sudo zypper dup -y --from packman --allow-vendor-change
+        sudo zypper install -y git jetbrains-mono-fonts code ffmpeg gstreamer-plugins-{good,bad,ugly,libav} vlc-codecs
     ;;
 esac
 

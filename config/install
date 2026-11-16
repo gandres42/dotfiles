@@ -93,7 +93,7 @@ appman_location="$HOME/.applications" appman -v
 rm AM-INSTALLER
 
 # DEEZER-ENHANCED -------------------------------------------------------------
-# appman install deezer-enhanced
+appman -e duzda/deezer-enhanced deezer-enhanced
 mkdir -p $HOME/.config/deezer-enhanced
 ln -s $HOME/.dotfiles/config/deezer.css $HOME/.config/deezer-enhanced/style.css
 mkdir -p $HOME/.config/deezer-enhanced/assets

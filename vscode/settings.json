@@ -2,8 +2,6 @@
     // appearance
     "window.titleBarStyle": "native",
     "window.menuBarVisibility": "toggle",
-    "window.customTitleBarVisibility": "never",
-    "window.zoomLevel": -1,
     "files.simpleDialog.enable": true,
     "workbench.colorTheme": "Armada",
     "workbench.iconTheme": "air-file-icons",
@@ -13,9 +11,9 @@
         "sideBar.border": "#090909",
         "editorIndentGuide.background1": "#2a2a2a",
         "editorIndentGuide.activeBackground1": "#505050",
-        "panel.border": "#090909"
+        "panel.border": "#090909",
+        "editorGroupHeader.tabsBackground": "#090909",
     },
-    "workbench.activityBar.location": "top",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "workbench.panel.showLabels": false,
     "workbench.editor.empty.hint": "hidden",
@@ -69,18 +67,14 @@
     // python
     "python.terminal.activateEnvironment": false,
     "python.languageServer": "None",
-    "python.pyrefly.typeCheckingMode": "basic",
 
     // ai
+    "chat.byokUtilityModelDefault": "mainAgent",
+    "oaicopilot.baseUrl": "http://127.0.0.1:8787/v1/",
     "claudeCode.preferredLocation": "sidebar",
     "claudeCode.useCtrlEnterToSend": true,
     "claudeCode.hideOnboarding": true,
-    "chat.viewSessions.orientation": "stacked",
-    "chat.tips.enabled": false,
-    "chat.commandCenter.enabled": false,
-    "chat.byokUtilityModelDefault": "mainAgent",
     "inlineChat.askInChat": false,
-    "oaicopilot.baseUrl": "http://localhost:8787/v1/",
 
     // misc
     "window.restoreWindows": "none",
@@ -90,5 +84,7 @@
     "update.showReleaseNotes": false,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "remote.SSH.useExecServer": false
+    "workbench.activityBar.location": "top",
+    "window.customTitleBarVisibility": "never",
+    "python.pyrefly.typeCheckingMode": "default",
 }

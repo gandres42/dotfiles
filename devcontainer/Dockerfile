@@ -22,5 +22,7 @@ RUN apt-get install -y ssh curl git wget python3-pip python-is-python3 jq
 # dev environment setup
 RUN chsh -s /bin/bash $USERNAME
 USER $USERNAME
-RUN echo "source /home/$USERNAME/.dotfiles/setup.bash" >> ~/.bashrc && echo 'export PIP_BREAK_SYSTEM_PACKAGES=1' >> ~/.bashrc
+RUN echo "source /home/$USERNAME/.dotfiles/setup.bash" >> ~/.bashrc
+RUN echo 'umask 022' >> ~/.bashrc
+RUN echo 'export PIP_BREAK_SYSTEM_PACKAGES=1' >> ~/.bashrc
 ENV CONTAINER_ID $CONTAINER_ID

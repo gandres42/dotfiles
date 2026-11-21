@@ -1,7 +1,8 @@
 #!/bin/bash
 # DISTRO="debian"
-DISTRO="fedora"
+# DISTRO="fedora"
 # DISTRO="tumbleweed"
+DISTRO="nobara"
 
 # DEBLOAT ---------------------------------------------------------------------
 case "$DISTRO" in
@@ -11,6 +12,11 @@ case "$DISTRO" in
     ;;
     (fedora)
         sudo dnf remove -y akregator dragon elisa-player libreoffice* kaddressbook kamoso kcalc kde-connect kmahjongg kmines kmouth kolourpaint kpat kontact korganizer krdc krfb neochat skanpage qrca kmail mpv
+    ;;
+    (nobara)
+        sudo dnf remove blender dnf-app-center falcond firewalld goverlay helium-bin heroic-games-launcher inkscape kcalc kde-connect libreoffice* lutris nvidia-* opengamepadui openrgb prismlauncher protonplus timeshift winetricks
+        sudo rpm -e --nodeps obs-studio
+        sudo dnf remove nobara-welcome --setopt=protected_packages=
     ;;
     (tumbleweed)
         sudo zypper remove -y discover6 git-gui kcalc kompare konversation kuiviewer myrlyn qrca skanlite xterm yast2* vlc mpv
@@ -29,6 +35,10 @@ case "$DISTRO" in
     ;;
     (tumbleweed)
         sudo zypper dup -y
+    ;;
+    (nobara)
+        sudo dnf check-update
+        sudo dnf upgrade -y
     ;;
 esac
 
@@ -54,6 +64,13 @@ case "$DISTRO" in
         echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
         sudo dnf install -y code
     ;;
+    (nobara)
+        sudo dnf install -y git jetbrains-mono-fonts tailscale cmake ufw
+        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+        echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+        sudo dnf install -y code
+        curl -fsSL https://tailscale.com/install.sh | sh
+    ;;
     (tumbleweed)
         sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
         sudo zypper ar -f https://packages.microsoft.com/yumrepos/vscode vscode
@@ -72,6 +89,9 @@ case "$DISTRO" in
     ;;
     (fedora)
         flatpak --user flatpak remote-delete fedora
+    ;;
+    (nobara)
+        :
     ;;
     (tumbleweed)
         :
@@ -117,6 +137,9 @@ case "$DISTRO" in
     (fedora)
         sudo dnf install -y git cmake gcc-c++ extra-cmake-modules kwin-devel kf6-kconfigwidgets-devel libepoxy-devel kf6-kcmutils-devel kf6-ki18n-devel qt6-qtbase-private-devel wayland-devel libdrm-devel
     ;;
+    (nobara)
+        sudo dnf install -y git cmake gcc-c++ extra-cmake-modules kwin-devel kf6-kconfigwidgets-devel libepoxy-devel kf6-kcmutils-devel kf6-ki18n-devel qt6-qtbase-private-devel wayland-devel libdrm-devel
+    ;;
     (tumbleweed)
         sudo zypper install -y git cmake gcc-c++ kf6-kconfigwidgets-devel kf6-kcmutils-devel kwin6-devel kf6-kwindowsystem-devel qt6-quick-devel qt6-core-private-devel
     ;;
@@ -145,6 +168,9 @@ case "$DISTRO" in
         curl -LsSf https://astral.sh/uv/install.sh | sh
     ;;
     (fedora)
+        sudo dnf install -y python3-uv
+    ;;
+    (nobara)
         sudo dnf install -y python3-uv
     ;;
     (tumbleweed)
